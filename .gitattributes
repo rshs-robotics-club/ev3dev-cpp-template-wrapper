@@ -1,1 +1,7 @@
-text=false
+* text=auto
+*.sh -crlf
+
+*.cpp text
+*.hpp text
+*.c text
+*.h text
