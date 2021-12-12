@@ -35,7 +35,7 @@ class Motor : private ev3dev::motor{
         
         // type of motor - note that changing the motorType after construction will not do anything
         // this is meant to be a value to read from in debuggging
-        char motorType[1];
+        char motorType[128];
         // constructor for the motor WITHOUT motortype specified
         // works because of ev3dev's auto detection for some components
         static Motor bind(ev3dev::address_type = ev3dev::OUTPUT_AUTO);

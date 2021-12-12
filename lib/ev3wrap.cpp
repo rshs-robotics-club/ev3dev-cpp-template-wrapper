@@ -18,7 +18,7 @@ Ev3Wrap::Motor::Motor(ev3dev::address_type addr) : ev3dev::motor(addr) {
 
 Ev3Wrap::Motor Ev3Wrap::Motor::bind(ev3dev::address_type addr) {
     Ev3Wrap::Motor retMotor = Motor(addr);
-    
+    retMotor.setDefaultStopAction(Ev3Wrap::MotorStopActions::brake);
     std::strcpy(retMotor.motorType, retMotor.driver_name().c_str());
     return retMotor;
 }
