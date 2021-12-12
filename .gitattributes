@@ -1,4 +1,5 @@
 # watch this - *copies entire file from stackoverflow*
+
 # Handle line endings automatically for files detected as text 
 # and leave all files detected as binary untouched.
 * text=false
