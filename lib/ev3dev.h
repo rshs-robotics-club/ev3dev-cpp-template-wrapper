@@ -1689,7 +1689,7 @@ class lego_port : protected device {
 /*
     the new modified code from Eisverygoodletter begins here.
 */
-class irseeker_sensor : public sensor{
+class irseeker_sensor : public i2c_sensor{
     public:
         irseeker_sensor(address_type address = INPUT_AUTO);
         // idk what this means, i copied from the docs
@@ -1733,7 +1733,7 @@ class irseeker_sensor : public sensor{
 };
 //------------------------------------------------------------------------------
 
-class compass : sensor{
+class compass : public i2c_sensor{
     public:
         compass(address_type address = INPUT_AUTO);
         static constexpr char mode_compass_compass[] = "COMPASS";
