@@ -45,6 +45,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::runTimed(float milliseconds, float rpm) {
     this->run_timed();
     return *this;
 }
+
 // takes in a float position and a float rotations per minute
 Ev3Wrap::Motor Ev3Wrap::Motor::runToAbsPos(float pos, float rpm) {
     this->runBeforeEveryFunction();
