@@ -5,14 +5,14 @@
 namespace Ev3Wrap {
 
 enum class Color {
-    NONE,
-    BLACK,
-    BLUE,
-    GREEN,
-    YELLOW,
-    RED,
-    WHITE,
-    BROWN
+    NONE = 0,
+    BLACK = 1,
+    BLUE = 2,
+    GREEN = 3,
+    YELLOW = 4,
+    RED = 5,
+    WHITE = 6,
+    BROWN = 7
 };
 
 class ColorSensor : private ev3dev::color_sensor {
