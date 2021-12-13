@@ -10,9 +10,9 @@
 #include <map>
 #include <string>
 
-namespace Ev3Wrap{
+namespace Ev3Wrap {
 
-namespace MotorTypes{
+namespace MotorTypes {
     typedef char MotorType;
     constexpr MotorType mediumMotor[] = "lego-ev3-m-motor";
     constexpr MotorType largeMotor[] = "lego-ev3-l-motor";
@@ -30,7 +30,7 @@ namespace MotorStopActions {
     note that all motors have the nearly the same inner interface
     no separate classes for the medium and large motor are needed
 */
-class Motor : private ev3dev::motor{
+class Motor : private ev3dev::motor {
     public:
         
         // type of motor - note that changing the motorType after construction will not do anything
