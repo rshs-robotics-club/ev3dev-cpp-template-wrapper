@@ -10,5 +10,6 @@
 #include <map>
 #include <string>
 #include <ev3wrapmotor.hpp>
+#include <ev3wraptouch.hpp>
 
 #endif
