@@ -5,16 +5,18 @@
 namespace EV3Wrap
 {
 
-    class MotorPair : private Ev3Wrap::Motor
+    class MotorPair
     {
     public:
         Ev3Wrap::Motor motor1;
         Ev3Wrap::Motor motor2;
-        MotorPair(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2, float rpm);
 
-        Ev3Wrap::Motor move(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2, float rpm);
-        Ev3Wrap::Motor stop(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2);
-    }
+        Ev3Wrap::Motor move();
+        Ev3Wrap::Motor stop();
 
-};
+    private:
+        MotorPair(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2);
+    };
+
+}
 #endif
