@@ -23,6 +23,8 @@ lib/touch/ev3wraptouch.hpp
 lib/touch/ev3wraptouch.cpp
 lib/ultrasonic/ev3wrapultrasonic.hpp
 lib/ultrasonic/ev3wrapultrasonic.cpp
+lib/compass/ev3wrapcompass.hpp
+lib/compass/ev3wrapcompass.cpp
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
@@ -41,6 +43,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/motor
     ${PROJECT_SOURCE_DIR}/lib/touch
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic
+    ${PROJECT_SOURCE_DIR}/lib/compass
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
