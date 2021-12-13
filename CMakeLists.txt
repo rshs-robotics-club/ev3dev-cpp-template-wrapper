@@ -23,6 +23,8 @@ lib/touch/ev3wraptouch.hpp
 lib/touch/ev3wraptouch.cpp
 lib/ultrasonic/ev3wrapultrasonic.hpp
 lib/ultrasonic/ev3wrapultrasonic.cpp
+lib/irseeker/ev3wrapirseeker.hpp
+lib/irseeker/ev3wrapirseeker.cpp
 lib/compass/ev3wrapcompass.hpp
 lib/compass/ev3wrapcompass.cpp
 lib/color/ev3wrapcolor.hpp
@@ -45,6 +47,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/motor
     ${PROJECT_SOURCE_DIR}/lib/touch
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic
+    ${PROJECT_SOURCE_DIR}/lib/irseeker
     ${PROJECT_SOURCE_DIR}/lib/compass
     ${PROJECT_SOURCE_DIR}/lib/color
     #${PROJECT_SOURCE_DIR}/lib/manager
