@@ -19,6 +19,8 @@ add_executable(${CUSTOM_PROJECT_NAME}
 src/main.cpp
 lib/motor/ev3wrapmotor.hpp
 lib/motor/ev3wrapmotor.cpp
+lib/touch/ev3wraptouch.hpp
+lib/touch/ev3wraptouch.cpp
 lib/ultrasonic/ev3wrapultrasonic.hpp
 lib/ultrasonic/ev3wrapultrasonic.cpp
 lib/ev3wrap.hpp
@@ -37,8 +39,8 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/lib
     ${PROJECT_SOURCE_DIR}/lib/motor
+    ${PROJECT_SOURCE_DIR}/lib/touch
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic
-
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
