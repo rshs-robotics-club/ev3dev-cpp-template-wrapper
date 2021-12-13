@@ -43,6 +43,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/lib
     ${PROJECT_SOURCE_DIR}/lib/motor
+    ${PROJECT_SOURCE_DIR}/lib/motorpair
     ${PROJECT_SOURCE_DIR}/lib/touch
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic
     ${PROJECT_SOURCE_DIR}/lib/compass
