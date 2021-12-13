@@ -17,7 +17,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/sentFiles)
 
 add_executable(${CUSTOM_PROJECT_NAME} 
 src/main.cpp
-lib/ev3wrap.cpp
+lib/motor/ev3wrapmotor.hpp
+lib/motor/ev3wrapmotor.cpp
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
@@ -33,6 +34,7 @@ lib/ev3dev.h
 include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/lib
+    ${PROJECT_SOURCE_DIR}/lib/motor
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
