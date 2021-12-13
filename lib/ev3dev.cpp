@@ -1189,5 +1189,5 @@ bool lego_port::connect(const std::map<std::string, std::set<std::string>> &matc
 */
 //-----------------------------------------------------------------------------
 irseeker_sensor::irseeker_sensor(ev3dev::address_type addr) : i2c_sensor(addr) {};
-
+compass::compass(ev3dev::address_type addr) : i2c_sensor(addr) {};
 } // namespace ev3dev
