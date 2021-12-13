@@ -12,7 +12,9 @@ class TouchSensor : private ev3dev::touch_sensor {
         static TouchSensor bind(ev3dev::address_type = ev3dev::INPUT_AUTO);
 
         // Check if touch sensor is pressed
-        bool isPressed();
+        bool isPressed() {
+            return this->is_pressed();
+        }
     
     private:
         TouchSensor(ev3dev::address_type = ev3dev::INPUT_AUTO);

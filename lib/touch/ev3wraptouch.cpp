@@ -2,9 +2,7 @@
 #include <string>
 #include <map>
 
-Ev3Wrap::TouchSensor::TouchSensor(ev3dev::address_type addr) : ev3dev::touch_sensor(addr) {
-    
-}
+Ev3Wrap::TouchSensor::TouchSensor(ev3dev::address_type addr) : ev3dev::touch_sensor(addr) {};
 
 /*
     Initalize/construct touch sensor with input port (1, 2, 3, 4) 
@@ -16,9 +14,4 @@ Ev3Wrap::TouchSensor::TouchSensor(ev3dev::address_type addr) : ev3dev::touch_sen
 Ev3Wrap::TouchSensor Ev3Wrap::TouchSensor::bind(ev3dev::address_type addr) { 
     Ev3Wrap::TouchSensor retTouchSensor = TouchSensor(addr);
     return retTouchSensor;
-}
-
-bool Ev3Wrap::TouchSensor::isPressed() {
-    bool pressed = this->is_pressed();
-    return pressed;
 }

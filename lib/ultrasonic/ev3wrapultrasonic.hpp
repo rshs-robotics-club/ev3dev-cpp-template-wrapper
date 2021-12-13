@@ -6,8 +6,13 @@ namespace Ev3Wrap {
 class UltrasonicSensor : private ev3dev::ultrasonic_sensor {
     public:
         static UltrasonicSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
-        float getCentimetres() {return this->distance_centimeters();}
-        bool getSensorsNearby() {return this->other_sensor_present();}
+        float getCentimetres() { 
+            return this->distance_centimeters(); 
+        }
+        bool getSensorsNearby() { 
+            return this->other_sensor_present(); 
+        }
+        
     private:
         UltrasonicSensor(ev3dev::address_type addr);
 };
