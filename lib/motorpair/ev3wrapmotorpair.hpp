@@ -11,7 +11,7 @@ namespace EV3Wrap
         Ev3Wrap::Motor motor1;
         Ev3Wrap::Motor motor2;
 
-        Ev3Wrap::Motor move();
+        Ev3Wrap::Motor move(float rpm);
         Ev3Wrap::Motor stop();
 
     private:
