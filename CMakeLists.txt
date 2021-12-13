@@ -37,6 +37,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/lib
     ${PROJECT_SOURCE_DIR}/lib/motor
+    ${PROJECT_SOURCE_DIR}/lib/touch
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
