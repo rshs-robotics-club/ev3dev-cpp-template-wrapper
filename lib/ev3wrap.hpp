@@ -13,5 +13,6 @@
 #include <ev3wraptouch.hpp>
 #include <ev3wrapultrasonic.hpp>
 #include <ev3wrapcompass.hpp>
+#include <ev3wrapcolor.hpp>
 
 #endif

@@ -1,6 +1,6 @@
 #include <ev3dev.h>
-#ifndef EV3WRAPULTRASONIC_HPP_
-#define EV3WRAPULTRASONIC_HPP_
+#ifndef EV3WRAPCOMPASS_HPP_
+#define EV3WRAPCOMPASS_HPP_
 
 namespace Ev3Wrap {
 
