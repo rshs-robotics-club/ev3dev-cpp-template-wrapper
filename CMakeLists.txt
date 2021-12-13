@@ -25,6 +25,10 @@ lib/ultrasonic/ev3wrapultrasonic.hpp
 lib/ultrasonic/ev3wrapultrasonic.cpp
 lib/irseeker/ev3wrapirseeker.hpp
 lib/irseeker/ev3wrapirseeker.cpp
+lib/compass/ev3wrapcompass.hpp
+lib/compass/ev3wrapcompass.cpp
+lib/color/ev3wrapcolor.hpp
+lib/color/ev3wrapcolor.cpp
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
@@ -44,6 +48,8 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/touch
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic
     ${PROJECT_SOURCE_DIR}/lib/irseeker
+    ${PROJECT_SOURCE_DIR}/lib/compass
+    ${PROJECT_SOURCE_DIR}/lib/color
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
