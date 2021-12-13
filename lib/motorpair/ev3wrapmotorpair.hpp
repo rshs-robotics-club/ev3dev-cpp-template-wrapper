@@ -13,7 +13,7 @@ namespace EV3Wrap
         MotorPair(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2, float rpm);
 
         Ev3Wrap::Motor move(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2, float rpm);
-        Ev3Wrap::Motor stop();
+        Ev3Wrap::Motor stop(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2);
     }
 
 };

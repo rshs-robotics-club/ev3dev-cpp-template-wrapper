@@ -19,6 +19,8 @@ add_executable(${CUSTOM_PROJECT_NAME}
 src/main.cpp
 lib/motor/ev3wrapmotor.hpp
 lib/motor/ev3wrapmotor.cpp
+lib/motorpair/ev3wrapmotorpair.hpp
+lib/motorpair/ev3wrapmotorpair.cpp
 lib/touch/ev3wraptouch.hpp
 lib/touch/ev3wraptouch.cpp
 lib/ultrasonic/ev3wrapultrasonic.hpp
