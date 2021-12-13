@@ -16,6 +16,7 @@ namespace EV3Wrap
 
     private:
         MotorPair(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2);
+        Ev3Wrap::Motor Ev3Wrap::CreateMotorPair(Ev3Wrap::Motor motor1, Ev3Wrap::Motor motor2)
     };
 
 }
