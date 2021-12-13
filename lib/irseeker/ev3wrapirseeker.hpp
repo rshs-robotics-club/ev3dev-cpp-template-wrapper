@@ -6,14 +6,16 @@ namespace Ev3Wrap {
 
 class IrSeeker : private ev3dev::irseeker_sensor {
     public:
-        static IrSeeker bind(ev3dev::address_type = ev3dev::INPUT_AUTO);
-        float getStrengthAC() {return this->ac();}
-        float getStrengthDC() {return this->dc();}
+        static IrSeeker bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
+        float getDirectionAC() {return this->ac();}
+        float getDirectionDC() {return this->dc();}
         std::tuple<int, int, int, int, int, int> getAllAC(){return this->ac_all();}
         std::tuple<int, int, int, int, int, int, int> getAllDC(){return this->dc_all();}
+        // future update
+        //float getLocalBearing();
         
     private:
-        IrSeeker(ev3dev::address_type = ev3dev::INPUT_AUTO);
+        IrSeeker(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
 };
 
 }
