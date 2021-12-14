@@ -16,7 +16,7 @@ Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::runMotorsTimed(float milliseconds1, floa
     return *this;
 }
 
-Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::holdPositions() {
+Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::stopMotors() {
     this->motor1.holdPosition();
     this->motor2.holdPosition();
 
