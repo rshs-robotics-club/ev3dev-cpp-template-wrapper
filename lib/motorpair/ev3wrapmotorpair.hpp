@@ -7,16 +7,16 @@ namespace Ev3Wrap {
 
 class MotorPair {
     public:
-        static Ev3Wrap::MotorPair CreateMotorPair(Ev3Wrap::Motor m1, Ev3Wrap::Motor m2);
+        static Ev3Wrap::MotorPair CreateMotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2);
 
-        static Ev3Wrap::Motor motor1;
-        static Ev3Wrap::Motor motor2;
+        Ev3Wrap::Motor& motor1;
+        Ev3Wrap::Motor& motor2;
 
-        void move(float rpm);
-        void stop();
+        Ev3Wrap::MotorPair& move(float rpm = 50);
+        Ev3Wrap::MotorPair& stop();
 
     private:
-        MotorPair(Ev3Wrap::Motor m1, Ev3Wrap::Motor m2);
+        MotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2);
 };
 
 }
