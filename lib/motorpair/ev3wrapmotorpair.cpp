@@ -10,7 +10,10 @@ Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::runMotorsForever(float rpm1, float rpm2)
 }
 
 Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::runMotorsTimed(float milliseconds1, float milliseconds2, float rpm1, float rpm2) {
-    
+    this->motor1.runTimed(milliseconds1, rpm1);
+    this->motor2.runTimed(milliseconds2, rpm2);
+
+    return *this;
 }
 
 Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::holdPositions() {
