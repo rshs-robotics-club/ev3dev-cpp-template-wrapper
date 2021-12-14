@@ -1,9 +1,6 @@
 #include <ev3wrapmotorpair.hpp>
 
-Ev3Wrap::MotorPair::MotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2) {
-    this->motor1 = m1;
-    this->motor2 = m2;
-}
+Ev3Wrap::MotorPair::MotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2) : motor1(m1), motor2(m2) {};
 
 Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::runMotorsForever(float rpm1, float rpm2) {
     this->motor1.runForever(rpm1);
