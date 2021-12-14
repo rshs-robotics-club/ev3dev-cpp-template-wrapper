@@ -25,7 +25,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::bind(ev3dev::address_type addr) {
 
 // run motor forever
 // takes in a float rotations per minute
-Ev3Wrap::Motor Ev3Wrap::Motor::runForever(float rpm) {
+Ev3Wrap::Motor& Ev3Wrap::Motor::runForever(float rpm) {
     this->runBeforeEveryFunction();
     // set the speed to tachos per minute (tachos in a rotation * rotations per minute)
     this->set_speed_sp(this->count_per_rot() * rpm / 60);
@@ -36,7 +36,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::runForever(float rpm) {
 
 // run motor for a set number of Rotations
 // takes in a float rotations and a float milliseconds
-Ev3Wrap::Motor Ev3Wrap::Motor::runTimed(float milliseconds, float rpm) {
+Ev3Wrap::Motor& Ev3Wrap::Motor::runTimed(float milliseconds, float rpm) {
     this->runBeforeEveryFunction();
     this->set_speed_sp(this->count_per_rot() * rpm / 60);
     // set speed (yes, milliseconds is directly used)
@@ -46,7 +46,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::runTimed(float milliseconds, float rpm) {
     return *this;
 }
 // takes in a float position and a float rotations per minute
-Ev3Wrap::Motor Ev3Wrap::Motor::runToAbsPos(float pos, float rpm) {
+Ev3Wrap::Motor& Ev3Wrap::Motor::runToAbsPos(float pos, float rpm) {
     this->runBeforeEveryFunction();
     this->set_speed_sp(this->count_per_rot() * rpm / 60);
     this->set_position_sp(this->count_per_rot() * pos);
@@ -54,7 +54,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::runToAbsPos(float pos, float rpm) {
     return *this;
 }
 
-Ev3Wrap::Motor Ev3Wrap::Motor::runToRelPos(float relPos, float rpm) {
+Ev3Wrap::Motor& Ev3Wrap::Motor::runToRelPos(float relPos, float rpm) {
     this->runBeforeEveryFunction();
     this->set_speed_sp(this->count_per_rot() * rpm / 60);
     this->set_position_sp(this->count_per_rot() * relPos);
@@ -63,7 +63,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::runToRelPos(float relPos, float rpm) {
 }
 
 // stop and hold position (attempt to rotate back if necessary)
-Ev3Wrap::Motor Ev3Wrap::Motor::holdPosition() {
+Ev3Wrap::Motor& Ev3Wrap::Motor::holdPosition() {
     this->runBeforeEveryFunction(); // kinda pointless here but eh
     this->setStopAction(MotorStopActions::hold);
     this->stop();
@@ -71,7 +71,7 @@ Ev3Wrap::Motor Ev3Wrap::Motor::holdPosition() {
 }
 
 // release motor (cut electricity and allow free spin)
-Ev3Wrap::Motor Ev3Wrap::Motor::releaseMotor() {
+Ev3Wrap::Motor& Ev3Wrap::Motor::releaseMotor() {
     this->runBeforeEveryFunction(); // pointless again :*(
     this->setStopAction(MotorStopActions::coast);
     this->stop();

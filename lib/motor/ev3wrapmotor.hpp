@@ -43,27 +43,27 @@ class Motor : private ev3dev::motor {
         // constructor for the motor with motortype specified
         // run motor for a set number of Rotations
         // takes in a float rotations and a float milliseconds
-        Motor runTimed(float milliseconds, float rpm = DEFAULT_MOTOR_RPM);
+        Motor& runTimed(float milliseconds, float rpm = DEFAULT_MOTOR_RPM);
         // run motor forever
         // takes in a float rotations per minute
-        Motor runForever(float rpm = DEFAULT_MOTOR_RPM);
+        Motor& runForever(float rpm = DEFAULT_MOTOR_RPM);
         // - NOTICE - MAY BE UNRELIABLE
         // takes in a float position and a float rotations per minute
         // takes in an absolute position pos in rotations and a float rpm
-        Motor runToAbsPos(float pos, float rpm = DEFAULT_MOTOR_RPM);
+        Motor& runToAbsPos(float pos, float rpm = DEFAULT_MOTOR_RPM);
         // - NOTICE - MAY BE UNRELIABLE
         // float relative position and rotations per minute
         // takes in a relative position pos in rotations and a float rpm
-        Motor runToRelPos(float relPos, float rpm = DEFAULT_MOTOR_RPM);
+        Motor& runToRelPos(float relPos, float rpm = DEFAULT_MOTOR_RPM);
         
         // default stop action that is updated EVERY time another run* command is done
-        Motor setDefaultStopAction(MotorStopActions::StopAction stopAction) {
+        Motor& setDefaultStopAction(MotorStopActions::StopAction stopAction) {
             this->defaultStopAction = stopAction;
             return *this;
         }
         MotorStopActions::StopAction getDefaultStopAction() {return this->defaultStopAction;}
-        Motor holdPosition();
-        Motor releaseMotor();
+        Motor& holdPosition();
+        Motor& releaseMotor();
         using ev3dev::motor::state;
 
     private:
@@ -71,7 +71,7 @@ class Motor : private ev3dev::motor {
         MotorStopActions::StopAction defaultStopAction;
         // please refer to setDefaultStopAction() for the actual thing you want to use
         // this is just a painful rewrite to fit naming conventions
-        Motor setStopAction(std::string stopAction) {
+        Motor& setStopAction(std::string stopAction) {
             this->set_stop_action(stopAction);
             return *this;
         }
