@@ -12,9 +12,20 @@ Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::runMotorsForever(float rpm1, float rpm2)
     return *this;
 }
 
-Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::stop() {
+Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::runMotorsTimed(float milliseconds1, float milliseconds2, float rpm1, float rpm2) {
+    
+}
+
+Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::holdPositions() {
     this->motor1.holdPosition();
     this->motor2.holdPosition();
+
+    return *this;
+}
+
+Ev3Wrap::MotorPair& Ev3Wrap::MotorPair::releaseMotors() {
+    this->motor1.releaseMotor();
+    this->motor2.releaseMotor();
 
     return *this;
 }
