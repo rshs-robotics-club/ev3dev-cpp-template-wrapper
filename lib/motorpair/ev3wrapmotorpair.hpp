@@ -12,7 +12,7 @@ class MotorPair {
         Ev3Wrap::Motor& motor1;
         Ev3Wrap::Motor& motor2;
 
-        Ev3Wrap::MotorPair& move(float rpm = 50);
+        Ev3Wrap::MotorPair& runMotorsForever(float rpm1 = 50, float rpm2 = 50);
         Ev3Wrap::MotorPair& stop();
 
     private:
