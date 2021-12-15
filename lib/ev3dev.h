@@ -1693,10 +1693,10 @@ class irseeker_sensor : public i2c_sensor{
     public:
         irseeker_sensor(address_type address = INPUT_AUTO);
         // idk what this means, i copied from the docs
-        static constexpr char mode_irseeker_dc[] = "DC";
-        static constexpr char mode_irseeker_ac[] = "AC";
-        static constexpr char mode_irseeker_dc_all[] = "DC-ALL";
-        static constexpr char mode_irseeker_ac_all[] = "AC-ALL";
+        static char mode_irseeker_dc[];
+        static char mode_irseeker_ac[];
+        static char mode_irseeker_dc_all[];
+        static char mode_irseeker_ac_all[];
         int dc(bool do_set_mode = true){
             if(do_set_mode) set_mode(mode_irseeker_dc);
             return value(0);
@@ -1736,7 +1736,7 @@ class irseeker_sensor : public i2c_sensor{
 class compass : public i2c_sensor{
     public:
         compass(address_type address = INPUT_AUTO);
-        static constexpr char mode_compass_compass[] = "COMPASS";
+        static char mode_compass_compass[];
         int degrees(bool do_set_mode = true){
             if(do_set_mode) set_mode(mode_compass_compass);
             return value(0);
