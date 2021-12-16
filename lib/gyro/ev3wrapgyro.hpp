@@ -8,7 +8,7 @@ class Gyro : private ev3dev::gyro_sensor {
     public:
         static Gyro bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
     private:
-
+        Gyro(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
 };
 
 } // namespace Ev3Wrap
