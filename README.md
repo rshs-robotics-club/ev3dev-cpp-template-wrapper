@@ -26,3 +26,17 @@ documentation written in the future perhaps
 8. wait for stuff to happen
 9. find compiled executable for the ev3 in sentFiles folder
 10. edit `src/main.cpp` and write some code
+
+## steps to run the programs on the robot
+1. install FileZilla https://filezilla-project.org/download.php?type=client
+2. connect to the robot, assuming ev3dev installation is vanilla the credentials are: <br />
+**host**: ev3dev <br />
+**username**: robot <br/>
+**password**: maker <br/>
+3. follow the compile guide to compile all the code 
+4. using FileZilla, locate the .elf file (which is in the sentFiles folder, in the project folder)
+5. drag and drop the .elf file to the robot's file system
+6. make sure the file has finished transferring by checking if it is in the robot's filesystem
+7. right click the .elf file and click file permissions (bottom option)
+8. change the numeric value to 755 and save
+9. go to the file browser on the ev3 device and run the .elf file
