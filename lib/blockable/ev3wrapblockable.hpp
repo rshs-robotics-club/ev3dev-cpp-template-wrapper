@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <functional>
 
 namespace Ev3Wrap {
 
@@ -11,13 +12,23 @@ namespace Ev3Wrap {
 class Blockable {
     private:
         bool isBlocking;
-        void block(float milliseconds) {
+    protected:
+        void blockMilliseconds(float milliseconds) {
             if(this->isBlocking) {
                 // std::chrono::milliseconds can't accept float for some reason, so we have to cast it
                 std::this_thread::sleep_for(std::chrono::milliseconds((long)milliseconds));
             }
         }
+        void blockUntilStateReached(std::function<bool()> state, float loopSpeed = 5) {
+            while(true) {
+                if(state()) {
+                    break;
+                }
+                this->blockMilliseconds(loopSpeed);
+            }
+        }
     public:
+
         Blockable() {
             this->isBlocking = false;
         }

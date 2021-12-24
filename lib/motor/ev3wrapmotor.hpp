@@ -9,6 +9,7 @@
 #include <ev3dev.h>
 #include <map>
 #include <string>
+#include <ev3wrapblockable.hpp>
 
 namespace Ev3Wrap {
 
@@ -30,7 +31,7 @@ namespace MotorStopActions {
     note that all motors have the nearly the same inner interface
     no separate classes for the medium and large motor are needed
 */
-class Motor : private ev3dev::motor {
+class Motor : private ev3dev::motor, public Blockable {
     public:
         
         // type of motor - note that changing the motorType after construction will not do anything
