@@ -43,6 +43,8 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::runTimed(float milliseconds, float rpm) {
     this->set_time_sp(milliseconds);
     // start running motor timed
     this->run_timed();
+    // blockable class method
+    this->blockMilliseconds(milliseconds);
     return *this;
 }
 // takes in a float position and a float rotations per minute
@@ -51,6 +53,16 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::runToAbsPos(float pos, float rpm) {
     this->set_speed_sp(this->count_per_rot() * rpm / 60);
     this->set_position_sp(this->count_per_rot() * pos);
     this->run_to_abs_pos();
+    // blockable class method
+    this->blockUntilStateReached([this] {
+        auto s = this->state();
+        // stop blocking when the motor is NOT [trying to go too fast, accelerating / decelerating, running]
+        return !(
+                (s.find(state_overloaded) != s.end()) || 
+                (s.find(state_ramping) != s.end()) || 
+                (s.find(state_running) != s.end())
+        );
+    });
     return *this;
 }
 
@@ -59,6 +71,16 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::runToRelPos(float relPos, float rpm) {
     this->set_speed_sp(this->count_per_rot() * rpm / 60);
     this->set_position_sp(this->count_per_rot() * relPos);
     this->run_to_rel_pos();
+    // blockable class method
+    this->blockUntilStateReached([this] {
+        auto s = this->state();
+        // stop blocking when the motor is NOT [trying to go too fast, accelerating / decelerating, running]
+        return !(
+                (s.find(state_overloaded) != s.end()) || 
+                (s.find(state_ramping) != s.end()) || 
+                (s.find(state_running) != s.end())
+        );
+    });
     return *this;
 }
 

@@ -18,6 +18,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
 add_executable(${CUSTOM_PROJECT_NAME} 
 src/main.cpp
+lib/blockable/ev3wrapblockable.hpp
 lib/motor/ev3wrapmotor.hpp
 lib/motor/ev3wrapmotor.cpp
 lib/motorpair/ev3wrapmotorpair.hpp
@@ -47,6 +48,7 @@ lib/ev3dev.h
 include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/lib
+    ${PROJECT_SOURCE_DIR}/lib/blockable
     ${PROJECT_SOURCE_DIR}/lib/motor
     ${PROJECT_SOURCE_DIR}/lib/motorpair
     ${PROJECT_SOURCE_DIR}/lib/touch

@@ -9,6 +9,7 @@
 #include <ev3dev.h>
 #include <map>
 #include <string>
+#include <ev3wrapblockable.hpp>
 #include <ev3wrapmotor.hpp>
 #include <ev3wraptouch.hpp>
 #include <ev3wrapultrasonic.hpp>
