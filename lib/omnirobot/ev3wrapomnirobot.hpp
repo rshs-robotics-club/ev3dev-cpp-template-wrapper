@@ -10,9 +10,12 @@ namespace Ev3Wrap {
 
 class OmniDirectionalRobot : public Blockable { 
     private:
-        OmniDirectionalRobot(MotorPair& leftRightPair, MotorPair& forwardBackPair, CompassSensor& compass);
+        MotorPair& leftRightPair;
+        MotorPair& frontBackPair;
+        CompassSensor& compass;
+        OmniDirectionalRobot(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass);
     public:
-        static OmniDirectionalRobot CreateOmniDirectionalRobot(MotorPair& leftRightPair, MotorPair& forwardBackPair, CompassSensor& compass);
+        static OmniDirectionalRobot CreateOmniDirectionalRobot(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass);
     
 };
 
