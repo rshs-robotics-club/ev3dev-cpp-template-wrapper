@@ -7,16 +7,20 @@
 #include <ev3wrapcompass.hpp>
 
 namespace Ev3Wrap {
-
-class OmniDirectionalRobot : public Blockable { 
+typedef float Angle;
+/*
+    class for controlling an omni directional robot with 4 wheels.
+*/
+class Omni : public Blockable { 
     private:
         MotorPair& leftRightPair;
         MotorPair& frontBackPair;
         CompassSensor& compass;
-        OmniDirectionalRobot(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass);
+        Omni(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass);
+        Angle motorToCompassOffset;
     public:
-        static OmniDirectionalRobot CreateOmniDirectionalRobot(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass);
-    
+        static Omni CreateOmni(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass);
+
 };
 
 } // namespace Ev3Wrap
