@@ -20,10 +20,11 @@ class CompassSensor : private ev3dev::compass {
         int getDegreeOffset() {
             return this->degreeOffset;
         }
+        // range is different from getAbsoluteDirection, this ranges from -180 to 179
         int getRelativeDirection() {
             float ret = this->getAbsoluteDirection() - this->degreeOffset;
-            if(ret >= 360) {return ret - 360;}
-            if(ret < 0) {return ret + 360;}
+            if(ret >= 180) {return ret - 360;}
+            if(ret < -180) {return ret + 360;}
             return ret;
         }
         void beginCalibrate() {
