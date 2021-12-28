@@ -14,12 +14,13 @@ class Blockable {
     private:
         bool isBlocking;
     protected:
-        void blockMilliseconds(float milliseconds) {
+        void blockMilliseconds(float milliseconds, std::function<void()> cleanupFunction = []{}) {
             if(!this->isBlocking) {return;}
             // std::chrono::milliseconds can't accept float for some reason, so we have to cast it
             std::this_thread::sleep_for(std::chrono::milliseconds((long)milliseconds));
+            cleanupFunction();
         }
-        void blockUntilStateReached(std::function<bool()> state, float loopSpeed = 5) {
+        void blockUntilStateReached(std::function<bool()> state, float loopSpeed = 5, std::function<void()> cleanupFunction = []{}) {
             if(!this->isBlocking) {return;}
             while(true) {
                 if(state()) {
@@ -27,8 +28,9 @@ class Blockable {
                 }
                 this->blockMilliseconds(loopSpeed);
             }
+            cleanupFunction();
         }
-        void blockMillisecondsAndFire(std::function<void()> function, float milliseconds) {
+        void blockMillisecondsAndFire(std::function<void()> function, float milliseconds, std::function<void()> cleanupFunction = []{}) {
             if(!this->isBlocking) {return;}
             std::clock_t startTime = std::clock();
             while(true) {
@@ -39,6 +41,7 @@ class Blockable {
                     break;
                 }
             }
+            cleanupFunction();
             return;
         }
     public:
