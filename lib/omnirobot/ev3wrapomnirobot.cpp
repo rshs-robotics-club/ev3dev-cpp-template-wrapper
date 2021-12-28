@@ -1,6 +1,7 @@
 #include <ev3wrapomnirobot.hpp>
 #include <cmath>
 #include <iostream>
+#include <ctime>
 using namespace Ev3Wrap;
 
 // constructor
@@ -57,6 +58,17 @@ Omni& Omni::runRelativeToCompass(float x, float y, float rpm) {
     return *this;
 }
 
-// TODO: define moveRelativeToForwards
+Omni& Omni::runRelativeToForwards(float x, float y, float rpm) {
+    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, this->motorToCompassOffset + this->compass.getRelativeDirection());
+    this->leftRightPair.runMotorsForever(mults.first, -mults.first);
+    this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    return *this;
+}
 
+Omni& Omni::runRelativeToMotorsTimed(float x, float y, float milliseconds, float rpm) {
+    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, 0);
+    this->leftRightPair.runMotorsForever(mults.first, -mults.first);
+    this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    return *this;
+}
 // TODO: define all timed functions
