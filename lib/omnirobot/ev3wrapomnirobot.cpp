@@ -67,12 +67,19 @@ Omni& Omni::runRelativeToForwards(float x, float y, float rpm) {
 }
 
 void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rotation) {
+    // calculate motor speeds
     const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, rotation);
     this->leftRightPair.runMotorsForever(mults.first, -mults.first);
     this->frontBackPair.runMotorsForever(mults.second, -mults.second);
     this->goalDirection = this->compass.getRelativeDirection();
+    // store in motorMults to assist auto-adjusting in case it is blocking
     this->motorMults = mults;
+    // set new firing keys so that other functions can't access with separate motor instances
+    int newFiringKeys = Motor::generateFiringKey();
+    this->leftRightPair.setMotorFiringKeys(newFiringKeys);
+    this->frontBackPair.setMotorFiringKeys(newFiringKeys);
     this->blockMillisecondsAndFire([this] {
+        // change motor speeds depending on angle offset
         if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == 0) {return;}
         if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == -1) {
             // to the left
@@ -85,7 +92,11 @@ void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rota
             this->frontBackPair.runMotorsForever(this->motorMults.second - OMNI_ADJUST, this->motorMults.second - OMNI_ADJUST);
         }
         return;
-    }, milliseconds);
+    }, milliseconds, [this] {
+        // reset the firing keys 
+        this->leftRightPair.setMotorFiringKeys(0);
+        this->frontBackPair.setMotorFiringKeys(0);
+    });
 }
 
 Omni& Omni::runRelativeToMotorsTimed(float x, float y, float milliseconds, float rpm) {

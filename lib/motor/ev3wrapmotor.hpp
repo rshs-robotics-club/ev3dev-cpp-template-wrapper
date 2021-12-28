@@ -85,8 +85,13 @@ class Motor : private ev3dev::motor, public Blockable {
         static std::map<ev3dev::address_type, int> motorLocked;
         // increment the number then take the number as the new motorLock key. This will ensure keys don't collide (consecutive numbers)
         static int motorLockIncrement;
+        // get a new unique firing key (just increments a number)
+        static int generateFiringKey() {
+            motorLockIncrement++;
+            return motorLockIncrement;
+        }
         // a function to check for if the motor is "locked" by the motorLocked variable
-        static void checkMotorLocked(ev3dev::address_type addr, int myKey = 0);
+        static void checkMotorLocked(ev3dev::address_type addr, int myKey = 0, std::string customError = "");
         
 
     private:

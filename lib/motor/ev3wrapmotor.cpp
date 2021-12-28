@@ -108,9 +108,9 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::releaseMotor() {
     return *this;
 }
 
-void Ev3Wrap::Motor::checkMotorLocked(ev3dev::address_type addr, int myKey) {
+void Ev3Wrap::Motor::checkMotorLocked(ev3dev::address_type addr, int myKey, std::string customError) {
     if (Ev3Wrap::Motor::motorLocked[addr] != myKey) {
-        throw std::invalid_argument("motor at address " + addr +" is locked but you don't have the correct key");
+        throw std::invalid_argument("motor at address " + addr +" is locked but you don't have the correct key" + customError);
     }
     return;
 }

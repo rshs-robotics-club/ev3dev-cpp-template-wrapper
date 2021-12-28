@@ -6,6 +6,7 @@
 #include <ev3wrapblockable.hpp>
 #include <ev3wrapcompass.hpp>
 
+// modify this number to make the omni robot adjust for directions faster / slower
 #define OMNI_ADJUST 1
 
 namespace Ev3Wrap {
