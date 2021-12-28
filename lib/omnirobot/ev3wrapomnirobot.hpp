@@ -6,6 +6,8 @@
 #include <ev3wrapblockable.hpp>
 #include <ev3wrapcompass.hpp>
 
+#define OMNI_ADJUST 1
+
 namespace Ev3Wrap {
 typedef float Angle;
 /*
@@ -26,7 +28,14 @@ class Omni : public Blockable {
         // a float to store how offset the compass is from the motor (an X shaped motor configuration is 0 degrees)
         Angle motorToCompassOffset;
         // calculate forwardMult and rightMult for the motor stuff
-        static std::pair<float, float> calculateMults(float x, float y, float rpm, float degrees);
+        static std::pair<float, float> calculateMults(float x, float y, float rpm, Angle degrees);
+        // current goal the motor is going for (relative angles)
+        Angle goalDirection;
+        // current goal mults for the motors
+        std::pair<float, float> motorMults;
+        // 2 support methods for the run--- methods
+        void runForevers(float x, float y, float rpm, Angle rotation);
+        void runTimeds(float x, float y, float milliseconds, float rpm, Angle rotation);
     public:
         /*
             constructor for the omni class.

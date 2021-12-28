@@ -39,36 +39,66 @@ std::pair<float, float> Omni::calculateMults(float x, float y, float rpm, float 
     float forwardMult = (rpm * (rpx * newY - rpy * newX)) / (rpx * fpy - fpx * rpy);
     float rightMult = (rpm * newY - fpy * forwardMult) / rpy;
     return std::make_pair(forwardMult, rightMult);
-    // TODO ----------------------------------------------------------------------------------
+}
+
+void Omni::runForevers(float x, float y, float rpm, Angle rotation) {
+    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, rotation);
+    this->leftRightPair.runMotorsForever(mults.first, -mults.first);
+    this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    this->goalDirection = this->compass.getRelativeDirection();
+    return;
 }
 
 // define motor related functions
 
 Omni& Omni::runRelativeToMotors(float x, float y, float rpm) {
-    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, 0);
-    this->leftRightPair.runMotorsForever(mults.first, -mults.first);
-    this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    this->runForevers(x, y, rpm, 0);
     return *this;
 }
 
 Omni& Omni::runRelativeToCompass(float x, float y, float rpm) {
-    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, this->motorToCompassOffset);
-    this->leftRightPair.runMotorsForever(mults.first, -mults.first);
-    this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    this->runForevers(x, y, rpm, this->motorToCompassOffset);
     return *this;
 }
 
 Omni& Omni::runRelativeToForwards(float x, float y, float rpm) {
-    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, this->motorToCompassOffset + this->compass.getRelativeDirection());
-    this->leftRightPair.runMotorsForever(mults.first, -mults.first);
-    this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    this->runForevers(x, y, rpm, this->motorToCompassOffset + this->compass.getRelativeDirection());
     return *this;
 }
 
-Omni& Omni::runRelativeToMotorsTimed(float x, float y, float milliseconds, float rpm) {
-    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, 0);
+void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rotation) {
+    const std::pair<float, float> mults = Omni::calculateMults(x, y, rpm, rotation);
     this->leftRightPair.runMotorsForever(mults.first, -mults.first);
     this->frontBackPair.runMotorsForever(mults.second, -mults.second);
+    this->goalDirection = this->compass.getRelativeDirection();
+    this->motorMults = mults;
+    this->blockMillisecondsAndFire([this] {
+        if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == 0) {return;}
+        if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == -1) {
+            // to the left
+            this->leftRightPair.runMotorsForever(this->motorMults.first + OMNI_ADJUST, this->motorMults.first + OMNI_ADJUST);
+            this->frontBackPair.runMotorsForever(this->motorMults.second + OMNI_ADJUST, this->motorMults.second + OMNI_ADJUST);
+        }
+        if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == 1) {
+            // to the right
+            this->leftRightPair.runMotorsForever(this->motorMults.first - OMNI_ADJUST, this->motorMults.first - OMNI_ADJUST);
+            this->frontBackPair.runMotorsForever(this->motorMults.second - OMNI_ADJUST, this->motorMults.second - OMNI_ADJUST);
+        }
+        return;
+    }, milliseconds);
+}
+
+Omni& Omni::runRelativeToMotorsTimed(float x, float y, float milliseconds, float rpm) {
+    this->runTimeds(x, y, milliseconds, rpm, 0);
     return *this;
 }
-// TODO: define all timed functions
+
+Omni& Omni::runRelativeToCompassTimed(float x, float y, float milliseconds, float rpm) {
+    this->runTimeds(x, y, milliseconds, rpm, this->motorToCompassOffset);
+    return *this;
+}
+
+Omni& Omni::runRelativeToForwardsTimed(float x, float y, float milliseconds, float rpm) {
+    this->runTimeds(x, y, milliseconds, rpm, this->motorToCompassOffset + this->compass.getRelativeDirection());
+    return *this;
+}
