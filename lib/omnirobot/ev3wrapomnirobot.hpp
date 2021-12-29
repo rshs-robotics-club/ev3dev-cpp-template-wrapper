@@ -16,7 +16,7 @@ typedef float Angle;
     assumes that the compass is facing "forwards"
     a X motor configuration and a compass facing "fowards" will result in a 0 for motorToCompassOffset
 */
-class Omni : public Blockable { 
+class Omni : public Blockable<Omni> { 
     private:
         // left and right motors in a MotorPair. Must be in that sequence.
         MotorPair& leftRightPair;
