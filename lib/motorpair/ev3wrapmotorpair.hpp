@@ -6,7 +6,7 @@
 
 namespace Ev3Wrap {
 
-class MotorPair : public Blockable {
+class MotorPair : public Blockable<MotorPair> {
     public:
         static Ev3Wrap::MotorPair CreateMotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2);
 
