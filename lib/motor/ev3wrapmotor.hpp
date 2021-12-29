@@ -31,6 +31,7 @@ namespace MotorStopActions {
     note that all motors have the nearly the same inner interface
     no separate classes for the medium and large motor are needed
 */
+class Motor : private ev3dev::motor, public Blockable<Motor> {
 // predeclare classes that will use the motors
 class MotorPair;
 class Omni;

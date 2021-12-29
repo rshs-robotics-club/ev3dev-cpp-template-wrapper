@@ -10,6 +10,7 @@
 namespace Ev3Wrap {
 
 // blockable class
+template<typename blockableReturn>
 class Blockable {
     private:
         bool isBlocking;
@@ -45,7 +46,6 @@ class Blockable {
             return;
         }
     public:
-
         Blockable() {
             this->isBlocking = false;
         }
@@ -55,6 +55,10 @@ class Blockable {
         }
         bool getBlocking() {
             return this->isBlocking;
+        }
+        blockableReturn wait(float milliseconds) {
+            this->blockMilliseconds(milliseconds);
+            return static_cast<blockableReturn>(this);
         }
 };
 
