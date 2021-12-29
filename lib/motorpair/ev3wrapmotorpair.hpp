@@ -17,7 +17,12 @@ class MotorPair : public Blockable<MotorPair> {
         Ev3Wrap::MotorPair& runMotorsTimed(float milliseconds, float rpm1 = 50, float rpm2 = 50);
         Ev3Wrap::MotorPair& stopMotors();
         Ev3Wrap::MotorPair& releaseMotors();
-
+        Ev3Wrap::MotorPair& setMotorFiringKeys(int key = 0) {
+            Motor::checkMotorLocked(motor1.address(), 0, " --- from setMotorFiringKeys");
+            Motor::checkMotorLocked(motor2.address(), 0, " --- from setMotorFiringKeys");
+            this->motor1.firingKey = key;
+            this->motor2.firingKey = key;
+        }
     private:
         MotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2);
 };
