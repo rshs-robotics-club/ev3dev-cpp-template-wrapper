@@ -1,4 +1,4 @@
-this is unofficial dont 
+this is unofficial (to pretty much everything) don't use this unless you know what you're doing. (we have no guarantees) 
 # welcome to [ev3dev cpp template wrapper]
 ### this is a wrapper aimed for lego robotics on ev3dev
 
