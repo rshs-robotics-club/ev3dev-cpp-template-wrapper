@@ -17,11 +17,6 @@ Omni Omni::CreateOmni(MotorPair& leftRightPair, MotorPair& frontBackPair, Compas
     return retRobot;
 };
 
-// declare static variables
-std::map<ev3dev::address_type, int> Motor::motorLocked = {};
-
-int Motor::motorLockIncrement = 1;
-
 
 std::pair<float, float> Omni::calculateMults(float x, float y, float rpm, float degrees) {
     const float fpx = rpm;
@@ -74,10 +69,6 @@ void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rota
     this->goalDirection = this->compass.getRelativeDirection();
     // store in motorMults to assist auto-adjusting in case it is blocking
     this->motorMults = mults;
-    // set new firing keys so that other functions can't access with separate motor instances
-    int newFiringKeys = Motor::generateFiringKey();
-    this->leftRightPair.setMotorFiringKeys(newFiringKeys);
-    this->frontBackPair.setMotorFiringKeys(newFiringKeys);
     this->blockMillisecondsAndFire([this] {
         // change motor speeds depending on angle offset
         if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == 0) {return;}
@@ -93,9 +84,7 @@ void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rota
         }
         return;
     }, milliseconds, [this] {
-        // reset the firing keys 
-        this->leftRightPair.setMotorFiringKeys(0);
-        this->frontBackPair.setMotorFiringKeys(0);
+        //ending function
     });
 }
 

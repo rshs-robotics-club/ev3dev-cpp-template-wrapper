@@ -78,21 +78,6 @@ class Motor : private ev3dev::motor, public Blockable<Motor> {
         Motor& releaseMotor();
         // naming conventions followed
         using ev3dev::motor::state;
-        // stores if each motor is currently constantly updated by some function and should not be tampered with
-        // causes functions that attempt the motor, but do not have the key (an int) to throw an error
-        // in order to protect programmers that might start 2 lambda functions accessing the same motor
-        // an int of 0 indicates it is currently unlocked
-        static std::map<ev3dev::address_type, int> motorLocked;
-        // increment the number then take the number as the new motorLock key. This will ensure keys don't collide (consecutive numbers)
-        static int motorLockIncrement;
-        // get a new unique firing key (just increments a number)
-        static int generateFiringKey() {
-            motorLockIncrement++;
-            return motorLockIncrement;
-        }
-        // a function to check for if the motor is "locked" by the motorLocked variable
-        static void checkMotorLocked(ev3dev::address_type addr, int myKey = 0, std::string customError = "");
-        
 
     private:
         // private constructor for the motor. Use the static bind() method instead.
@@ -112,8 +97,6 @@ class Motor : private ev3dev::motor, public Blockable<Motor> {
         void runBeforeEveryFunction() {
             this->set_stop_action(this->defaultStopAction);
         }
-        // key used when attempting to access the motor
-        int firingKey;
         
 };
 
