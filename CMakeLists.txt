@@ -5,6 +5,7 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 set(CMAKE_C_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CC_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
+set(CMAKE_CXX_FLAGS "-Os")
 #set(ev3dev_DIR ${PROJECT_SOURCE_DIR})
 
 set(CUSTOM_PROJECT_NAME "ev3MotorTest")
@@ -13,6 +14,7 @@ project(${CUSTOM_PROJECT_NAME} VERSION 1.0)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/sentFiles)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
+
 
 #find_package(ev3dev)
 
