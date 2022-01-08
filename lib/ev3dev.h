@@ -153,6 +153,9 @@ class sensor : protected device {
         static constexpr char nxt_i2c_sensor[] = "nxt-i2c-sensor";
         static constexpr char nxt_analog[]     = "nxt-analog";
 
+        static constexpr char hitechnic_ir_seeker[] = "ht-nxt-ir-seek-v2";
+        static constexpr char hitechnic_compass[] = "ht-nxt-compass";
+
         sensor(address_type);
         sensor(address_type, const std::set<sensor_type>&);
 
@@ -1705,9 +1708,9 @@ class irseeker_sensor : public i2c_sensor{
             if(do_set_mode) set_mode(mode_irseeker_ac);
             return value(0);
         }
-        std::tuple<int, int, int, int, int, int, int> dc_all(bool do_set_mode = true){
+        std::vector<int> dc_all(bool do_set_mode = true){
             if(do_set_mode) set_mode(mode_irseeker_dc_all);
-            return std::make_tuple(
+            return {
                 value(0),
                 value(1),
                 value(2),
@@ -1715,18 +1718,18 @@ class irseeker_sensor : public i2c_sensor{
                 value(4),
                 value(5),
                 value(6)
-            );
+            };
         }
-        std::tuple<int, int, int, int, int, int> ac_all(bool do_set_mode = true){
+        std::vector<int> ac_all(bool do_set_mode = true){
             if(do_set_mode) set_mode(mode_irseeker_ac_all);
-            return std::make_tuple(
+            return {
                 value(0),
                 value(1),
                 value(2),
                 value(3),
                 value(4),
                 value(5)
-            );
+            };
         }
 
 
