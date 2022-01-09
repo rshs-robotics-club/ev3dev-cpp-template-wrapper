@@ -16,26 +16,66 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
 #components used
 # todo
+set(WRAP_USE_MOTOR true)
+set(WRAP_USE_MOTORPAIR true)
 
+
+set(WRAP_USE_TOUCH true)
+set(WRAP_USE_ULTRASONIC true)
+set(WRAP_USE_COLOR true)
+set(WRAP_USE_COMPASS true)
+set(WRAP_USE_OMNIROBOT true)
+set(WRAP_USE_IRSEEKER true)
+
+
+
+if(WRAP_USE_MOTOR)
+    set(MOTOR_LIST lib/motor/ev3wrapmotor.hpp lib/motor/ev3wrapmotor.cpp)
+    add_compile_definitions(MOTOR_USED)
+endif()
+if(WRAP_USE_MOTOR AND WRAP_USE_MOTORPAIR)
+    set(MOTORPAIR_LIST lib/motorpair/ev3wrapmotorpair.hpp lib/motorpair/ev3wrapmotorpair.cpp)
+    add_compile_definitions(MOTORPAIR_USED)
+endif()
+
+if(WRAP_USE_TOUCH)
+    set(TOUCH_LIST lib/touch/ev3wraptouch.hpp lib/touch/ev3wraptouch.cpp)
+    add_compile_definitions(TOUCH_USED)
+endif()
+if(WRAP_USE_ULTRASONIC)
+    set(ULTRASONIC_LIST lib/ultrasonic/ev3wrapultrasonic.hpp lib/ultrasonic/ev3wrapultrasonic.cpp)
+    add_compile_definitions(ULTRASONIC_USED)
+endif()
+if(WRAP_USE_COLOR)
+    set(COLOR_LIST lib/color/ev3wrapcolor.hpp lib/color.ev3wrapcolor.cpp)
+    add_compile_definitions(COLOR_USED)
+endif()
+if(WRAP_USE_COMPASS)
+    set(COMPASS_LIST lib/compass/ev3wrapcompass.hpp lib/compass/ev3wrapcompass.cpp)
+    add_compile_definitions(COMPASS_USED)
+endif()
+if(WRAP_USE_COMPASS AND WRAP_USE_OMNIROBOT)
+    set(OMNIROBOT_LIST lib/omnirobot/ev3wrapomnirobot.hpp lib/omnirobot/ev3wrapomnirobot.cpp)
+    add_compile_definitions(OMNIROBOT_USED)
+endif()
+if(WRAP_USE_IRSEEKER)
+    set(IRSEEKER_LIST lib/irseeker/ev3wrapirseeker.hpp lib/irseeker/ev3wrapirseeker.cpp)
+    add_compile_definitions(IRSEEKER_USED)
+endif()
+
+
+# add executables
 add_executable(${CUSTOM_PROJECT_NAME} 
 src/main.cpp
 lib/blockable/ev3wrapblockable.hpp
-lib/motor/ev3wrapmotor.hpp
-lib/motor/ev3wrapmotor.cpp
-lib/motorpair/ev3wrapmotorpair.hpp
-lib/motorpair/ev3wrapmotorpair.cpp
-lib/touch/ev3wraptouch.hpp
-lib/touch/ev3wraptouch.cpp
-lib/ultrasonic/ev3wrapultrasonic.hpp
-lib/ultrasonic/ev3wrapultrasonic.cpp
-lib/irseeker/ev3wrapirseeker.hpp
-lib/irseeker/ev3wrapirseeker.cpp
-lib/compass/ev3wrapcompass.hpp
-lib/compass/ev3wrapcompass.cpp
-lib/color/ev3wrapcolor.hpp
-lib/color/ev3wrapcolor.cpp
-lib/omnirobot/ev3wrapomnirobot.hpp
-lib/omnirobot/ev3wrapomnirobot.cpp
+${MOTOR_LIST}
+${MOTORPAIR_LIST}
+${TOUCH_LIST}
+${ULTRASONIC_LIST}
+${COLOR_LIST}
+${IRSEEKER_LIST}
+${COMPASS_LIST}
+${WRAP_USE_OMNIROBOT}
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
