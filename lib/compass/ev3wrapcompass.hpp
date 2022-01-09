@@ -19,7 +19,7 @@ class CompassSensor : private ev3dev::compass {
         // returns 1 if otherAngle is to the right of sourceAngle,
         //         0 if the angles are identical
         //         -1 if otherAngle is to the left of sourceAngle
-        static int compareAngles(float sourceAngle, float otherAngle, Angle tolerance = 10)
+        static int compareAngles(float sourceAngle, float otherAngle, float tolerance = 10)
         {
             // sourceAngle and otherAngle should be in the range -180 to 180
             float difference = otherAngle - sourceAngle;
