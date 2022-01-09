@@ -29,9 +29,9 @@ class CompassSensor : private ev3dev::compass {
             if(difference > 180.0f)
                 difference -= 360.0f;
 
-            if(difference > -tolerance)
+            if(difference > tolerance)
                 return 1;
-            if(difference < tolerance)
+            if(difference < -tolerance)
                 return -1;
 
             return 0;
