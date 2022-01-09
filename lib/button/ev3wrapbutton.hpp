@@ -16,10 +16,13 @@ enum class ButtonCode {
 
 class Button : private ev3dev::button, public Blockable<Button> {
     public:
-        
+        static Button CreateButton(ButtonCode btnCode);
+        bool isPressed() {
+            return this->pressed();
+        };
 
     private:
-
+        Button(int keyCode);
 };
 
 }
