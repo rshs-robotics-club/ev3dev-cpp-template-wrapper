@@ -9,8 +9,8 @@ only works on windows
 documentation written in the future perhaps
 
 ## how to set up docker for ev3dev compiling
-1. download and install docker desktop 
-2. make sure Git Bash is installed (Git Bash can be downloaded on the official Git website)
+1. download and install docker desktop (https://www.docker.com/products/docker-desktop)
+2. make sure Git Bash is installed (https://git-scm.com/downloads)
 3. `"C:\Program Files\Docker\Docker\DockerCli.exe" -SwitchDaemon`
 4. Wait for the Docker daemon to start (there should be a docker icon in the system tray)
 5. Follow this guide (only in the "Download the ev3dev cross-compiler image" section): https://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/
@@ -28,7 +28,7 @@ documentation written in the future perhaps
 10. edit `src/main.cpp` and write some code
 
 ## steps to run the programs on the robot
-1. install FileZilla https://filezilla-project.org/download.php?type=client
+1. install FileZilla (https://filezilla-project.org/download.php?type=client)
 2. connect to the robot, assuming ev3dev installation is vanilla the credentials are: <br />
 **host**: ev3dev <br />
 **username**: robot <br/>
