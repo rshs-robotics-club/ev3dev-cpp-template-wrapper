@@ -18,5 +18,6 @@
 #include <ev3wrapcolor.hpp>
 #include <ev3wrapmotorpair.hpp>
 #include <ev3wrapomnirobot.hpp>
+#include <ev3wrapbutton.hpp>
 
 #endif
