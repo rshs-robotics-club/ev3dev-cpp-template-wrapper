@@ -64,7 +64,7 @@ if(WRAP_USE_IRSEEKER)
 endif()
 if(WRAP_USE_BUTTON)
     set(BUTTON_LIST lib/button/ev3wrapbutton.hpp lib/button/ev3wrapbutton.cpp)
-    add_definitions(-DBUTTON_USED
+    add_definitions(-DBUTTON_USED)
 endif()
 
 
