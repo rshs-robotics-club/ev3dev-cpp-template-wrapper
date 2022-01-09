@@ -6,7 +6,6 @@ set(CMAKE_C_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CC_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
 set(CMAKE_CXX_FLAGS "-Os")
-#set(ev3dev_DIR ${PROJECT_SOURCE_DIR})
 
 set(CUSTOM_PROJECT_NAME "ev3MotorTest")
 
@@ -15,8 +14,8 @@ project(${CUSTOM_PROJECT_NAME} VERSION 1.0)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/sentFiles)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
-
-#find_package(ev3dev)
+#components used
+# todo
 
 add_executable(${CUSTOM_PROJECT_NAME} 
 src/main.cpp
@@ -40,14 +39,8 @@ lib/omnirobot/ev3wrapomnirobot.cpp
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
-
-#lib/manager/commands.h
-#lib/manager/commands.cpp
-#lib/manager/manager.h
-#lib/manager/manager.cpp
-#ev3dev::ev3dev
 )
-#configure_file(src/main.h src/main.h)
+
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/src

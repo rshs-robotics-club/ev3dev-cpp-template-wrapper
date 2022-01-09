@@ -76,15 +76,21 @@ void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rota
             // to the left
             this->leftRightPair.runMotorsForever(this->motorMults.first + OMNI_ADJUST, this->motorMults.first + OMNI_ADJUST);
             this->frontBackPair.runMotorsForever(this->motorMults.second + OMNI_ADJUST, this->motorMults.second + OMNI_ADJUST);
+            this->motorMults.first += OMNI_ADJUST;
+            this->motorMults.second += OMNI_ADJUST;
         }
         if(CompassSensor::compareAngles(this->compass.getRelativeDirection(), this->goalDirection) == 1) {
             // to the right
             this->leftRightPair.runMotorsForever(this->motorMults.first - OMNI_ADJUST, this->motorMults.first - OMNI_ADJUST);
             this->frontBackPair.runMotorsForever(this->motorMults.second - OMNI_ADJUST, this->motorMults.second - OMNI_ADJUST);
+            this->motorMults.first -= OMNI_ADJUST;
+            this->motorMults.second -= OMNI_ADJUST;
         }
         return;
     }, milliseconds, [this] {
         //ending function
+        this->leftRightPair.stopMotors();
+        this->frontBackPair.stopMotors();
     });
 }
 
