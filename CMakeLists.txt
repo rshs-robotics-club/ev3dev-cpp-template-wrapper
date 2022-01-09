@@ -31,36 +31,36 @@ set(WRAP_USE_IRSEEKER true)
 
 if(WRAP_USE_MOTOR)
     set(MOTOR_LIST lib/motor/ev3wrapmotor.hpp lib/motor/ev3wrapmotor.cpp)
-    add_compile_definitions(MOTOR_USED)
+    add_definitions(-DMOTOR_USED)
 endif()
 if(WRAP_USE_MOTOR AND WRAP_USE_MOTORPAIR)
     set(MOTORPAIR_LIST lib/motorpair/ev3wrapmotorpair.hpp lib/motorpair/ev3wrapmotorpair.cpp)
-    add_compile_definitions(MOTORPAIR_USED)
+    add_definitions(-DMOTORPAIR_USED)
 endif()
 
 if(WRAP_USE_TOUCH)
     set(TOUCH_LIST lib/touch/ev3wraptouch.hpp lib/touch/ev3wraptouch.cpp)
-    add_compile_definitions(TOUCH_USED)
+    add_definitions(-DTOUCH_USED)
 endif()
 if(WRAP_USE_ULTRASONIC)
     set(ULTRASONIC_LIST lib/ultrasonic/ev3wrapultrasonic.hpp lib/ultrasonic/ev3wrapultrasonic.cpp)
-    add_compile_definitions(ULTRASONIC_USED)
+    add_definitions(-DULTRASONIC_USED)
 endif()
 if(WRAP_USE_COLOR)
-    set(COLOR_LIST lib/color/ev3wrapcolor.hpp lib/color.ev3wrapcolor.cpp)
-    add_compile_definitions(COLOR_USED)
+    set(COLOR_LIST lib/color/ev3wrapcolor.hpp lib/color/ev3wrapcolor.cpp)
+    add_definitions(-DCOLOR_USED)
 endif()
 if(WRAP_USE_COMPASS)
     set(COMPASS_LIST lib/compass/ev3wrapcompass.hpp lib/compass/ev3wrapcompass.cpp)
-    add_compile_definitions(COMPASS_USED)
+    add_definitions(-DCOMPASS_USED)
 endif()
 if(WRAP_USE_COMPASS AND WRAP_USE_OMNIROBOT)
     set(OMNIROBOT_LIST lib/omnirobot/ev3wrapomnirobot.hpp lib/omnirobot/ev3wrapomnirobot.cpp)
-    add_compile_definitions(OMNIROBOT_USED)
+    add_definitions(-DOMNIROBOT_USED)
 endif()
 if(WRAP_USE_IRSEEKER)
     set(IRSEEKER_LIST lib/irseeker/ev3wrapirseeker.hpp lib/irseeker/ev3wrapirseeker.cpp)
-    add_compile_definitions(IRSEEKER_USED)
+    add_definitions(-DIRSEEKER_USED)
 endif()
 
 
@@ -75,7 +75,7 @@ ${ULTRASONIC_LIST}
 ${COLOR_LIST}
 ${IRSEEKER_LIST}
 ${COMPASS_LIST}
-${WRAP_USE_OMNIROBOT}
+${OMNIROBOT_LIST}
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
