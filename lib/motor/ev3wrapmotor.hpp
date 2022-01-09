@@ -39,7 +39,7 @@ class Motor : private ev3dev::motor, public Blockable {
         char motorType[128];
         // constructor for the motor WITHOUT motortype specified
         // works because of ev3dev's auto detection for some components
-        static Motor bind(ev3dev::address_type = ev3dev::OUTPUT_AUTO);
+        static Motor bind(ev3dev::address_type addr = ev3dev::OUTPUT_AUTO);
 
         // constructor for the motor with motortype specified
         // run motor for a set number of Rotations

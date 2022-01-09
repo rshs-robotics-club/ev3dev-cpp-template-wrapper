@@ -33,6 +33,8 @@ lib/compass/ev3wrapcompass.hpp
 lib/compass/ev3wrapcompass.cpp
 lib/color/ev3wrapcolor.hpp
 lib/color/ev3wrapcolor.cpp
+lib/gyro/ev3wrapgyro.hpp
+lib/gyro/ev3wrapgyro.cpp
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
@@ -56,6 +58,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/irseeker
     ${PROJECT_SOURCE_DIR}/lib/compass
     ${PROJECT_SOURCE_DIR}/lib/color
+    ${PROJECT_SOURCE_DIR}/lib/gyro
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
