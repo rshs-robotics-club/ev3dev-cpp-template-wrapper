@@ -31,5 +31,7 @@
 #ifdef OMNIROBOT_USED
 #include <ev3wrapomnirobot.hpp>
 #endif
-
+#ifdef BUTTON_USED
+#include <ev3wrapbutton.hpp>
+#endif
 #endif

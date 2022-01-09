@@ -26,7 +26,7 @@ set(WRAP_USE_COLOR true)
 set(WRAP_USE_COMPASS true)
 set(WRAP_USE_OMNIROBOT true)
 set(WRAP_USE_IRSEEKER true)
-
+set(WRAP_USE_BUTTON true)
 
 
 if(WRAP_USE_MOTOR)
@@ -62,6 +62,10 @@ if(WRAP_USE_IRSEEKER)
     set(IRSEEKER_LIST lib/irseeker/ev3wrapirseeker.hpp lib/irseeker/ev3wrapirseeker.cpp)
     add_definitions(-DIRSEEKER_USED)
 endif()
+if(WRAP_USE_BUTTON)
+    set(BUTTON_LIST lib/button/ev3wrapbutton.hpp lib/button/ev3wrapbutton.cpp)
+    add_definitions(-DBUTTON_USED
+endif()
 
 
 # add executables
@@ -76,6 +80,7 @@ ${COLOR_LIST}
 ${IRSEEKER_LIST}
 ${COMPASS_LIST}
 ${OMNIROBOT_LIST}
+${BUTTON_LIST}
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
@@ -94,6 +99,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/compass
     ${PROJECT_SOURCE_DIR}/lib/color
     ${PROJECT_SOURCE_DIR}/lib/omnirobot
+    ${PROJECT_SOURCE_DIR}/lib/button
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
