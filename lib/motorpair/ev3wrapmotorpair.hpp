@@ -6,7 +6,7 @@
 
 namespace Ev3Wrap {
 
-class MotorPair : public Blockable {
+class MotorPair : public Blockable<MotorPair> {
     public:
         static Ev3Wrap::MotorPair CreateMotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2);
 
@@ -17,7 +17,6 @@ class MotorPair : public Blockable {
         Ev3Wrap::MotorPair& runMotorsTimed(float milliseconds, float rpm1 = 50, float rpm2 = 50);
         Ev3Wrap::MotorPair& stopMotors();
         Ev3Wrap::MotorPair& releaseMotors();
-
     private:
         MotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2);
 };
