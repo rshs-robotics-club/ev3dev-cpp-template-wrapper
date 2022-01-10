@@ -36,5 +36,7 @@
 #endif
 #ifdef LCD_USED
 #include <ev3wraplcd.hpp>
+#ifdef GYRO_USED
+#include <ev3wrapgyro.hpp>
 #endif
 #endif
