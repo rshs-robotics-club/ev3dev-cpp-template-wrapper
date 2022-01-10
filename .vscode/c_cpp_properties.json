@@ -16,7 +16,9 @@
                 "COLOR_USED",
                 "COMPASS_USED",
                 "OMNIROBOT_USED",
-                "IRSEEKER_USED"
+                "IRSEEKER_USED",
+                "BUTTON_USED",
+                "LCD_USED"
             ],
             "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/cl.exe",
