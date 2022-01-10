@@ -34,4 +34,7 @@
 #ifdef BUTTON_USED
 #include <ev3wrapbutton.hpp>
 #endif
+#ifndef LCD_USED
+#include <ev3wraplcd.hpp>
+#endif
 #endif

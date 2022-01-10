@@ -27,6 +27,7 @@ set(WRAP_USE_COMPASS true)
 set(WRAP_USE_OMNIROBOT true)
 set(WRAP_USE_IRSEEKER true)
 set(WRAP_USE_BUTTON true)
+set(WRAP_USE_LCD true)
 
 
 if(WRAP_USE_MOTOR)
@@ -66,6 +67,10 @@ if(WRAP_USE_BUTTON)
     set(BUTTON_LIST lib/button/ev3wrapbutton.hpp lib/button/ev3wrapbutton.cpp)
     add_definitions(-DBUTTON_USED)
 endif()
+if(WRAP_USE_LCD)
+    set(LCD_LIST lib/lcd/ev3wraplcd.hpp lib/lcd/ev3wraplcd.cpp)
+    add_definitions(-DLCD_USED)
+endif()
 
 
 # add executables
@@ -81,6 +86,7 @@ ${IRSEEKER_LIST}
 ${COMPASS_LIST}
 ${OMNIROBOT_LIST}
 ${BUTTON_LIST}
+${LCD_LIST}
 lib/ev3wrap.hpp
 lib/ev3dev.cpp
 lib/ev3dev.h
@@ -100,6 +106,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/color
     ${PROJECT_SOURCE_DIR}/lib/omnirobot
     ${PROJECT_SOURCE_DIR}/lib/button
+    ${PROJECT_SOURCE_DIR}/lib/lcd
     #${PROJECT_SOURCE_DIR}/lib/manager
 
 ) # we know project source dir is this directory bc project was just called
