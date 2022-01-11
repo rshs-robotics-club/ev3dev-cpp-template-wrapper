@@ -7,4 +7,5 @@ It contains support for the nxt compass sensor, nxt ir seeker v2 sensor, lego me
 setting up
 ----------
 TODO
+----
 good luck!
