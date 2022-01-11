@@ -92,6 +92,10 @@ void Omni::runTimeds(float x, float y, float milliseconds, float rpm, Angle rota
         this->leftRightPair.stopMotors();
         this->frontBackPair.stopMotors();
     });
+    if(!this->getBlocking()) {
+        this->leftRightPair.runMotorsTimed(milliseconds, this->motorMults.first, -this->motorMults.first);
+        this->frontBackPair.runMotorsTimed(milliseconds, this->motorMults.second, -this->motorMults.second);
+    }
 }
 
 Omni& Omni::runRelativeToMotorsTimed(float x, float y, float milliseconds, float rpm) {
