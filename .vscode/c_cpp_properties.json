@@ -18,6 +18,7 @@
                 "OMNIROBOT_USED",
                 "IRSEEKER_USED",
                 "BUTTON_USED",
+                "LCD_USED",
                 "GYRO_USED"
             ],
             "windowsSdkVersion": "10.0.19041.0",
