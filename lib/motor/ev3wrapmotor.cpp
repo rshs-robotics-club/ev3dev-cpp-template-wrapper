@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <cstring>
+#include <stdexcept>
 
 Ev3Wrap::Motor::Motor(ev3dev::address_type addr) : ev3dev::motor(addr) {
     this->defaultStopAction = MotorStopActions::brake;
@@ -87,15 +88,21 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::runToRelPos(float relPos, float rpm) {
 // stop and hold position (attempt to rotate back if necessary)
 Ev3Wrap::Motor& Ev3Wrap::Motor::holdPosition() {
     this->runBeforeEveryFunction(); // kinda pointless here but eh
-    this->setStopAction(MotorStopActions::hold);
-    this->stop();
+    if (this->stop_action() != MotorStopActions::hold)
+        this->setStopAction(MotorStopActions::hold);
+    // not already stopped with the state
+    auto state = this->state();
+    if (!(state.find(ev3dev::motor::state_holding) != state.end())) {
+        this->stop();
+    }
     return *this;
 }
 
 // release motor (cut electricity and allow free spin)
 Ev3Wrap::Motor& Ev3Wrap::Motor::releaseMotor() {
     this->runBeforeEveryFunction(); // pointless again :*(
-    this->setStopAction(MotorStopActions::coast);
+    if (this->getStopAction() != MotorStopActions::coast)
+        this->setStopAction(MotorStopActions::coast);
     this->stop();
     return *this;
 }

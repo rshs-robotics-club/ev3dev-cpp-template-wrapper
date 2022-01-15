@@ -27,11 +27,18 @@ namespace MotorStopActions {
     static StopAction hold = "hold";
 }
 
+
+// predeclare classes that will use the motors
+class MotorPair;
+class Omni;
 /*
     note that all motors have the nearly the same inner interface
     no separate classes for the medium and large motor are needed
 */
-class Motor : private ev3dev::motor, public Blockable {
+class Motor : private ev3dev::motor, public Blockable<Motor> {
+    // allow motorpair and omni to access private variables of motor
+    friend class Ev3Wrap::MotorPair;
+    friend class Ev3Wrap::Omni;
     public:
         
         // type of motor - note that changing the motorType after construction will not do anything
@@ -58,17 +65,24 @@ class Motor : private ev3dev::motor, public Blockable {
         Motor& runToRelPos(float relPos, float rpm = DEFAULT_MOTOR_RPM);
         
         // default stop action that is updated EVERY time another run* command is done
+        // a stop action may be coast, brake or hold, which define how the motors stops
         Motor& setDefaultStopAction(MotorStopActions::StopAction stopAction) {
             this->defaultStopAction = stopAction;
             return *this;
         }
+        // gets the default stop action (see setDefaultStopAction for more information)
         MotorStopActions::StopAction getDefaultStopAction() {return this->defaultStopAction;}
+        // stops the motor and holds it in position. Do not spam this command
         Motor& holdPosition();
+        // releases the motor by cutting the electricity, allowing it to freely stop
         Motor& releaseMotor();
+        // naming conventions followed
         using ev3dev::motor::state;
 
     private:
+        // private constructor for the motor. Use the static bind() method instead.
         Motor(ev3dev::address_type = ev3dev::OUTPUT_AUTO);
+        // defaultStopAction of this motor. Use the setDefaultStopAction and getDefaultStopAction methods instead.
         MotorStopActions::StopAction defaultStopAction;
         // please refer to setDefaultStopAction() for the actual thing you want to use
         // this is just a painful rewrite to fit naming conventions
@@ -83,6 +97,7 @@ class Motor : private ev3dev::motor, public Blockable {
         void runBeforeEveryFunction() {
             this->set_stop_action(this->defaultStopAction);
         }
+        
 };
 
 

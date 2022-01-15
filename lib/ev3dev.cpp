@@ -415,6 +415,9 @@ constexpr char sensor::nxt_ultrasonic[];
 constexpr char sensor::nxt_i2c_sensor[];
 constexpr char sensor::nxt_analog[];
 
+constexpr char sensor::hitechnic_compass[];
+constexpr char sensor::hitechnic_ir_seeker[];
+
 //-----------------------------------------------------------------------------
 sensor::sensor(address_type address) {
     connect({{ "address", { address }}});
@@ -460,7 +463,9 @@ std::string sensor::type_name() const {
         { nxt_light,       "NXT light" },
         { nxt_sound,       "NXT sound" },
         { nxt_ultrasonic,  "NXT ultrasonic" },
-        { nxt_i2c_sensor,  "I2C sensor" }
+        { nxt_i2c_sensor,  "I2C sensor" },
+        { hitechnic_compass, "HiTechnic NXT Compass Sensor"},
+        { hitechnic_ir_seeker, "HiTechnic NXT IRSeeker V2"}
         };
 
     auto s = lookup_table.find(type);
@@ -1188,11 +1193,12 @@ bool lego_port::connect(const std::map<std::string, std::set<std::string>> &matc
     the new modified code from Eisverygoodletter begins here.
 */
 //-----------------------------------------------------------------------------
-irseeker_sensor::irseeker_sensor(ev3dev::address_type addr) : i2c_sensor(addr) {};
+irseeker_sensor::irseeker_sensor(ev3dev::address_type addr) : i2c_sensor(addr, { hitechnic_ir_seeker }) {};
 char irseeker_sensor::mode_irseeker_dc[] = "DC";
 char irseeker_sensor::mode_irseeker_ac[] = "AC";
 char irseeker_sensor::mode_irseeker_dc_all[] = "DC-ALL";
 char irseeker_sensor::mode_irseeker_ac_all[] = "AC-ALL";
+compass::compass(ev3dev::address_type addr) : i2c_sensor(addr, { hitechnic_compass }) {};
 char compass::mode_compass_compass[] = "COMPASS";
-compass::compass(ev3dev::address_type addr) : i2c_sensor(addr) {};
+
 } // namespace ev3dev
