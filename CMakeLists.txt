@@ -20,15 +20,15 @@ set(WRAP_USE_MOTOR true)
 set(WRAP_USE_MOTORPAIR true)
 
 
-set(WRAP_USE_TOUCH true)
+set(WRAP_USE_TOUCH false)
 set(WRAP_USE_ULTRASONIC true)
 set(WRAP_USE_COLOR true)
 set(WRAP_USE_COMPASS true)
 set(WRAP_USE_OMNIROBOT true)
 set(WRAP_USE_IRSEEKER true)
 set(WRAP_USE_BUTTON true)
-set(WRAP_USE_LCD true)
-set(WRAP_USE_GYRO true)
+set(WRAP_USE_LCD false)
+set(WRAP_USE_GYRO false)
 
 
 if(WRAP_USE_MOTOR)
