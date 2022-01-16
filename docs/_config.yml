@@ -1,3 +1,4 @@
 theme: jekyll-theme-cayman
 title: ev3dev-cpp-template-wrapper
 description: a wrapper library designed for soccer robot competitions
+remote_theme: pmarsceill/just-the-docs
