@@ -22,6 +22,6 @@ We currently only have support for compiling on windows.
 9.  do `cd ev3dev-cpp-template-wrapper` to move the cwd into the folder.
 10. run `./scripts/compile.sh` to compile the file. Note that the docker daemon MUST be running for this bash script to work. Every time you want to compile your code in the future, run `./scripts/compile.sh`. Note that you may see a lot of `cmake` cache files appearing. That is normal and will reduce future compile times
 
-# Quick Start - Using a basic ev3 2 wheeled robot design.
+# [Quick Start - Using a basic ev3 2 wheeled robot design.](ev3_tutorial_1.md)
 #### requirements: 2 motors plugged into ev3 output ports, an irseeker sensor plugged into ev3 input port, and a compass sensor plugged into ev3 input port
 
