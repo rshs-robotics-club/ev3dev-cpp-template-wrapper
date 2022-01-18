@@ -49,9 +49,9 @@ class Blockable {
         Blockable() {
             this->isBlocking = false;
         }
-        bool setBlocking(bool willBlock) {
+        blockableReturn setBlocking(bool willBlock) {
             this->isBlocking = willBlock;
-            return this->isBlocking;
+            return static_cast<blockableReturn>(this);
         }
         bool getBlocking() {
             return this->isBlocking;

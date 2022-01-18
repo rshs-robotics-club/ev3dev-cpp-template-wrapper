@@ -1,6 +1,6 @@
 ---
 title: MotorPair documentation
-nav_order: 2
+nav_order: 3
 ---
 
 # `Ev3Wrap::MotorPair`
@@ -41,3 +41,5 @@ Description: tells the motors to stop whilst resisting any force trying to budge
 Output method
 {: .label}
 Description: tells the motors to cut its electricity and freely come to a stop.
+
+---
