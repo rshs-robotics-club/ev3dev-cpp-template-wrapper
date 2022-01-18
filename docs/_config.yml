@@ -9,3 +9,7 @@ search.preview_words_after: 10
 search.tokenizer_separator: /[\s/]+/
 search.rel_url: false
 search.button: true
+
+aux_links:
+  "the code on github":
+    - "//github.com/rm-robotics/ev3dev-cpp-template-wrapper"
