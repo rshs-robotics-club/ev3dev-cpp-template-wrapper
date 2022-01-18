@@ -8,6 +8,7 @@ parent: documentation
 ## public methods
 ---
 ### `Motor bind(ev3dev::address_type)`
+
 Constructor 
 {: .label-green }
 
@@ -16,6 +17,7 @@ returns the binded motor object.
 
 ---
 ### `Motor& runTimed(float milliseconds, float rpm = DEFAULT_MOTOR_RPM)`
+
 Affected by blockable 
 {: .label-yellow }
 
