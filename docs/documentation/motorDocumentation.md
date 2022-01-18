@@ -70,4 +70,3 @@ Output method
 Description: tells the motor to cut it's electricity and freely come to a stop.
 
 ---
-# End
