@@ -15,10 +15,10 @@ returns the binded motor object.
 
 ---
 ## `Motor& runTimed(float milliseconds, float rpm = DEFAULT_MOTOR_RPM)`
-Affected by blockable  
-{: .label .label-yellow }
 Output method 
 {: .label }
+Affected by blockable  
+{: .label .label-yellow }
 
 Description: tells the motor to run for a specific number of milliseconds at a specific rpm.
 Returns a reference of the Motor itself so that method chaining can be done.
@@ -70,6 +70,8 @@ Description: tells the motor to cut it's electricity and freely come to a stop.
 ---
 
 ## `Motor& setDefaultStopAction(MotorStopActions::StopAction stopAction)`
+setter method
+{: .label .label-purple}
 
 Description: tells the motor how it should stop after timed methods, such as `runTimed()`.
 
@@ -77,5 +79,7 @@ Description: tells the motor how it should stop after timed methods, such as `ru
 
 ## `MotorStopActions::StopAction getDefaultStopAction()`
 Description: gets the current stopAction. Can be set by `setDefaultStopAction`
+getter method
+{: .label .label-purple}
 
 ---
