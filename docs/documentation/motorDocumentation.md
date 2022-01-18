@@ -6,7 +6,6 @@ nav_order: 1
 ## public methods
 ---
 ## `Motor bind(ev3dev::address_type)`
-
 Constructor 
 {: .label .label-green }
 
@@ -65,7 +64,7 @@ Description: tells the motor to stop whilst resisting any force trying to budge 
 ## `Motor::releaseMotor()`
 Output method 
 {: .label }
-Description: tells the motor to cut it's electricity and freely come to a stop.
+Description: tells the motor to cut its electricity and freely come to a stop.
 
 ---
 
