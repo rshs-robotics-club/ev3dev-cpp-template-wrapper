@@ -1,3 +1,10 @@
+---
+layout: default
+title: two wheeled robot tutorial
+parent: Quick Start
+nav_order: 2
+---
+
 # Quick start - 2 wheeled robot
 
 this is a quick start tutorial for using the basic two-wheeled ev3 robots with no sensors
