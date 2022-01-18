@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Motor documentation
-nav_order: 5
+nav_order: 2
 parent: documentation
 ---
 

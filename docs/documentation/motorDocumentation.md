@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Motor documentation
-nav_order: 4
+nav_order: 1
 parent: documentation
 ---
 # `Ev3Wrap::Motor`
