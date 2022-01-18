@@ -1,6 +1,6 @@
 title: ev3dev-cpp-template-wrapper
 description: a wrapper library designed for soccer robot competitions
-remote_theme: rm-robotics/just-the-docs
+remote_theme: rshs-robotics-club/just-the-docs
 # previews and searches
 search_enabled: true
 search.previews: 3

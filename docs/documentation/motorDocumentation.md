@@ -21,5 +21,16 @@ returns the binded motor object.
 Affected by blockable 
 {: .label .label-yellow }
 
+Output method
+{: .label }
+
 Description: tells the motor to run for a specific number of milliseconds at a specific rpm.
 Returns a reference of the Motor itself so that method chaining can be done.
+
+---
+
+### `Motor& runForever(float rpm = DEFAULT_MOTOR_RPM)`
+Output method
+{: .label}
+
+Description: tells the motor to run for a sp
