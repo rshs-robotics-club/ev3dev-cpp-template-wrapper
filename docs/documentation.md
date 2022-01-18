@@ -6,6 +6,6 @@ has_children: true
 
 # The documentation currently contains:
 
-
+# - [Ev3Wrap::Blockable](documentation/BlockableDocumentation.md)
 # - [Ev3Wrap::Motor](documentation/motorDocumentation.md)
 # - [Ev3Wrap::MotorPair](documentation/MotorPairDocumentation.md)
