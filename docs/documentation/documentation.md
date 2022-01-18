@@ -8,3 +8,4 @@ nav_order: 3
 
 
 # - [Ev3Wrap::Motor](motorDocumentation.md)
+# = [Ev3Wrap::MotorPair](MotorPairDocumentation.md)
