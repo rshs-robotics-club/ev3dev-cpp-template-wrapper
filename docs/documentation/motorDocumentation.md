@@ -70,3 +70,14 @@ Output method
 Description: tells the motor to cut it's electricity and freely come to a stop.
 
 ---
+
+### `Motor& setDefaultStopAction(MotorStopActions::StopAction stopAction)`
+
+Description: tells the motor how it should stop after timed methods, such as `runTimed()`.
+
+---
+
+### `MotorStopActions::StopAction getDefaultStopAction()`
+Description: gets the current stopAction. Can be set by `setDefaultStopAction`
+
+---
