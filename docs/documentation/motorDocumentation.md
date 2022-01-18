@@ -8,12 +8,16 @@ parent: documentation
 ## public methods
 ---
 ### `Motor bind(ev3dev::address_type)`
-Constructor {: .label-green}
+Constructor 
+{: .label-green }
+
 Description: static constructor to bind to an output address.
 returns the binded motor object.
 
 ---
 ### `Motor& runTimed(float milliseconds, float rpm = DEFAULT_MOTOR_RPM)`
-Affected by blockable {: .label-yellow}
+Affected by blockable 
+{: .label-yellow }
+
 Description: tells the motor to run for a specific number of milliseconds at a specific rpm.
 Returns a reference of the Motor itself so that method chaining can be done.
