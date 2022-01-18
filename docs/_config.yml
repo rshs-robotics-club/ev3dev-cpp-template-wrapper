@@ -13,3 +13,15 @@ search.button: true
 aux_links:
   "the code on github":
     - "//github.com/rm-robotics/ev3dev-cpp-template-wrapper"
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: default
+  -
+    scope:
+      path: "documentation"
+    values:
+      parent: documentation

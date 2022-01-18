@@ -6,6 +6,6 @@ has_children: true
 ---
 # Quick Start tutorials
 ---
-# [two wheeled robot designs](quickstartTutorial_1.md)
+# [two wheeled robot designs](quickStartTutorials/quickstartTutorial_1.md)
 
 ---

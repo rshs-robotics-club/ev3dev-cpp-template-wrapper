@@ -1,8 +1,6 @@
 ---
-layout: default
-title: Motor documentation
+title: MotorPair documentation
 nav_order: 2
-parent: documentation
 ---
 
 # `Ev3Wrap::MotorPair`
