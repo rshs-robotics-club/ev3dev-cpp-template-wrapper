@@ -12,7 +12,7 @@ title: Button
 
 ## `static Button CreateButton(ButtonCode btnCode)`
 Constructor
-{: .label}
+{: .label .label-green}
 Description: creates a button.
 >   Warning - We do not guarantee that `ButtonCode::BACK` would work
 

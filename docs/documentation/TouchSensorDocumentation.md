@@ -9,6 +9,7 @@ title: touch sensor
 ---
 
 ## `static TouchSensor bind(ev3dev::address_type = ev3dev::INPUT_AUTO)`
+Constructor
 {: .label .label-green }
 
 Description: static constructor to bind to an input address.
