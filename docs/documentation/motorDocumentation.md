@@ -5,7 +5,7 @@ nav_order: 2
 # `Ev3Wrap::Motor`
 ## public methods
 ---
-## `Motor bind(ev3dev::address_type)`
+## `static Motor bind(ev3dev::address_type)`
 Constructor 
 {: .label .label-green }
 

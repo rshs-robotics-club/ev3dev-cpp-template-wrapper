@@ -6,7 +6,7 @@ nav_order: 3
 # `Ev3Wrap::MotorPair`
 ## public methods
 ---
-## `MotorPair CreateMotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2)`
+## `static MotorPair CreateMotorPair(Ev3Wrap::Motor& m1, Ev3Wrap::Motor& m2)`
 Constructor 
 {: .label .label-green }
 Description: static constructor for creating a "manager" class. Parameters must be placed in order, from left to right.
