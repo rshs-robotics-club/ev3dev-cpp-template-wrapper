@@ -1,5 +1,5 @@
 ---
-title: Blockable Documentation
+title: Blockable
 nav_order: 1
 ---
 # `Ev3Wrap::Blockable`

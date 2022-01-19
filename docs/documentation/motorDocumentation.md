@@ -1,5 +1,5 @@
 ---
-title: Motor documentation
+title: Motor
 nav_order: 2
 ---
 # `Ev3Wrap::Motor`

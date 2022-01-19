@@ -1,5 +1,5 @@
 ---
-title: MotorPair documentation
+title: MotorPair
 nav_order: 3
 ---
 
