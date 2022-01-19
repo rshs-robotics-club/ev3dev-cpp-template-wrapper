@@ -1,5 +1,5 @@
 ---
-title:  CompassSensor
+title:  Compass Sensor
 nav_order: 4
 ---
 # `Ev3Wrap::CompassSensor`
@@ -7,7 +7,7 @@ nav_order: 4
 ## public methods
 ---
 
-## `CompassSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO)`
+## `static CompassSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO)`
 Constructor 
 {: .label .label-green }
 
