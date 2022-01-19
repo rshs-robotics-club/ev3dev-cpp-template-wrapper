@@ -49,16 +49,16 @@ class Blockable {
         Blockable() {
             this->isBlocking = false;
         }
-        blockableReturn setBlocking(bool willBlock) {
+        blockableReturn& setBlocking(bool willBlock) {
             this->isBlocking = willBlock;
-            return static_cast<blockableReturn>(this);
+            return (static_cast<blockableReturn&>(*this));
         }
         bool getBlocking() {
             return this->isBlocking;
         }
-        blockableReturn wait(float milliseconds) {
+        blockableReturn& wait(float milliseconds) {
             this->blockMilliseconds(milliseconds);
-            return static_cast<blockableReturn>(this);
+            return (static_cast<blockableReturn&>(*this));
         }
 };
 
