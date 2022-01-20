@@ -29,8 +29,9 @@ class ColorSensor : private ev3dev::color_sensor {
             Color color = static_cast<Color>(colorIndex);
             return color;
         }
-        std::tuple<int, int, int> getRgbColor() {
-            return this->raw();
+        std::vector<int> getRgbColor() {
+            set_mode(mode_rgb_raw);
+            return {value(0), value(1), value(2)};
         }
 
     private:
