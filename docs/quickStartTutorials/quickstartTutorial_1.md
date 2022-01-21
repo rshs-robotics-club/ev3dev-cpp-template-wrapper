@@ -48,15 +48,15 @@ this is a quick start tutorial for using the basic two-wheeled ev3 robots with n
 #### Use `runMotorsForever()` to make motors run forever at a constant rpm
 ```cpp
 // make robot move forward with a speed of 50 rpm on each motor
-motorPair.runForever();
+motorPair.runMotorsForever();
 // make robot move forward with a speed of 100 rpm
-motorPair.runForever(100, 100);
+motorPair.runMotorsForever(100, 100);
 // make robot turn on the spot
-motorPair.runForever(30, -30);
+motorPair.runMotorsForever(30, -30);
 // make robot turn on the spot even faster
-motorPair.runForever(60, -60);
+motorPair.runMotorsForever(60, -60);
 // turn with the pivot on the left motor
-motorPair.runForever(0, 100);
+motorPair.runMotorsForever(0, 100);
 ```
 >   Warning - Calling runForever consecutively will constantly change the motor's speed
 

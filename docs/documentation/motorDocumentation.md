@@ -77,8 +77,7 @@ Description: tells the motor how it should stop after timed methods, such as `ru
 ---
 
 ## `MotorStopActions::StopAction getDefaultStopAction()`
-Description: gets the current stopAction. Can be set by `setDefaultStopAction`
 getter method
 {: .label .label-purple}
-
+Description: gets the current stopAction. Can be set by `setDefaultStopAction`
 ---
