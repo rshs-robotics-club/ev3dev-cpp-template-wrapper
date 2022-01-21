@@ -11,8 +11,8 @@ class IrSeeker : private ev3dev::irseeker_sensor {
         int getDirectionDC() {return this->dc();}
         std::vector<int> getAllAC(){return this->ac_all();}
         std::vector<int> getAllDC(){return this->dc_all();}
-        int getACStrength() {return this->getAllAC()[this->getDirectionAC()]; }
-        int getDCStrength() {return this->getAllDC()[this->getDirectionDC()]; }
+        int getACStrength() {return this->getAllAC()[5]; }
+        int getDCStrength() {return this->getAllDC()[6]; }
         // returns 1 if ball is on the right of ir sensor
         //         0 if ball is in front of ir sensor
         //         -1 if ball is on the left of ir sensor
