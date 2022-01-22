@@ -7,6 +7,7 @@ aimed at providing support for a few other sensors (compass and irseeker etc) an
 only works on windows
 
 documentation written in the future perhaps
+[![docs](https://img.shields.io/badge/documentation-available-yellow.svg)](https://rshs-robotics-club.github.io/ev3dev-cpp-template-wrapper/)
 
 ## how to set up docker for ev3dev compiling
 1. download and install docker desktop (https://www.docker.com/products/docker-desktop)

@@ -16,6 +16,7 @@ class IrSeeker : private ev3dev::irseeker_sensor {
         // returns 1 if ball is on the right of ir sensor
         //         0 if ball is in front of ir sensor
         //         -1 if ball is on the left of ir sensor
+        //         -2 if ball undetected
         int getBallDirection() {
             if (this->getDirectionAC() > 5)
                 return 1;
