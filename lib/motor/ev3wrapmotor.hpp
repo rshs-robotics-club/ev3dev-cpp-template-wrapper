@@ -78,6 +78,8 @@ class Motor : private ev3dev::motor, public Blockable<Motor> {
         Motor& releaseMotor();
         // naming conventions followed
         using ev3dev::motor::state;
+        // return true if motor is stalling
+        bool getStalling();
 
     private:
         // private constructor for the motor. Use the static bind() method instead.
