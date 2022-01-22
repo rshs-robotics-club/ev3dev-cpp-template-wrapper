@@ -26,7 +26,7 @@ set(WRAP_USE_COLOR true)
 set(WRAP_USE_COMPASS true)
 set(WRAP_USE_OMNIROBOT true)
 set(WRAP_USE_IRSEEKER true)
-set(WRAP_USE_BUTTON false)
+set(WRAP_USE_BUTTON true)
 set(WRAP_USE_LCD false)
 set(WRAP_USE_GYRO false)
 
