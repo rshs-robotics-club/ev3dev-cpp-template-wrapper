@@ -67,6 +67,11 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::runToAbsPos(float pos, float rpm) {
     return *this;
 }
 
+bool Ev3Wrap::Motor::getStalling() {
+    auto s = this->state();
+    return s.find(state_stalled) != s.end();
+}
+
 Ev3Wrap::Motor& Ev3Wrap::Motor::runToRelPos(float relPos, float rpm) {
     this->runBeforeEveryFunction();
     this->set_speed_sp(this->count_per_rot() * rpm / 60);

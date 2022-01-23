@@ -14,7 +14,7 @@ enum class ButtonCode {
     DOWN = 108
 };
 
-class Button : private ev3dev::button, private Blockable<Button> {
+class Button : private ev3dev::button, public Blockable<Button> {
     public:
         static Button CreateButton(ButtonCode btnCode);
         bool isPressed() {
