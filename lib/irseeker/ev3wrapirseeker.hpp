@@ -13,6 +13,7 @@ class IrSeeker : private ev3dev::irseeker_sensor {
         static IrSeeker bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         int getDirectionAC() {return this->ac();}
         int getDirectionDC() {return this->dc();}
+        int getDirectionACDegrees() {return (this->getDirectionAC() - 5) * 30;}
         std::vector<int> getAllAC(){return this->ac_all();}
         std::vector<int> getAllDC(){return this->dc_all();}
         int getACStrength(int IrDirection = USE_SPECIFIC_IR_DIRECTION) {
