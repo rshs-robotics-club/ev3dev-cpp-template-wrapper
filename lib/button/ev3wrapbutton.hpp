@@ -29,9 +29,7 @@ class Button : private ev3dev::button, public Blockable<Button> {
         };
         float blockUntilReleased() {
             // block until pressed
-            this->blockUntilStateReached([this] {
-                return this->pressed();
-            }, 5, []{});
+            this->blockUntilPressed();
 
             // capture point where button was pressed
             std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();

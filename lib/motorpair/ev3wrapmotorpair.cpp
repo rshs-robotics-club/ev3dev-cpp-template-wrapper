@@ -34,3 +34,7 @@ Ev3Wrap::MotorPair Ev3Wrap::MotorPair::CreateMotorPair(Ev3Wrap::Motor& m1, Ev3Wr
     Ev3Wrap::MotorPair retMotorPair = Ev3Wrap::MotorPair(m1, m2);
     return retMotorPair;
 }
+
+bool Ev3Wrap::MotorPair::getStalling() {
+    return (this->motor1.getStalling() || this->motor2.getStalling());
+}

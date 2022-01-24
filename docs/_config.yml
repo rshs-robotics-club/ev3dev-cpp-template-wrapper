@@ -1,1 +1,27 @@
-theme: jekyll-theme-cayman
+title: ev3dev-cpp-template-wrapper
+description: a wrapper library designed for soccer robot competitions
+remote_theme: rshs-robotics-club/just-the-docs
+# previews and searches
+search_enabled: true
+search.previews: 3
+search.preview_words_before: 5
+search.preview_words_after: 10
+search.tokenizer_separator: /[\s/]+/
+search.rel_url: false
+search.button: true
+
+aux_links:
+  "the code on github":
+    - "//github.com/rm-robotics/ev3dev-cpp-template-wrapper"
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: default
+  -
+    scope:
+      path: "documentation"
+    values:
+      parent: documentation

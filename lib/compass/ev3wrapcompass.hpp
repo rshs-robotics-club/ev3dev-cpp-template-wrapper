@@ -1,6 +1,7 @@
 #include <ev3dev.h>
 #include <iostream>
 #include <exception>
+#include <vector>
 #ifndef EV3WRAPCOMPASS_HPP_
 #define EV3WRAPCOMPASS_HPP_
 
@@ -8,7 +9,7 @@ namespace Ev3Wrap {
 
 class CompassSensor : private ev3dev::compass {
     private:
-        int degreeOffset;
+        int degreeOffsets[5];
     public:
         static CompassSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         // gets the absolute direction. getRelativeDirection is recommended
@@ -37,15 +38,16 @@ class CompassSensor : private ev3dev::compass {
             return 0;
         }
         // sets the current direction as 0 degrees (in getRelativeDirection)
-        CompassSensor& setZero() {
-            this->degreeOffset = this->getAbsoluteDirection();
+        CompassSensor& setZero(int key = 0) {
+            this->degreeOffsets[key] = this->getAbsoluteDirection();
         }
-        int getDegreeOffset() {
-            return this->degreeOffset;
+        int getDegreeOffset(int key = 0) {
+            return this->degreeOffsets[key];
         }
         // range is different from getAbsoluteDirection, this ranges from -180 to 179
-        int getRelativeDirection() {
-            float ret = this->getAbsoluteDirection() - this->degreeOffset;
+        // inclusive of -180 and non inclusive of 180
+        int getRelativeDirection(int key = 0) {
+            float ret = this->getAbsoluteDirection() - this->degreeOffsets[key];
             if(ret >= 180) {return ret - 360;}
             if(ret < -180) {return ret + 360;}
             return ret;
