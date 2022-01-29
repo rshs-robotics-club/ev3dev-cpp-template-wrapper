@@ -1,4 +1,4 @@
-this is unofficial dont 
+this is unofficial (to pretty much everything) don't use this unless you know what you're doing. (we have no guarantees) 
 # welcome to [ev3dev cpp template wrapper]
 ### this is a wrapper aimed for lego robotics on ev3dev
 
@@ -7,6 +7,7 @@ aimed at providing support for a few other sensors (compass and irseeker etc) an
 only works on windows
 
 documentation written in the future perhaps
+[![docs](https://img.shields.io/badge/documentation-available-yellow.svg)](https://rshs-robotics-club.github.io/ev3dev-cpp-template-wrapper/)
 
 ## how to set up docker for ev3dev compiling
 1. download and install docker desktop (https://www.docker.com/products/docker-desktop)
