@@ -51,14 +51,14 @@ Description: gets all 6 DC signal strength values in the IrSensor put in a `std:
 ## `int getACStrength()`
 getter method
 {: .label .label-purple}
-Description: gets the signal strength from the ball (measured from 0-9) in AC (modulated mode)
+Description: gets the signal strength from the ball (measured from 0-255) in AC (modulated mode)
 
 ---
 
 ## `int getDCStrength()`
 getter method
 {: .label .label-purple}
-Description: gets the signal strength from the ball (measured from 0-9) in DC (unmodulated mode)
+Description: gets the signal strength from the ball (measured from 0-255) in DC (unmodulated mode)
 
 ---
 
