@@ -58,6 +58,8 @@ Description: gets the signal strength from the ball (measured from 0-255) in AC 
 ## `int getDCStrength()`
 getter method
 {: .label .label-purple}
+deprecated
+{: .label .label-red}
 Description: gets the signal strength from the ball (measured from 0-255) in DC (unmodulated mode)
 
 ---
@@ -67,5 +69,12 @@ getter method
 {: .label .label-purple}
 Description: returns 1 if the ball is on the right of the sensor, returns 0 if the ball is exactly in front of the sensor, returns -1 if ball is on the left of the sensor, returns -2 if ball is undetected.
 >   Tip - this method relies on the AC (modulated) mode, meaning it should be more accurate and clear.
+
+---
+
+## `int getDirectionACDegrees()`
+getter method
+{: .label .label-purple}
+Description: returns the direction of the ball in degrees -180 to 180. (the same range as the `CompassSensor`'s `int getRelativeDirection(int key)`)
 
 ---
