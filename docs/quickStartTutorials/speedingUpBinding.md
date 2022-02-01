@@ -6,3 +6,5 @@ nav_order: 2
 ---
 
 # What is the bind method?
+
+some text for testing
