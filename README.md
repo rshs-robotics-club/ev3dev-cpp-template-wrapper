@@ -1,4 +1,6 @@
-this is unofficial (to pretty much everything) don't use this unless you know what you're doing. (we have no guarantees) 
+# NEWS
+## If you are viewing this from our github page, we have now migrated to gitlab [here](https://gitlab.com/Eisverygoodletter/ev3dev-cpp-template-wrapper/-/tree/master)
+
 # welcome to [ev3dev cpp template wrapper]
 ### this is a wrapper aimed for lego robotics on ev3dev
 
