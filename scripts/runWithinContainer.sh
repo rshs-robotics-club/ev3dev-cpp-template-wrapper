@@ -14,10 +14,55 @@
 #    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
+echo -e "\e[1;37m"
+# a function for creating a bar showing file size and the limit
+# $1 is file name
+# $2 is the max kilobytes
+# $3 is file path
+# $4 is progress bar length
+function sizeBar() {
+    FILENAME=$1
+    FILEPATH=$3
+    FILESIZE=$(stat -c%s "$FILEPATH")
+    FILE_KILOBYTES=$(($FILESIZE / 1000))
+    MAX_KILOBYTES=$2
+    INVERSEBEGIN="\e[0;32m"
+    INVERSEEND="\e[1;37m"
+    echo
+    echo -e "$INVERSEBEGIN$FILENAME$INVERSEEND's size is $INVERSEBEGIN$FILE_KILOBYTES$INVERSEEND kilobytes out of the $INVERSEBEGIN$MAX_KILOBYTES$INVERSEEND kilobytes allowed"
+    if (($FILE_KILOBYTES > $MAX_KILOBYTES)); then
+        echo "The file is $INVERSEBEGIN$(($FILE_KILOBYTES - $MAX_KILOBYTES))$INVERSEEND kilobytes too large"
+        echo
+        return
+    fi
+    echo -e "\e[0;32m" # set the color to green
+    PROGRESS_BAR_LENGTH=$4
+    echo -n "0 kB ["
+    for ((i=0; i<$(($FILE_KILOBYTES* $PROGRESS_BAR_LENGTH / $MAX_KILOBYTES)); i++)); do
+        echo -n "="
+    done
+    echo -n ">"
+    for ((i=$(($FILE_KILOBYTES* $PROGRESS_BAR_LENGTH / $MAX_KILOBYTES)); i<$PROGRESS_BAR_LENGTH; i++)); do
+        echo -n " "
+    done
+    echo -n "] $MAX_KILOBYTES kB"
+
+    echo -e "\e[1;37m"
+    echo
+    return
+}
 echo "wakeup"
 echo $PATH
-cmake ./
-cmake --build ./
-echo "start of program"
-qemu-arm-static -L /usr/arm-linux-gnueabi/ ./sentFiles/ev3MotorTest.elf
-echo "end of program"
+echo "setting up cmake env"
+
+cmake ./ -G"Unix Makefiles" -S"lib" -B"bin/build"
+
+echo "building library"
+
+cmake --build ./bin
+# display filesize of the library
+sizeBar "the library" "500" "./bin/libev3dev-cpp-template-wrapper.a" "50"
+
+#echo "start of program"
+#qemu-arm-static -L /usr/arm-linux-gnueabi/ ./sentFiles/ev3MotorTest.elf
+#echo "end of program"

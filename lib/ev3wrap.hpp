@@ -25,37 +25,29 @@
 #include <map>
 #include <string>
 #include <ev3wrapblockable.hpp>
-#ifdef MOTOR_USED
+
 #include <ev3wrapmotor.hpp>
-#endif
-#ifdef TOUCH_USED
+
+
 #include <ev3wraptouch.hpp>
-#endif
-#ifdef ULTRASONIC_USED
+
+
 #include <ev3wrapultrasonic.hpp>
-#endif
-#ifdef IRSEEKER_USED
+
 #include <ev3wrapirseeker.hpp>
-#endif
-#ifdef COMPASS_USED
+
 #include <ev3wrapcompass.hpp>
-#endif
-#ifdef COLOR_USED
+
 #include <ev3wrapcolor.hpp>
-#endif
-#ifdef MOTORPAIR_USED
+
 #include <ev3wrapmotorpair.hpp>
-#endif
-#ifdef OMNIROBOT_USED
+
 #include <ev3wrapomnirobot.hpp>
-#endif
-#ifdef BUTTON_USED
+
 #include <ev3wrapbutton.hpp>
-#endif
-#ifdef LCD_USED
+
 #include <ev3wraplcd.hpp>
-#endif
-#ifdef GYRO_USED
+
 #include <ev3wrapgyro.hpp>
-#endif
-#endif
+
+#endif // EV3WRAP_H_

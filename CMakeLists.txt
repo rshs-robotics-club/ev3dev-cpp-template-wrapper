@@ -21,121 +21,30 @@ set(CMAKE_C_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CC_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
 set(CMAKE_CXX_FLAGS "-Os")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED true)
 
-set(CUSTOM_PROJECT_NAME "ev3MotorTest")
+set(LIBNAME "ev3-cpp-template-wrapper-lib")
 
-project(${CUSTOM_PROJECT_NAME} VERSION 1.0)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/sentFiles)
-set(CMAKE_EXPORT_COMPILE_COMMANDS true)
-
-#components used
-# todo
-set(WRAP_USE_MOTOR true)
-set(WRAP_USE_MOTORPAIR true)
+project(${LIBNAME} VERSION 1.1.0)
 
 
-set(WRAP_USE_TOUCH false)
-set(WRAP_USE_ULTRASONIC true)
-set(WRAP_USE_COLOR true)
-set(WRAP_USE_COMPASS true)
-set(WRAP_USE_OMNIROBOT true)
-set(WRAP_USE_IRSEEKER true)
-set(WRAP_USE_BUTTON true)
-set(WRAP_USE_LCD false)
-set(WRAP_USE_GYRO false)
-
-
-if(WRAP_USE_MOTOR)
-    set(MOTOR_LIST lib/motor/ev3wrapmotor.hpp lib/motor/ev3wrapmotor.cpp)
-    add_definitions(-DMOTOR_USED)
-endif()
-if(WRAP_USE_MOTOR AND WRAP_USE_MOTORPAIR)
-    set(MOTORPAIR_LIST lib/motorpair/ev3wrapmotorpair.hpp lib/motorpair/ev3wrapmotorpair.cpp)
-    add_definitions(-DMOTORPAIR_USED)
-endif()
-
-if(WRAP_USE_TOUCH)
-    set(TOUCH_LIST lib/touch/ev3wraptouch.hpp lib/touch/ev3wraptouch.cpp)
-    add_definitions(-DTOUCH_USED)
-endif()
-if(WRAP_USE_ULTRASONIC)
-    set(ULTRASONIC_LIST lib/ultrasonic/ev3wrapultrasonic.hpp lib/ultrasonic/ev3wrapultrasonic.cpp)
-    add_definitions(-DULTRASONIC_USED)
-endif()
-if(WRAP_USE_COLOR)
-    set(COLOR_LIST lib/color/ev3wrapcolor.hpp lib/color/ev3wrapcolor.cpp)
-    add_definitions(-DCOLOR_USED)
-endif()
-if(WRAP_USE_COMPASS)
-    set(COMPASS_LIST lib/compass/ev3wrapcompass.hpp lib/compass/ev3wrapcompass.cpp)
-    add_definitions(-DCOMPASS_USED)
-endif()
-if(WRAP_USE_COMPASS AND WRAP_USE_OMNIROBOT)
-    set(OMNIROBOT_LIST lib/omnirobot/ev3wrapomnirobot.hpp lib/omnirobot/ev3wrapomnirobot.cpp)
-    add_definitions(-DOMNIROBOT_USED)
-endif()
-if(WRAP_USE_IRSEEKER)
-    set(IRSEEKER_LIST lib/irseeker/ev3wrapirseeker.hpp lib/irseeker/ev3wrapirseeker.cpp)
-    add_definitions(-DIRSEEKER_USED)
-endif()
-if(WRAP_USE_BUTTON)
-    set(BUTTON_LIST lib/button/ev3wrapbutton.hpp lib/button/ev3wrapbutton.cpp)
-    add_definitions(-DBUTTON_USED)
-endif()
-if(WRAP_USE_LCD)
-    set(LCD_LIST lib/lcd/ev3wraplcd.hpp lib/lcd/ev3wraplcd.cpp)
-    add_definitions(-DLCD_USED)
-endif()
-if(WRAP_USE_GYRO)
-    set(GYRO_LIST lib/gyro/ev3wrapgyro.hpp lib/gyro/ev3wrapgyro.cpp)
-    add_definitions(-DGYRO_USED)
-endif()
-
-# add executables
-add_executable(${CUSTOM_PROJECT_NAME} 
-src/main.cpp
-lib/blockable/ev3wrapblockable.hpp
-${MOTOR_LIST}
-${MOTORPAIR_LIST}
-${TOUCH_LIST}
-${ULTRASONIC_LIST}
-${COLOR_LIST}
-${IRSEEKER_LIST}
-${COMPASS_LIST}
-${OMNIROBOT_LIST}
-${BUTTON_LIST}
-${LCD_LIST}
-${GYRO_LIST}
-lib/ev3wrap.hpp
-lib/ev3dev.cpp
-lib/ev3dev.h
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+add_library(
+    ${LIBNAME} 
+    STATIC
+    lib/ev3dev.cpp
+    lib/ev3dev.h
+)
+target_include_directories(
+    ${LIBNAME}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/lib/
 )
 
 
-include_directories(
-    ${PROJECT_SOURCE_DIR}/src
-    ${PROJECT_SOURCE_DIR}/lib
-    ${PROJECT_SOURCE_DIR}/lib/blockable
-    ${PROJECT_SOURCE_DIR}/lib/motor
-    ${PROJECT_SOURCE_DIR}/lib/motorpair
-    ${PROJECT_SOURCE_DIR}/lib/touch
-    ${PROJECT_SOURCE_DIR}/lib/ultrasonic
-    ${PROJECT_SOURCE_DIR}/lib/irseeker
-    ${PROJECT_SOURCE_DIR}/lib/compass
-    ${PROJECT_SOURCE_DIR}/lib/color
-    ${PROJECT_SOURCE_DIR}/lib/gyro
-    ${PROJECT_SOURCE_DIR}/lib/omnirobot
-    ${PROJECT_SOURCE_DIR}/lib/button
-    ${PROJECT_SOURCE_DIR}/lib/lcd
-    #${PROJECT_SOURCE_DIR}/lib/manager
-
-) # we know project source dir is this directory bc project was just called
-#target_link_libraries(${CUSTOM_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/libev3dev.a)
-#target_include_directories(${CUSTOM_PROJECT_NAME} PUBLIC
-#                           "${PROJECT_BINARY_DIR}/src"
-#                           )
-
-set_target_properties(${CUSTOM_PROJECT_NAME} PROPERTIES OUTPUT_NAME "ev3MotorTest.elf")
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED true)
+set_target_properties(${LIBNAME}
+                    PROPERTIES
+                    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
+                    OUTPUT_NAME "ev3dev-cpp-template-wrapper"
+                    )
