@@ -46,7 +46,8 @@
 
 #include <ev3wrapbutton.hpp>
 
-#include <ev3wraplcd.hpp>
+// lcd is deprecated as it requires the linux framebuffer library(s) and it is out of the scope of this library
+//#include <ev3wraplcd.hpp>
 
 #include <ev3wrapgyro.hpp>
 

@@ -31,7 +31,7 @@ function sizeBar() {
     echo
     echo -e "$INVERSEBEGIN$FILENAME$INVERSEEND's size is $INVERSEBEGIN$FILE_KILOBYTES$INVERSEEND kilobytes out of the $INVERSEBEGIN$MAX_KILOBYTES$INVERSEEND kilobytes allowed"
     if (($FILE_KILOBYTES > $MAX_KILOBYTES)); then
-        echo "The file is $INVERSEBEGIN$(($FILE_KILOBYTES - $MAX_KILOBYTES))$INVERSEEND kilobytes too large"
+        echo "The file is $INVERSEBEGIN $(($FILE_KILOBYTES - $MAX_KILOBYTES)) $INVERSEEND kilobytes too large"
         echo
         return
     fi
@@ -51,15 +51,18 @@ function sizeBar() {
     echo
     return
 }
+
+
+
 echo "wakeup"
 echo $PATH
 echo "setting up cmake env"
 
-cmake ./ -G"Unix Makefiles" -S"lib" -B"bin/build"
+cmake ./ -G"Unix Makefiles" -S"lib" -B"bin"
 
 echo "building library"
 
-cmake --build ./bin
+cmake --build bin
 # display filesize of the library
 sizeBar "the library" "500" "./bin/libev3dev-cpp-template-wrapper.a" "50"
 

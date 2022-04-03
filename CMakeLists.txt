@@ -20,31 +20,76 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 set(CMAKE_C_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CC_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
-set(CMAKE_CXX_FLAGS "-Os")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 set(LIBNAME "ev3-cpp-template-wrapper-lib")
-
+set(CMAKE_CXX_FLAGS "-Os")
 project(${LIBNAME} VERSION 1.1.0)
+message(STATUS ${CMAKE_CXX_FLAGS})
 
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_library(
     ${LIBNAME} 
     STATIC
+    lib/blockable/ev3wrapblockable.hpp
+    lib/button/ev3wrapbutton.hpp
+    lib/button/ev3wrapbutton.cpp
+
+    lib/color/ev3wrapcolor.cpp
+    lib/color/ev3wrapcolor.hpp
+    
+    lib/compass/ev3wrapcompass.cpp
+    lib/compass/ev3wrapcompass.hpp
+
+    lib/gyro/ev3wrapgyro.cpp
+    lib/gyro/ev3wrapgyro.hpp
+
+    lib/irseeker/ev3wrapirseeker.cpp
+    lib/irseeker/ev3wrapirseeker.hpp
+
+    lib/motor/ev3wrapmotor.cpp
+    lib/motor/ev3wrapmotor.hpp
+
+    lib/motorpair/ev3wrapmotorpair.cpp
+    lib/motorpair/ev3wrapmotorpair.hpp
+
+    lib/omnirobot/ev3wrapomnirobot.cpp
+    lib/omnirobot/ev3wrapomnirobot.hpp
+
+    lib/touch/ev3wraptouch.cpp
+    lib/touch/ev3wraptouch.hpp
+
+    lib/ultrasonic/ev3wrapultrasonic.cpp
+    lib/ultrasonic/ev3wrapultrasonic.hpp
+
     lib/ev3dev.cpp
     lib/ev3dev.h
+
+    lib/ev3wrap.hpp
 )
 target_include_directories(
     ${LIBNAME}
     PRIVATE
     ${CMAKE_SOURCE_DIR}/lib/
+    ${CMAKE_SOURCE_DIR}/lib/blockable/
+    ${CMAKE_SOURCE_DIR}/lib/button/
+    ${CMAKE_SOURCE_DIR}/lib/color/
+    ${CMAKE_SOURCE_DIR}/lib/compass/
+    ${CMAKE_SOURCE_DIR}/lib/gyro/
+    ${CMAKE_SOURCE_DIR}/lib/irseeker/
+    ${CMAKE_SOURCE_DIR}/lib/motor/
+    ${CMAKE_SOURCE_DIR}/lib/motorpair/
+    ${CMAKE_SOURCE_DIR}/lib/omnirobot/
+    ${CMAKE_SOURCE_DIR}/lib/touch/
+    ${CMAKE_SOURCE_DIR}/lib/ultrasonic/
 )
-
 
 set_target_properties(${LIBNAME}
                     PROPERTIES
                     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
                     OUTPUT_NAME "ev3dev-cpp-template-wrapper"
-                    )
+)
+
+add_subdirectory(examples)
