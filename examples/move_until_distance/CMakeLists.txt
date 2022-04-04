@@ -12,24 +12,42 @@
 #    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
-
+# set the example file name -- this needs to be changed per file
 project(move_until_distance VERSION 1.0)
-
+# add the executable to the target project
 add_executable(
     ${PROJECT_NAME}
     ${PROJECT_NAME}.cpp
 )
+# link the Ev3Wrap library
 target_link_libraries(
     ${PROJECT_NAME}
     PRIVATE
     ${LIBNAME}
 )
-
+# set its output executable name
 set_target_properties(
     ${PROJECT_NAME}
     PROPERTIES
     OUTPUT_NAME ${PROJECT_NAME}.elf
 )
-set(FINAL_EXECUTION ${FINAL_EXECUTION} "sizeBar \"spin_a_motor.elf\" \"500\" \"./bin/examples/spin_a_motor/spin_a_motor.elf\" \"50\"" PARENT_SCOPE)
-list(APPEND ${FINAL_EXECUTION} "sizeBar \"spin_a_motor.elf\" \"500\" \"./bin/examples/spin_a_motor/spin_a_motor.elf\" \"50\"")
-message(STATUS ${FINAL_EXECUTION})
+# make sure the EVERYTHING_BUILT_TARGET target is built AFTER this project is built.
+add_dependencies(${EVERYTHING_BUILT_TARGET} ${PROJECT_NAME})
+# create a custom target for this project that will be executed AFTER the EVERYTHING_BUILT_TARGET
+# is executed
+add_custom_target(
+    ${PROJECT_NAME}_TARGET ALL
+)
+# make sure this custom target of ours is executed after the EVERYTHING_BUILT_TARGET is built
+add_dependencies(${PROJECT_NAME}_TARGET ${EVERYTHING_BUILT_TARGET})
+# add a custom command that:
+# 1. creates the folder for this project in the finished examples folder
+# 2. copies the finished executable from the messy bin to the bin/finished folder
+# 3. executes a bash script that shows a bar checking for the executable's size
+add_custom_command(
+    TARGET ${PROJECT_NAME}_TARGET POST_BUILD
+    COMMAND mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}/${PROJECT_NAME}/
+    COMMAND cp ${WRAPPER_BIN_DIR}/examples/${PROJECT_NAME}/${PROJECT_NAME}.elf ${WRAPPER_BIN_EXAMPLES_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.elf
+    COMMAND ${WRAPPER_SCRIPTS_DIR}/post_build.sh ${PROJECT_NAME} 500 ${WRAPPER_BIN_EXAMPLES_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.elf 50
+    USES_TERMINAL
+)

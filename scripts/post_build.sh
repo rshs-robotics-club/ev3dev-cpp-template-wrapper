@@ -1,3 +1,4 @@
+#!/bin/bash
 # 
 #    A bash script used with Docker for compiling The Ev3dev C++ Wrapper Library examples
 #
@@ -23,7 +24,8 @@ function sizeBar() {
     FILENAME=$1
     FILEPATH=$3
     FILESIZE=$(stat -c%s "$FILEPATH")
-    FILE_KILOBYTES=$(($FILESIZE / 1000))
+    BYTES_PER_KILOBYTE="1000"
+    FILE_KILOBYTES=$(($FILESIZE/$BYTES_PER_KILOBYTE))
     MAX_KILOBYTES=$2
     INVERSEBEGIN="\e[0;32m"
     INVERSEEND="\e[1;37m"
@@ -34,7 +36,7 @@ function sizeBar() {
         echo
         return
     fi
-    echo -e "\e[0;32m" # set the color to green
+    echo -e -n "\e[0;32m" # set the color to green
     PROGRESS_BAR_LENGTH=$4
     echo -n "0 kB ["
     for ((i=0; i<$(($FILE_KILOBYTES* $PROGRESS_BAR_LENGTH / $MAX_KILOBYTES)); i++)); do
@@ -46,11 +48,9 @@ function sizeBar() {
     done
     echo -n "] $MAX_KILOBYTES kB"
 
-    echo -e "\e[1;37m"
-    echo
+    echo -e "\e[1;37m \n"
     return
 }
 
 # actual code begins here
-FILENAME=$2
-sizeBar $FILENAME 500 $FILENAME 50
+sizeBar $1 $2 $3 $4

@@ -92,7 +92,28 @@ set_target_properties(${LIBNAME}
                     OUTPUT_NAME "ev3dev-cpp-template-wrapper"
 )
 
-set(FINAL_EXECUTION "sizeBar \"the library\" 500 \"./bin/libev3dev-cpp-template-wrapper.a\" 50")
+set("WRAPPER_EXAMPLES_DIR" ${CMAKE_SOURCE_DIR}/examples)
+set("WRAPPER_SCRIPTS_DIR" ${CMAKE_SOURCE_DIR}/scripts)
+set("WRAPPER_BIN_DIR" ${CMAKE_SOURCE_DIR}/bin)
+set(WRAPPER_BIN_FINISHED_DIR ${WRAPPER_BIN_DIR}/finished)
+set(WRAPPER_BIN_EXAMPLES_DIR ${WRAPPER_BIN_FINISHED_DIR}/examples)
+set(EVERYTHING_BUILT_TARGET "EVERYTHING_BUILT_TARGET")
+
+add_custom_target(
+    ${EVERYTHING_BUILT_TARGET} 
+    ALL
+)
+add_dependencies(${EVERYTHING_BUILT_TARGET} ${LIBNAME})
+
+add_custom_command(
+    TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
+    # setting up the directories
+    COMMAND mkdir -p ${WRAPPER_BIN_FINISHED_DIR}
+    COMMAND mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}
+    # commands for the library itself
+    COMMAND cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
+    COMMAND ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
+)
+
 
 add_subdirectory(examples)
-message(STATUS ${FINAL_EXECUTION})

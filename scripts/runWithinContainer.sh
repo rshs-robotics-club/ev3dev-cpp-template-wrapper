@@ -64,12 +64,12 @@ echo "building library"
 
 cmake --build bin
 # display filesize of the library
-sizeBar "the library" "500" "./bin/libev3dev-cpp-template-wrapper.a" "50"
+#sizeBar "the library" "500" "./bin/libev3dev-cpp-template-wrapper.a" "50"
 # display filesize of the examples
-sizeBar "spin_a_motor.elf" "500" "./bin/examples/spin_a_motor/spin_a_motor.elf" "50"
-mkdir "./bin/finished/"
-cp "./bin/examples/spin_a_motor/spin_a_motor.elf" "./bin/finished/spin_a_motor.elf"
-sizeBar "move_until_distance.elf" "500" "./bin/examples/move_until_distance/move_until_distance.elf" "50"
+#sizeBar "spin_a_motor.elf" "500" "./bin/examples/spin_a_motor/spin_a_motor.elf" "50"
+#mkdir "./bin/finished/"
+#cp "./bin/examples/spin_a_motor/spin_a_motor.elf" "./bin/finished/spin_a_motor.elf"
+#sizeBar "move_until_distance.elf" "500" "./bin/examples/move_until_distance/move_until_distance.elf" "50"
 #echo "start of program"
 #qemu-arm-static -L /usr/arm-linux-gnueabi/ ./sentFiles/ev3MotorTest.elf
 #echo "end of program"
