@@ -92,4 +92,7 @@ set_target_properties(${LIBNAME}
                     OUTPUT_NAME "ev3dev-cpp-template-wrapper"
 )
 
+set(FINAL_EXECUTION "sizeBar \"the library\" 500 \"./bin/libev3dev-cpp-template-wrapper.a\" 50")
+
 add_subdirectory(examples)
+message(STATUS ${FINAL_EXECUTION})

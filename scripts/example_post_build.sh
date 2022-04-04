@@ -1,7 +1,5 @@
-#!/bin/bash
-
 # 
-#    A bash script used with Docker for compiling The Ev3dev C++ Wrapper Library
+#    A bash script used with Docker for compiling The Ev3dev C++ Wrapper Library examples
 #
 #    Copyright (c) 2021, 2022 - Eisverygoodletter
 #
@@ -14,6 +12,7 @@
 #    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
+
 echo -e "\e[1;37m"
 # a function for creating a bar showing file size and the limit
 # $1 is file name
@@ -26,18 +25,18 @@ function sizeBar() {
     FILESIZE=$(stat -c%s "$FILEPATH")
     FILE_KILOBYTES=$(($FILESIZE / 1000))
     MAX_KILOBYTES=$2
-    GREENBEGIN="\e[0;32m"
-    COLOREND="\e[1;37m"
-    REDBEGIN="\e[0;31m"
+    INVERSEBEGIN="\e[0;32m"
+    INVERSEEND="\e[1;37m"
     echo
-    echo -e "$GREENBEGIN$FILENAME$COLOREND's size is $GREENBEGIN$FILE_KILOBYTES$COLOREND kilobytes out of the $REDBEGIN$MAX_KILOBYTES$COLOREND kilobytes allowed"
+    echo -e "$INVERSEBEGIN$FILENAME$INVERSEEND's size is $INVERSEBEGIN$FILE_KILOBYTES$INVERSEEND kilobytes out of the $INVERSEBEGIN$MAX_KILOBYTES$INVERSEEND kilobytes allowed"
     if (($FILE_KILOBYTES > $MAX_KILOBYTES)); then
-        echo "The file is $REDBEGIN $(($FILE_KILOBYTES - $MAX_KILOBYTES)) $COLOREND kilobytes too large"
+        echo "The file is $INVERSEBEGIN $(($FILE_KILOBYTES - $MAX_KILOBYTES)) $INVERSEEND kilobytes too large"
         echo
         return
     fi
+    echo -e "\e[0;32m" # set the color to green
     PROGRESS_BAR_LENGTH=$4
-    echo -e -n "$GREENBEGIN 0 $COLOREND kB ["
+    echo -n "0 kB ["
     for ((i=0; i<$(($FILE_KILOBYTES* $PROGRESS_BAR_LENGTH / $MAX_KILOBYTES)); i++)); do
         echo -n "="
     done
@@ -45,31 +44,13 @@ function sizeBar() {
     for ((i=$(($FILE_KILOBYTES* $PROGRESS_BAR_LENGTH / $MAX_KILOBYTES)); i<$PROGRESS_BAR_LENGTH; i++)); do
         echo -n " "
     done
-    echo -n -e "] $REDBEGIN$MAX_KILOBYTES$COLOREND kB"
+    echo -n "] $MAX_KILOBYTES kB"
 
     echo -e "\e[1;37m"
     echo
     return
 }
 
-
-
-echo "wakeup"
-echo $PATH
-echo "setting up cmake env"
-
-cmake ./ -G"Unix Makefiles" -S"lib" -B"bin"
-
-echo "building library"
-
-cmake --build bin
-# display filesize of the library
-sizeBar "the library" "500" "./bin/libev3dev-cpp-template-wrapper.a" "50"
-# display filesize of the examples
-sizeBar "spin_a_motor.elf" "500" "./bin/examples/spin_a_motor/spin_a_motor.elf" "50"
-mkdir "./bin/finished/"
-cp "./bin/examples/spin_a_motor/spin_a_motor.elf" "./bin/finished/spin_a_motor.elf"
-sizeBar "move_until_distance.elf" "500" "./bin/examples/move_until_distance/move_until_distance.elf" "50"
-#echo "start of program"
-#qemu-arm-static -L /usr/arm-linux-gnueabi/ ./sentFiles/ev3MotorTest.elf
-#echo "end of program"
+# actual code begins here
+FILENAME=$2
+sizeBar $FILENAME 500 $FILENAME 50

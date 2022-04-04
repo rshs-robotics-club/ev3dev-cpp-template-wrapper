@@ -1,5 +1,5 @@
 # 
-#    A CMake file used with Docker for compiling The Ev3dev C++ Wrapper Library
+#    A CMake file used with Docker for compiling The Ev3dev C++ Wrapper Library examples
 #
 #    Copyright (c) 2021, 2022 - Eisverygoodletter
 #
@@ -13,22 +13,23 @@
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 
-# this file is mainly for including sub-folders which contains examples of how to use the library
-# it is not meant to be a full test suite (difficult due to the nature of this library)
-include_directories(
-    ${CMAKE_SOURCE_DIR}/lib/
-    ${CMAKE_SOURCE_DIR}/lib/blockable/
-    ${CMAKE_SOURCE_DIR}/lib/button/
-    ${CMAKE_SOURCE_DIR}/lib/color/
-    ${CMAKE_SOURCE_DIR}/lib/compass/
-    ${CMAKE_SOURCE_DIR}/lib/gyro/
-    ${CMAKE_SOURCE_DIR}/lib/irseeker/
-    ${CMAKE_SOURCE_DIR}/lib/motor/
-    ${CMAKE_SOURCE_DIR}/lib/motorpair/
-    ${CMAKE_SOURCE_DIR}/lib/omnirobot/
-    ${CMAKE_SOURCE_DIR}/lib/touch/
-    ${CMAKE_SOURCE_DIR}/lib/ultrasonic/
+project(move_until_distance VERSION 1.0)
+
+add_executable(
+    ${PROJECT_NAME}
+    ${PROJECT_NAME}.cpp
+)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${LIBNAME}
 )
 
-add_subdirectory(spin_a_motor)
-add_subdirectory(move_until_distance)
+set_target_properties(
+    ${PROJECT_NAME}
+    PROPERTIES
+    OUTPUT_NAME ${PROJECT_NAME}.elf
+)
+set(FINAL_EXECUTION ${FINAL_EXECUTION} "sizeBar \"spin_a_motor.elf\" \"500\" \"./bin/examples/spin_a_motor/spin_a_motor.elf\" \"50\"" PARENT_SCOPE)
+list(APPEND ${FINAL_EXECUTION} "sizeBar \"spin_a_motor.elf\" \"500\" \"./bin/examples/spin_a_motor/spin_a_motor.elf\" \"50\"")
+message(STATUS ${FINAL_EXECUTION})
