@@ -34,8 +34,8 @@ add_library(
     ${LIBNAME} 
     STATIC
     lib/blockable/ev3wrapblockable.hpp
-    lib/button/ev3wrapbutton.hpp
     lib/button/ev3wrapbutton.cpp
+    lib/button/ev3wrapbutton.hpp
 
     lib/color/ev3wrapcolor.cpp
     lib/color/ev3wrapcolor.hpp
@@ -72,38 +72,43 @@ add_library(
 target_include_directories(
     ${LIBNAME}
     PRIVATE
-    ${CMAKE_SOURCE_DIR}/lib/
-    ${CMAKE_SOURCE_DIR}/lib/blockable/
-    ${CMAKE_SOURCE_DIR}/lib/button/
-    ${CMAKE_SOURCE_DIR}/lib/color/
-    ${CMAKE_SOURCE_DIR}/lib/compass/
-    ${CMAKE_SOURCE_DIR}/lib/gyro/
-    ${CMAKE_SOURCE_DIR}/lib/irseeker/
-    ${CMAKE_SOURCE_DIR}/lib/motor/
-    ${CMAKE_SOURCE_DIR}/lib/motorpair/
-    ${CMAKE_SOURCE_DIR}/lib/omnirobot/
-    ${CMAKE_SOURCE_DIR}/lib/touch/
-    ${CMAKE_SOURCE_DIR}/lib/ultrasonic/
+    ${PROJECT_SOURCE_DIR}/lib/
+    ${PROJECT_SOURCE_DIR}/lib/blockable/
+    ${PROJECT_SOURCE_DIR}/lib/button/
+    ${PROJECT_SOURCE_DIR}/lib/color/
+    ${PROJECT_SOURCE_DIR}/lib/compass/
+    ${PROJECT_SOURCE_DIR}/lib/gyro/
+    ${PROJECT_SOURCE_DIR}/lib/irseeker/
+    ${PROJECT_SOURCE_DIR}/lib/motor/
+    ${PROJECT_SOURCE_DIR}/lib/motorpair/
+    ${PROJECT_SOURCE_DIR}/lib/omnirobot/
+    ${PROJECT_SOURCE_DIR}/lib/touch/
+    ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
 )
 
 set_target_properties(${LIBNAME}
                     PROPERTIES
-                    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
+                    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin/
                     OUTPUT_NAME "ev3dev-cpp-template-wrapper"
 )
 
-set("WRAPPER_EXAMPLES_DIR" ${CMAKE_SOURCE_DIR}/examples)
-set("WRAPPER_SCRIPTS_DIR" ${CMAKE_SOURCE_DIR}/scripts)
-set("WRAPPER_BIN_DIR" ${CMAKE_SOURCE_DIR}/bin)
+set("WRAPPER_EXAMPLES_DIR" ${PROJECT_SOURCE_DIR}/examples)
+set("WRAPPER_SCRIPTS_DIR" ${PROJECT_SOURCE_DIR}/scripts)
+set("WRAPPER_BIN_DIR" ${PROJECT_BINARY_DIR})
 set(WRAPPER_BIN_FINISHED_DIR ${WRAPPER_BIN_DIR}/finished)
 set(WRAPPER_BIN_EXAMPLES_DIR ${WRAPPER_BIN_FINISHED_DIR}/examples)
 set(EVERYTHING_BUILT_TARGET "EVERYTHING_BUILT_TARGET")
-
+set(LIB_BUILT_TARGET "LIB_BUILT_TARGET")
 add_custom_target(
     ${EVERYTHING_BUILT_TARGET} 
     ALL
 )
+add_custom_target(
+    ${LIB_BUILT_TARGET}
+    ALL
+)
 add_dependencies(${EVERYTHING_BUILT_TARGET} ${LIBNAME})
+add_dependencies(${LIB_BUILT_TARGET} ${EVERYTHING_BUILT_TARGET})
 
 add_custom_command(
     TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
@@ -114,6 +119,6 @@ add_custom_command(
     COMMAND cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
     COMMAND ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
 )
-
+#set(ALL_LIB_FINAL_TARGETS)
 
 add_subdirectory(examples)
