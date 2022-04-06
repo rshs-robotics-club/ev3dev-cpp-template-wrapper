@@ -4,6 +4,9 @@ title: Introduction
 nav_order: 1
 ---
 
+<details>
+<summary>Legacy build system (V1) setup tutorial</summary>
+
 # Introduction
 If you do not know what ev3dev is, go [here](https://www.ev3dev.org/).
 This library is a wrapper around [ev3dev's official cpp library](https://github.com/ddemidov/ev3dev-lang-cpp). We do not guarantee that this wrapper will work.
@@ -27,6 +30,21 @@ We currently only have support for compiling on windows.
     into `main.cpp` which you just created.
 9.  do `cd ev3dev-cpp-template-wrapper` to move the cwd into the folder.
 10. run `./scripts/compile.sh` to compile the file. Note that the docker daemon MUST be running for this bash script to work. Every time you want to compile your code in the future, run `./scripts/compile.sh`. Note that you may see a lot of `cmake` cache files appearing. That is normal and will reduce future compile times
+
+</details>
+
+<details>
+<summary>New build system (V2 setup tutorial)</summary>
+
+1. Familiarize yourself with the CMake build system first.(how to construct a basic cmake project)
+2. Create a folder where you will store this library and your code
+3. inside that folder, execute the command `git clone https://github.com/rshs-robotics-club/ev3dev-cpp-template-wrapper`. This will download the library into a folder
+4. Inside that folder, execute the command `git clone https://github.com/todo-create-an-example-repo`
+5. enter the example repo folder
+6. edit the src files as you wish
+
+</details>
+
 ---
 # [Click here to find the Quick Start tutorials](quickstartTutorials.md)
 ---
