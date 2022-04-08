@@ -32,15 +32,23 @@ class Blockable {
     private:
         bool isBlocking;
     protected:
+        // block the thread for a number of milliseconds
         void blockMilliseconds(float milliseconds, std::function<void()> cleanupFunction = []{}) {
             if(!this->isBlocking) {return;}
             // std::chrono::milliseconds can't accept float for some reason, so we have to cast it
             std::this_thread::sleep_for(std::chrono::milliseconds((long)milliseconds));
             cleanupFunction();
         }
-        void blockUntilStateReached(std::function<bool()> state, float loopSpeed = 5, std::function<void()> cleanupFunction = []{}) {
+        // block the thread until a state is reached, then call the cleanupFunction.
+        void blockUntilStateReached(std::function<bool()> state, float loopSpeed = 5, std::function<void()> cleanupFunction = []{}, float timeoutMilliseconds = 10000) {
             if(!this->isBlocking) {return;}
+            std::clock_t startTime = std::clock();
             while(true) {
+                float duration = (std::clock() - startTime) / CLOCKS_PER_SEC;
+                duration *= 1000;
+                if (duration >= timeoutMilliseconds) {
+                    break;
+                }
                 if(state()) {
                     break;
                 }
@@ -48,6 +56,8 @@ class Blockable {
             }
             cleanupFunction();
         }
+        // block the thread and force it into a while loop where the `function` is called as fast as possible, and
+        // when `milliseconds` pass, stop and call the `cleanupFunction`
         void blockMillisecondsAndFire(std::function<void()> function, float milliseconds, std::function<void()> cleanupFunction = []{}) {
             if(!this->isBlocking) {return;}
             std::clock_t startTime = std::clock();
@@ -62,6 +72,8 @@ class Blockable {
             cleanupFunction();
             return;
         }
+
+
     public:
         Blockable() {
             this->isBlocking = false;
