@@ -34,3 +34,4 @@ include_directories(
 
 add_subdirectory(spin_a_motor)
 add_subdirectory(move_until_distance)
+add_subdirectory(compass_calibration)
