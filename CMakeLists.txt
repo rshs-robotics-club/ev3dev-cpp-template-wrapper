@@ -113,11 +113,11 @@ add_dependencies(${LIB_BUILT_TARGET} ${EVERYTHING_BUILT_TARGET})
 add_custom_command(
     TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
     # setting up the directories
-    COMMAND mkdir -p ${WRAPPER_BIN_FINISHED_DIR}
-    COMMAND mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}
+    COMMAND sudo mkdir -p ${WRAPPER_BIN_FINISHED_DIR}
+    COMMAND sudo mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}
     # commands for the library itself
-    COMMAND cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
-    COMMAND ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
+    COMMAND sudo cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
+    COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
 )
 #set(ALL_LIB_FINAL_TARGETS)
 
