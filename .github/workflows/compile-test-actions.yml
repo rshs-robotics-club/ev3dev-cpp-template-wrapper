@@ -1,5 +1,5 @@
 name: compile-test-actions
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   inside-container-job:
     runs-on: ubuntu-latest
