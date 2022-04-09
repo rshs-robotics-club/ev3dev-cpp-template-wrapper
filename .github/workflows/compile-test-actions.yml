@@ -1,0 +1,8 @@
+name: compile-test-actions
+on: [push]
+jobs:
+  inside-container-job:
+    runs-on: ubuntu-latest
+    container: ev3dev/debian-stretch-cross
+    steps:
+      - run: echo "Hello Github Actions!"
