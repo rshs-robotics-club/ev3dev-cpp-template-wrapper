@@ -1,7 +1,18 @@
 name: compile-test-actions
 on: [pull_request]
 jobs:
-  inside-container-job:
+  compile-out-of-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install Docker
+        run: sudo apt-get install docker-ce docker-ce-cli containerd.io
+      - name: Download this repo
+        uses: actions/checkout@v3
+      - name: Setup docker images
+        run: sudo bash ./scripts/dockersetup.sh
+      - name: compile the contents
+        run: sudo bash ./scripts/compile.sh
+  compile-inside-container:
     runs-on: ubuntu-latest
     container: 
       image: ev3dev/debian-stretch-cross:latest
