@@ -1,5 +1,10 @@
 # NEWS
-## If you are viewing this from our github page, we have now migrated to gitlab [here](https://gitlab.com/Eisverygoodletter/ev3dev-cpp-template-wrapper/-/tree/master)
+## Why is the documentation all over the place?
+### Reasons:
+1. Attempted a migration to gitlab but found out we can't host documentation there free, so we gave up
+2. We're currently transitioning into V2 of the library, which has a new build structure (still same api tho), which means the build tutorials are out of date (even this document)
+3. Nobody is updating the documentation and i'm stuck fixing linker errors
+- Eisverygoodletter 10/04/2022
 
 # welcome to [ev3dev cpp template wrapper]
 ### this is a wrapper aimed for lego robotics on ev3dev
