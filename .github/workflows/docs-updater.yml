@@ -1,26 +1,78 @@
 name: docs-update-action
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - unstable
+    paths:
+      - docs/**
+  pull_request:
+    branches:
+      - master
+      - unstable
 jobs:
-  copy-files-to-docs-repo:
+  do-it:
     runs-on: ubuntu-latest
     steps:
-      - name: clone this repo into a folder named "thisrepo" inside the vm
-        uses: actions/checkout@v3
-        with:
-          path: thisrepo
-      - name: clone the docs repo
-        uses: actions/checkout@v3
-        with:
-          path: docsrepo
-          repository: rshs-robotics-club/rshs-robotics-club.github.io
-      - name: copy the files from this repo into the docs repo
-        run: |
-          sudo rm -rf docsrepo/docs/ev3wrap-stable
-          sudo cp -a thisrepo/docs/ docsrepo/docs/ev3wrap-stable
-      - name: push the docs repo
-        run: |
-          sudo git add .
-          sudo git commit -m "automatic update docs action triggered from stable"
-          git push origin master
+    - uses: actions/checkout@v2
+    - uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.EISVERYGOODLETTER_PAT }}
+      with:
+        source-directory: docs/
+        destination-github-username: rshs-robotics-club
+        destination-repository-name: rshs-robotics-club.github.io
+        user-email: noreply@fakeemail.com
+        target-branch: main
+        target-directory: docs/ev3wrap/${{ github.head_ref || github.ref_name }}
+
+
+# name: docs-update-action
+# on: [push]
+# jobs:
+#   copy-files-to-docs-repo:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: clone this repo into a folder named "thisrepo" inside the vm
+#         uses: actions/checkout@v3
+#         with:
+#           path: thisrepo
+#       - name: clone the docs repo
+#         uses: actions/checkout@v3
+#         with:
+#           path: docsrepo
+#           repository: rshs-robotics-club/rshs-robotics-club.github.io
+#       - name: copy the files from this repo into the docs repo
+#         run: |
+#           sudo rm -rf docsrepo/docs/ev3wrap-stable
+#           sudo cp -a thisrepo/docs/ docsrepo/docs/ev3wrap-stable
+#       - run: |
+#           cd docsrepo
+#           git remote rm origin
+#           cd ../thisrepo
+#           git remote rm origin
+#           cd ..
+#       # - name: custom push command
+#       #   run: |
+#       #     cd docsrepo
+#       #     git config --global user.email "Eisverygoodletter"
+#       #     git config --global user.name "Eisverygoodletter_auto_doc_updater"
+#       #     git add .
+#       #     git commit -m "automated docs update"
+#       #     echo "https://${{ secrets.EISVERYGOODLETTER_PAT }}@github.com/rshs-robotics-club/rshs-robotics-club.github.io.git"
+#       #     git push "https://${{ secrets.EISVERYGOODLETTER_PAT }}@github.com/rshs-robotics-club/rshs-robotics-club.github.io.git" --set-upstream "main"
+#       - name: do the push
+#         uses: cpina/github-action-push-to-another-repository@main
+#         env:
+#           API_TOKEN_GITHUB: ${{ secrets.EISVERYGOODLETTER_PAT }}
+#         with:
+#           source-directory: docsrepo/
+#           destination-github-username: Eisverygoodletter
+#           destination-repository-name: rshs-robotics-club.github.io
+#           user-email: noreply@fakeemail.com
+#           user-name: Eisverygoodletter
+#           destination-repository-username: rshs-robotics-club
+#           target-branch: main
+#           commit-message: automatic update docs action triggered from stable
         
         
