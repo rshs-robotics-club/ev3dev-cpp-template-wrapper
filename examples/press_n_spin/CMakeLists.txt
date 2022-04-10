@@ -12,9 +12,9 @@
 #    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
-
-project(compass_calibration VERSION 1.0)
-
+# set the example file name -- this needs to be changed per file
+project(press_n_spin VERSION 1.0)
+# add the executable to the target project
 add_executable(
     ${PROJECT_NAME}
     ${PROJECT_NAME}.cpp

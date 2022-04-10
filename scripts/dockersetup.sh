@@ -14,5 +14,6 @@
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 
-docker pull ev3dev/debian-stretch-cross
-docker tag ev3dev/debian-stretch-cross ev3cc
+docker pull ev3dev/debian-stretch-cross:latest
+echo "done pulling"
+docker tag ev3dev/debian-stretch-cross:latest ev3cc

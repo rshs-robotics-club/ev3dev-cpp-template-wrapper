@@ -128,3 +128,7 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::releaseMotor() {
     this->stop();
     return *this;
 }
+
+bool Ev3Wrap::Motor::waitUntilStalled(float timeoutMilliseconds) {
+    this->blockUntilStateReached([this] {return this->getStalling();}, 5, [] {}, timeoutMilliseconds);
+}
