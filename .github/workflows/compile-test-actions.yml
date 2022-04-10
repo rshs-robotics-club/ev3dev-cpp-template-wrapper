@@ -4,8 +4,12 @@ jobs:
   compile-out-of-container:
     runs-on: ubuntu-latest
     steps:
-      - name: install Docker
-        run: sudo apt-get install docker-ce docker-ce-cli containerd.io
+      #- name: install Docker
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt install snap
+      #    sudo snap install docker
+
       - name: Download this repo
         uses: actions/checkout@v3
       - name: Setup docker images
