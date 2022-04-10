@@ -1,0 +1,25 @@
+name: docs-update-action
+jobs:
+  copy-files-to-docs-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone this repo into a folder named "thisrepo" inside the vm
+        uses: actions/checkout@v3
+        with:
+          path: thisrepo
+      - name: clone the docs repo
+        uses: actions/checkout@v3
+        with:
+          path: docsrepo
+          repository: rshs-robotics-club/rshs-robotics-club.github.io
+      - name: copy the files from this repo into the docs repo
+        run: |
+          sudo rm -rf docsrepo/docs/ev3wrap-stable
+          sudo cp -a thisrepo/docs/ docsrepo/docs/ev3wrap-stable
+      - name: push the docs repo
+        run: |
+          sudo git add .
+          sudo git commit -m "automatic update docs action triggered from stable"
+          git push origin master
+        
+        
