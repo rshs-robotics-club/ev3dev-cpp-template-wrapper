@@ -72,6 +72,5 @@
         "xtree": "cpp",
         "xutility": "cpp"
     },
-    "restructuredtext.confPath": "",
     "ev3devBrowser.download.directory": "myFiles"
 }

@@ -92,6 +92,9 @@ class Motor : private ev3dev::motor, public Blockable<Motor> {
         using ev3dev::motor::state;
         // return true if motor is stalling
         bool getStalling();
+        // wait until the motor stalls. This is NOT affected by blockable, and will block no matter what
+        bool waitUntilStalled(float timeoutMilliseconds = 10000);
+
 
     private:
         // private constructor for the motor. Use the static bind() method instead.

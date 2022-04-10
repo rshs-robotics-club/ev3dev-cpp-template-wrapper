@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
-# 
-#    A bash script used with Docker for compiling The Ev3dev C++ Wrapper Library
+#!/bin/bash
+
+#    A bash script used with Docker for setting the image for the Ev3dev C++ Wrapper Library examples
 #
 #    Copyright (c) 2021, 2022 - Eisverygoodletter
 #
@@ -14,16 +14,6 @@
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 
-
-CONTAINER_NAME="EV3PROGRAM"
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SRC_DIR=${SCRIPT_DIR}/../
-
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    docker rm ${CONTAINER_NAME}
-    docker run --entrypoint /${SRC_DIR}/scripts/runWithinContainer.sh --name ${CONTAINER_NAME} -v /${SRC_DIR}:/${SRC_DIR} -w /${SRC_DIR} ev3cc
-else
-    winpty docker rm ${CONTAINER_NAME}
-    winpty docker run --entrypoint /${SRC_DIR}/scripts/runWithinContainer.sh --name ${CONTAINER_NAME} -v /${SRC_DIR}:/${SRC_DIR} -w /${SRC_DIR} ev3cc
-fi
-$SHELL
+docker pull ev3dev/debian-stretch-cross:latest
+echo "done pulling"
+docker tag ev3dev/debian-stretch-cross:latest ev3cc

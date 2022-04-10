@@ -20,122 +20,105 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 set(CMAKE_C_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CC_COMPILER "arm-linux-gnueabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED true)
+
+set(LIBNAME "ev3-cpp-template-wrapper-lib")
 set(CMAKE_CXX_FLAGS "-Os")
+project(${LIBNAME} VERSION 2.0.0)
+message(STATUS ${CMAKE_CXX_FLAGS})
 
-set(CUSTOM_PROJECT_NAME "ev3MotorTest")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+add_library(
+    ${LIBNAME} 
+    STATIC
+    lib/blockable/ev3wrapblockable.hpp
+    lib/button/ev3wrapbutton.cpp
+    lib/button/ev3wrapbutton.hpp
 
-project(${CUSTOM_PROJECT_NAME} VERSION 1.0)
+    lib/color/ev3wrapcolor.cpp
+    lib/color/ev3wrapcolor.hpp
+    
+    lib/compass/ev3wrapcompass.cpp
+    lib/compass/ev3wrapcompass.hpp
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/sentFiles)
-set(CMAKE_EXPORT_COMPILE_COMMANDS true)
+    lib/gyro/ev3wrapgyro.cpp
+    lib/gyro/ev3wrapgyro.hpp
 
-#components used
-# todo
-set(WRAP_USE_MOTOR true)
-set(WRAP_USE_MOTORPAIR true)
+    lib/irseeker/ev3wrapirseeker.cpp
+    lib/irseeker/ev3wrapirseeker.hpp
 
+    lib/motor/ev3wrapmotor.cpp
+    lib/motor/ev3wrapmotor.hpp
 
-set(WRAP_USE_TOUCH false)
-set(WRAP_USE_ULTRASONIC true)
-set(WRAP_USE_COLOR true)
-set(WRAP_USE_COMPASS true)
-set(WRAP_USE_OMNIROBOT true)
-set(WRAP_USE_IRSEEKER true)
-set(WRAP_USE_BUTTON true)
-set(WRAP_USE_LCD false)
-set(WRAP_USE_GYRO false)
+    lib/motorpair/ev3wrapmotorpair.cpp
+    lib/motorpair/ev3wrapmotorpair.hpp
 
+    lib/omnirobot/ev3wrapomnirobot.cpp
+    lib/omnirobot/ev3wrapomnirobot.hpp
 
-if(WRAP_USE_MOTOR)
-    set(MOTOR_LIST lib/motor/ev3wrapmotor.hpp lib/motor/ev3wrapmotor.cpp)
-    add_definitions(-DMOTOR_USED)
-endif()
-if(WRAP_USE_MOTOR AND WRAP_USE_MOTORPAIR)
-    set(MOTORPAIR_LIST lib/motorpair/ev3wrapmotorpair.hpp lib/motorpair/ev3wrapmotorpair.cpp)
-    add_definitions(-DMOTORPAIR_USED)
-endif()
+    lib/touch/ev3wraptouch.cpp
+    lib/touch/ev3wraptouch.hpp
 
-if(WRAP_USE_TOUCH)
-    set(TOUCH_LIST lib/touch/ev3wraptouch.hpp lib/touch/ev3wraptouch.cpp)
-    add_definitions(-DTOUCH_USED)
-endif()
-if(WRAP_USE_ULTRASONIC)
-    set(ULTRASONIC_LIST lib/ultrasonic/ev3wrapultrasonic.hpp lib/ultrasonic/ev3wrapultrasonic.cpp)
-    add_definitions(-DULTRASONIC_USED)
-endif()
-if(WRAP_USE_COLOR)
-    set(COLOR_LIST lib/color/ev3wrapcolor.hpp lib/color/ev3wrapcolor.cpp)
-    add_definitions(-DCOLOR_USED)
-endif()
-if(WRAP_USE_COMPASS)
-    set(COMPASS_LIST lib/compass/ev3wrapcompass.hpp lib/compass/ev3wrapcompass.cpp)
-    add_definitions(-DCOMPASS_USED)
-endif()
-if(WRAP_USE_COMPASS AND WRAP_USE_OMNIROBOT)
-    set(OMNIROBOT_LIST lib/omnirobot/ev3wrapomnirobot.hpp lib/omnirobot/ev3wrapomnirobot.cpp)
-    add_definitions(-DOMNIROBOT_USED)
-endif()
-if(WRAP_USE_IRSEEKER)
-    set(IRSEEKER_LIST lib/irseeker/ev3wrapirseeker.hpp lib/irseeker/ev3wrapirseeker.cpp)
-    add_definitions(-DIRSEEKER_USED)
-endif()
-if(WRAP_USE_BUTTON)
-    set(BUTTON_LIST lib/button/ev3wrapbutton.hpp lib/button/ev3wrapbutton.cpp)
-    add_definitions(-DBUTTON_USED)
-endif()
-if(WRAP_USE_LCD)
-    set(LCD_LIST lib/lcd/ev3wraplcd.hpp lib/lcd/ev3wraplcd.cpp)
-    add_definitions(-DLCD_USED)
-endif()
-if(WRAP_USE_GYRO)
-    set(GYRO_LIST lib/gyro/ev3wrapgyro.hpp lib/gyro/ev3wrapgyro.cpp)
-    add_definitions(-DGYRO_USED)
-endif()
+    lib/ultrasonic/ev3wrapultrasonic.cpp
+    lib/ultrasonic/ev3wrapultrasonic.hpp
 
-# add executables
-add_executable(${CUSTOM_PROJECT_NAME} 
-src/main.cpp
-lib/blockable/ev3wrapblockable.hpp
-${MOTOR_LIST}
-${MOTORPAIR_LIST}
-${TOUCH_LIST}
-${ULTRASONIC_LIST}
-${COLOR_LIST}
-${IRSEEKER_LIST}
-${COMPASS_LIST}
-${OMNIROBOT_LIST}
-${BUTTON_LIST}
-${LCD_LIST}
-${GYRO_LIST}
-lib/ev3wrap.hpp
-lib/ev3dev.cpp
-lib/ev3dev.h
+    lib/ev3dev.cpp
+    lib/ev3dev.h
+
+    lib/ev3wrap.hpp
+)
+target_include_directories(
+    ${LIBNAME}
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/lib/
+    ${PROJECT_SOURCE_DIR}/lib/blockable/
+    ${PROJECT_SOURCE_DIR}/lib/button/
+    ${PROJECT_SOURCE_DIR}/lib/color/
+    ${PROJECT_SOURCE_DIR}/lib/compass/
+    ${PROJECT_SOURCE_DIR}/lib/gyro/
+    ${PROJECT_SOURCE_DIR}/lib/irseeker/
+    ${PROJECT_SOURCE_DIR}/lib/motor/
+    ${PROJECT_SOURCE_DIR}/lib/motorpair/
+    ${PROJECT_SOURCE_DIR}/lib/omnirobot/
+    ${PROJECT_SOURCE_DIR}/lib/touch/
+    ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
 )
 
+set_target_properties(${LIBNAME}
+                    PROPERTIES
+                    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin/
+                    OUTPUT_NAME "ev3dev-cpp-template-wrapper"
+)
 
-include_directories(
-    ${PROJECT_SOURCE_DIR}/src
-    ${PROJECT_SOURCE_DIR}/lib
-    ${PROJECT_SOURCE_DIR}/lib/blockable
-    ${PROJECT_SOURCE_DIR}/lib/motor
-    ${PROJECT_SOURCE_DIR}/lib/motorpair
-    ${PROJECT_SOURCE_DIR}/lib/touch
-    ${PROJECT_SOURCE_DIR}/lib/ultrasonic
-    ${PROJECT_SOURCE_DIR}/lib/irseeker
-    ${PROJECT_SOURCE_DIR}/lib/compass
-    ${PROJECT_SOURCE_DIR}/lib/color
-    ${PROJECT_SOURCE_DIR}/lib/gyro
-    ${PROJECT_SOURCE_DIR}/lib/omnirobot
-    ${PROJECT_SOURCE_DIR}/lib/button
-    ${PROJECT_SOURCE_DIR}/lib/lcd
-    #${PROJECT_SOURCE_DIR}/lib/manager
+set("WRAPPER_EXAMPLES_DIR" ${PROJECT_SOURCE_DIR}/examples)
+set("WRAPPER_SCRIPTS_DIR" ${PROJECT_SOURCE_DIR}/scripts)
+set("WRAPPER_BIN_DIR" ${PROJECT_BINARY_DIR})
+set(WRAPPER_BIN_FINISHED_DIR ${WRAPPER_BIN_DIR}/finished)
+set(WRAPPER_BIN_EXAMPLES_DIR ${WRAPPER_BIN_FINISHED_DIR}/examples)
+set(EVERYTHING_BUILT_TARGET "EVERYTHING_BUILT_TARGET")
+set(LIB_BUILT_TARGET "LIB_BUILT_TARGET")
+add_custom_target(
+    ${EVERYTHING_BUILT_TARGET} 
+    ALL
+)
+add_custom_target(
+    ${LIB_BUILT_TARGET}
+    ALL
+)
+add_dependencies(${EVERYTHING_BUILT_TARGET} ${LIBNAME})
+add_dependencies(${LIB_BUILT_TARGET} ${EVERYTHING_BUILT_TARGET})
 
-) # we know project source dir is this directory bc project was just called
-#target_link_libraries(${CUSTOM_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/libev3dev.a)
-#target_include_directories(${CUSTOM_PROJECT_NAME} PUBLIC
-#                           "${PROJECT_BINARY_DIR}/src"
-#                           )
+add_custom_command(
+    TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
+    # setting up the directories
+    COMMAND sudo mkdir -p ${WRAPPER_BIN_FINISHED_DIR}
+    COMMAND sudo mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}
+    # commands for the library itself
+    COMMAND sudo cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
+    COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
+)
+#set(ALL_LIB_FINAL_TARGETS)
 
-set_target_properties(${CUSTOM_PROJECT_NAME} PROPERTIES OUTPUT_NAME "ev3MotorTest.elf")
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED true)
+add_subdirectory(examples)
