@@ -1,4 +1,5 @@
 name: docs-update-action
+on: [push]
 jobs:
   copy-files-to-docs-repo:
     runs-on: ubuntu-latest
