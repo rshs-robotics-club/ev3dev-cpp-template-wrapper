@@ -3,6 +3,7 @@ layout: default
 title: two wheeled robot tutorial
 parent: Quick Start
 nav_order: 2
+grand_parent: Ev3Wrap
 ---
 
 # Quick start - 2 wheeled robot
