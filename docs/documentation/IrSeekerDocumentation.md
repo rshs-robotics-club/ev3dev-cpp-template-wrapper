@@ -1,6 +1,7 @@
 ---
 nav_order: 7
 title: IrSeeker
+parent: documentation
 ---
 
 # `Ev3Wrap::IrSeeker`

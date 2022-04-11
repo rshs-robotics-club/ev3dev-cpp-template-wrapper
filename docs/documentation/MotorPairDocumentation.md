@@ -1,6 +1,7 @@
 ---
 title: MotorPair
 nav_order: 3
+parent: documentation
 ---
 
 # `Ev3Wrap::MotorPair`

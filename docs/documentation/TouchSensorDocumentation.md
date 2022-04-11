@@ -1,6 +1,7 @@
 ---
 nav_order: 6
 title: touch sensor
+parent: documentation
 ---
 
 # `Ev3Wrap::TouchSensor`

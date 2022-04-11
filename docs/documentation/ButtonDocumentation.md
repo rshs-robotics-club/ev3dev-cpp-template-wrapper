@@ -1,6 +1,7 @@
 ---
 nav_order: 10
 title: Button
+parent: documentation
 ---
 
 # `Ev3Wrap::Button`

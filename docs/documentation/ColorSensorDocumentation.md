@@ -1,6 +1,7 @@
 ---
 nav_order: 5
 title: Color Sensor
+parent: documentation
 ---
 
 # `Ev3Wrap::ColorSensor`

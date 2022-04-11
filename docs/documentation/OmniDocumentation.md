@@ -1,6 +1,7 @@
 ---
 nav_order: 11
 title: Omni
+parent: documentation
 ---
 
 # `Ev3Wrap::Omni`
