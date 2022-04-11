@@ -1,6 +1,7 @@
 ---
 title: Blockable
 nav_order: 1
+parent: documentation
 ---
 # `Ev3Wrap::Blockable`
 > Important Information: This class is meant to be inherited by other classes to allow them to have a "blocked" state. Use `setBlocking` and `getBlocking` to access the "blocked state". When child classes are not in the "blocked state", after any timed method calls, the thread will not be blocked
