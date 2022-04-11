@@ -1,7 +1,7 @@
 # 
 #    A CMake file used with Docker for compiling The Ev3dev C++ Wrapper Library
 #
-#    Copyright (c) 2021, 2022 - Eisverygoodletter
+#    Copyright (c) 2021, 2022 - Eisverygoodletter, txxvgnx
 #
 #    This file is part of The Ev3dev C++ Wrapper Library.
 #    The Ev3dev C++ Wrapper Library is free software: you can redistribute it and/or modify
