@@ -2,6 +2,7 @@
 title: Motor
 nav_order: 2
 parent: documentation
+grand_parent: Ev3Wrap
 ---
 # `Ev3Wrap::Motor`
 ## public methods

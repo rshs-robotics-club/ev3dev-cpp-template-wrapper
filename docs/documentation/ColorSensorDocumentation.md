@@ -2,6 +2,7 @@
 nav_order: 5
 title: Color Sensor
 parent: documentation
+grand_parent: Ev3Wrap
 ---
 
 # `Ev3Wrap::ColorSensor`

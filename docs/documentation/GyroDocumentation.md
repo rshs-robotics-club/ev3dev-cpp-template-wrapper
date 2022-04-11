@@ -2,6 +2,7 @@
 nav_order: 8
 title: Gyro
 parent: documentation
+grand_parent: Ev3Wrap
 ---
 
 # `Ev3Wrap::Gyro`

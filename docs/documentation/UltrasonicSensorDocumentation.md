@@ -2,6 +2,7 @@
 nav_order: 9
 title: Ultrasonic Sensor
 parent: documentation
+grand_parent: Ev3Wrap
 ---
 
 # `Ev3Wrap::UltrasonicSensor`

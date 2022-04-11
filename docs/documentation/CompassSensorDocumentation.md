@@ -2,6 +2,7 @@
 title:  Compass Sensor
 nav_order: 4
 parent: documentation
+grand_parent: Ev3Wrap
 ---
 # `Ev3Wrap::CompassSensor`
 
