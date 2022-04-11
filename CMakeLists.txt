@@ -30,6 +30,7 @@ message(STATUS ${CMAKE_CXX_FLAGS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+add_compile_options(-Os)
 add_library(
     ${LIBNAME} 
     STATIC
