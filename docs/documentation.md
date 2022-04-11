@@ -2,7 +2,7 @@
 title: documentation
 nav_order: 3
 has_children: true
-parent: ev3wrapDocPage
+parent: Ev3Wrap
 ---
 
 # The documentation currently contains:

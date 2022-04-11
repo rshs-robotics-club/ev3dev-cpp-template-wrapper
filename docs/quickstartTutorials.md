@@ -3,7 +3,7 @@ layout: default
 title: Quick Start
 nav_order: 2
 has_children: true
-parent: ev3wrapDocPage
+parent: Ev3Wrap
 ---
 # Quick Start tutorials
 ---
