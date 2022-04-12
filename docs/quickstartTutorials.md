@@ -3,7 +3,7 @@ layout: default
 title: "Quick Start"
 nav_order: 2
 has_children: true
-parent: "Ev3Wrap"
+parent: "Ev3Wrap-unstable-docs"
 tag: "Quick Start"
 ---
 # Quick Start tutorials

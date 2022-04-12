@@ -2,7 +2,7 @@
 nav_order: 9
 title: "Ultrasonic Sensor"
 parent: "documentation"
-grand_parent: "Ev3Wrap"
+grand_parent: "Ev3Wrap-unstable-docs"
 ---
 
 # `Ev3Wrap::UltrasonicSensor`

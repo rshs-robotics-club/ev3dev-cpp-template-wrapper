@@ -2,7 +2,7 @@
 nav_order: 8
 title: "Gyro"
 parent: "documentation"
-grand_parent: "Ev3Wrap"
+grand_parent: "Ev3Wrap-unstable-docs"
 ---
 
 # `Ev3Wrap::Gyro`

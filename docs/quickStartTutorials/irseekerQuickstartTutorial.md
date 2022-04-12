@@ -3,7 +3,7 @@ layout: default
 title: "irseeker tutorial"
 parent: "Quick Start"
 nav_order: 3
-grand_parent: "Ev3Wrap"
+grand_parent: "Ev3Wrap-unstable-docs"
 ---
 
 # This tutorial includes:
