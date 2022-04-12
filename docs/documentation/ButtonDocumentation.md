@@ -1,8 +1,8 @@
 ---
 nav_order: 10
-title: Button
-parent: documentation
-grand_parent: Ev3Wrap
+title: "Button"
+parent: "documentation"
+grand_parent: "Ev3Wrap"
 ---
 
 # `Ev3Wrap::Button`

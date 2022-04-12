@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Quick Start
+title: "Quick Start"
 nav_order: 2
 has_children: true
-parent: Ev3Wrap
+parent: "Ev3Wrap"
 tag: "Quick Start"
 ---
 # Quick Start tutorials

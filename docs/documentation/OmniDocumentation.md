@@ -1,8 +1,8 @@
 ---
 nav_order: 11
-title: Omni
-parent: documentation
-grand_parent: Ev3Wrap
+title: "Omni"
+parent: "documentation"
+grand_parent: "Ev3Wrap"
 ---
 
 # `Ev3Wrap::Omni`
