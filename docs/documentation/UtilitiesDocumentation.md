@@ -23,14 +23,14 @@ Ev3Wrap::Utilities::Beeper::beep();
 ```
 
 ### functions:
-#### `static int setBeepHertz(int hertz)`
+## `static int setBeepHertz(int hertz)`
 setter
 {: .label .label-purple}
 sets the frequency for the robot to beep at and returns the frequency given.
 
 ---
 
-#### `static int setBeepDuration(int milliseconds)`
+## `static int setBeepDuration(int milliseconds)`
 setter
 {: .label .label-purple}
 sets the duration of the beep in milliseconds.
@@ -38,19 +38,19 @@ sets the duration of the beep in milliseconds.
 
 ---
 
-#### `static int setBeepRepetitions(int repeats)`
+## `static int setBeepRepetitions(int repeats)`
 setter
 {: .label .label-purple}
 sets the number of times the beep will be repeated. Defaults to 1
 
 ---
 
-#### `static int setBeepRepeatDelay(int milliseconds)`
+## `static int setBeepRepeatDelay(int milliseconds)`
 setter
 {:.label .label-purple}
 sets the delay between beeps in milliseconds.
 
 ---
 
-#### `static void beep(bool block)`
+## `static void beep(bool block)`
 beeps, using config functions shown on top
