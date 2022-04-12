@@ -30,15 +30,19 @@ namespace Beeper {
     static int beepRepeatDelay = 500;
     static int setBeepHertz(int hz = 750) {
         Ev3Wrap::Utilities::Beeper::beepHertz = hz;
+        return hz;
     }
     static int setBeepDuration(int milliseconds = 1000) {
         Ev3Wrap::Utilities::Beeper::beepDuration = milliseconds;
+        return milliseconds;
     }
     static int setBeepRepetitions(int repeats = 1) {
         Ev3Wrap::Utilities::Beeper::beepRepetitions = repeats;
+        return repeats;
     }
     static int setBeepRepeatDelay(int milliseconds = 500) {
         Ev3Wrap::Utilities::Beeper::beepRepeatDelay = milliseconds;
+        return milliseconds;
     }
     static void beep(bool block = true) {
         std::ostringstream args;
