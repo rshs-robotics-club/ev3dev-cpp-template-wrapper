@@ -64,6 +64,8 @@ add_library(
     lib/ultrasonic/ev3wrapultrasonic.cpp
     lib/ultrasonic/ev3wrapultrasonic.hpp
 
+    lib/utilities/ev3wraputilities.hpp
+
     lib/ev3dev.cpp
     lib/ev3dev.h
 
@@ -84,6 +86,7 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/lib/omnirobot/
     ${PROJECT_SOURCE_DIR}/lib/touch/
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
+    ${PROJECT_SOURCE_DIR}/lib/utilities/
 )
 
 set_target_properties(${LIBNAME}
