@@ -51,6 +51,6 @@
 
 #include <ev3wrapgyro.hpp>
 
-#include <ev3wraputilities.hpp
+#include <ev3wraputilities.hpp>
 
 #endif // EV3WRAP_H_

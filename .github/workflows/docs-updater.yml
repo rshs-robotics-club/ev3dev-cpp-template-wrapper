@@ -6,10 +6,6 @@ on:
       - unstable
     paths:
       - docs/**
-  pull_request:
-    branches:
-      - master
-      - unstable
 jobs:
   do-it:
     runs-on: ubuntu-latest
