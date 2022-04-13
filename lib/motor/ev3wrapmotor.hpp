@@ -52,7 +52,10 @@ class Motor : private ev3dev::motor, public Blockable<Motor> {
     friend class Ev3Wrap::MotorPair;
     friend class Ev3Wrap::Omni;
     public:
-        
+        using ev3dev::motor::OUTPUT_A;
+        using ev3dev::motor::OUTPUT_B;
+        using ev3dev::motor::OUTPUT_C;
+        using ev3dev::motor::OUTPUT_D;
         // type of motor - note that changing the motorType after construction will not do anything
         // this is meant to be a value to read from in debuggging
         char motorType[128];

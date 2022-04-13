@@ -25,6 +25,10 @@ namespace Ev3Wrap {
 
 class TouchSensor : private ev3dev::touch_sensor {
     public:
+        using ev3dev::touch_sensor::INPUT_1;
+        using ev3dev::touch_sensor::INPUT_2;
+        using ev3dev::touch_sensor::INPUT_3;
+        using ev3dev::touch_sensor::INPUT_4;
         static TouchSensor bind(ev3dev::address_type = ev3dev::INPUT_AUTO);
 
         // Check if touch sensor is pressed

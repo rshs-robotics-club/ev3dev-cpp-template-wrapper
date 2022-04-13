@@ -27,6 +27,10 @@ namespace Ev3Wrap {
 
 class IrSeeker : private ev3dev::irseeker_sensor {
     public:
+        using ev3dev::irseeker_sensor::INPUT_1;
+        using ev3dev::irseeker_sensor::INPUT_2;
+        using ev3dev::irseeker_sensor::INPUT_3;
+        using ev3dev::irseeker_sensor::INPUT_4;
         static IrSeeker bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         int getDirectionAC() {return this->ac();}
         int getDirectionDC() {return this->dc();}

@@ -33,6 +33,9 @@ add_compile_options(-Os)
 add_library(
     ${LIBNAME} 
     STATIC
+
+    lib/ev3dev.cpp
+    
     lib/blockable/ev3wrapblockable.hpp
     lib/button/ev3wrapbutton.cpp
     lib/button/ev3wrapbutton.hpp
@@ -66,7 +69,6 @@ add_library(
 
     lib/utilities/ev3wraputilities.hpp
 
-    lib/ev3dev.cpp
     lib/ev3dev.h
 
     lib/ev3wrap.hpp
