@@ -4,7 +4,7 @@ title: "Quick Start"
 nav_order: 2
 has_children: true
 parent: "Ev3Wrap-unstable-docs"
-tag: "Quick Start"
+tag: "QuickStart-Unstable"
 ---
 # Quick Start tutorials
 ---

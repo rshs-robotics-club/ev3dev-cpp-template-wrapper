@@ -1,7 +1,7 @@
 ---
 nav_order: 9
 title: "Ultrasonic Sensor"
-parent: "documentation"
+parent: "Documentation-Unstable"
 grand_parent: "Ev3Wrap-unstable-docs"
 ---
 

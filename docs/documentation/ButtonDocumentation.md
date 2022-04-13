@@ -1,7 +1,7 @@
 ---
 nav_order: 10
 title: "Button"
-parent: "documentation"
+parent: "Documentation-Unstable"
 grand_parent: "Ev3Wrap-unstable-docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "irseeker tutorial"
-parent: "Quick Start"
+parent: "QuickStart-Unstable"
 nav_order: 3
 grand_parent: "Ev3Wrap-unstable-docs"
 ---

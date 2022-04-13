@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "two wheeled robot tutorial"
-parent: "Quick Start"
+parent: "QuickStart-Unstable"
 nav_order: 2
 grand_parent: "Ev3Wrap-unstable-docs"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Motor"
 nav_order: 2
-parent: "documentation"
+parent: "Documentation-Unstable"
 grand_parent: "Ev3Wrap-unstable-docs"
 ---
 # `Ev3Wrap::Motor`

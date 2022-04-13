@@ -1,7 +1,7 @@
 ---
 nav_order: 7
 title: "IrSeeker"
-parent: "documentation"
+parent: "Documentation-Unstable"
 grand_parent: "Ev3Wrap-unstable-docs"
 ---
 

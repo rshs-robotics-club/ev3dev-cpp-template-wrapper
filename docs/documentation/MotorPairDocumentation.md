@@ -1,7 +1,7 @@
 ---
 title: "MotorPair"
 nav_order: 3
-parent: "documentation"
+parent: "Documentation-Unstable"
 grand_parent: "Ev3Wrap-unstable-docs"
 ---
 
