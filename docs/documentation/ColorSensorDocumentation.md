@@ -2,7 +2,7 @@
 nav_order: 5
 title: "Color Sensor"
 parent: "Documentation-Unstable"
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "ColorSensor"
 ---
 
 # `Ev3Wrap::ColorSensor`

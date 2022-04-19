@@ -2,7 +2,7 @@
 title: "Compass Sensor"
 nav_order: 4
 parent: "Documentation-Unstable"
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "CompassSensor"
 ---
 # `Ev3Wrap::CompassSensor`
 
