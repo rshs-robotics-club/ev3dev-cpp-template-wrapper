@@ -2,7 +2,7 @@
 nav_order: 6
 title: "touch sensor"
 parent: "Documentation-Unstable"
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "TouchSensor"
 ---
 
 # `Ev3Wrap::TouchSensor`

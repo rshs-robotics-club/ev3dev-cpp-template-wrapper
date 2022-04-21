@@ -2,7 +2,7 @@
 nav_order: 7
 title: "IrSeeker"
 parent: "Documentation-Unstable"
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "IrSeekerSensor"
 ---
 
 # `Ev3Wrap::IrSeeker`

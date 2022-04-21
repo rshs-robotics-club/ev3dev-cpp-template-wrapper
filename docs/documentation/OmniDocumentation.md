@@ -2,7 +2,7 @@
 nav_order: 11
 title: "Omni"
 parent: "Documentation-Unstable"
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "Omni"
 ---
 
 # `Ev3Wrap::Omni`

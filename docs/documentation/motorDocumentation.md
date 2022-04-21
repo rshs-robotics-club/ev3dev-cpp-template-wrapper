@@ -2,7 +2,7 @@
 title: "Motor"
 nav_order: 2
 parent: "Documentation-Unstable"
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "Motor"
 ---
 # `Ev3Wrap::Motor`
 ## public methods
