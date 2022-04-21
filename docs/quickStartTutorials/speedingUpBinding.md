@@ -3,7 +3,7 @@ layout: default
 title: "How to speed up the `bind` method"
 parent: "QuickStart-Unstable"
 nav_order: 2
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "SpeedingUpBindingTutorial"
 ---
 
 # What is the bind method?

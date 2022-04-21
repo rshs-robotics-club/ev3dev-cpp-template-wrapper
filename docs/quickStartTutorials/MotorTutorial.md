@@ -3,7 +3,7 @@ layout: default
 title: "Motor tutorial"
 parent: "QuickStart-Unstable"
 nav_order: 2
-grand_parent: "Ev3Wrap-unstable-docs"
+tag: "MotorTutorial"
 ---
 
 # This tutorial includes:
