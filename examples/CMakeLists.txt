@@ -28,6 +28,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/lib/omnirobot/
     ${PROJECT_SOURCE_DIR}/lib/touch/
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
+    ${PROJECT_SOURCE_DIR}/lib/utilities/
 )
 
 

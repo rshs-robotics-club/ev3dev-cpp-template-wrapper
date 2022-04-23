@@ -2,8 +2,7 @@
 layout: default
 title: "Introduction"
 nav_order: 1
-parent: "Ev3Wrap"
-tag: "Introduction"
+tag: "introduction"
 ---
 
 <details>

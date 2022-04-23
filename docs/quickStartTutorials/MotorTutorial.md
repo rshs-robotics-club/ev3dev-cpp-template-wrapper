@@ -1,9 +1,9 @@
 ---
 layout: default
 title: "Motor tutorial"
-parent: "Quick Start"
+parent: "QuickStart-Unstable"
 nav_order: 2
-grand_parent: "Ev3Wrap"
+tag: "MotorTutorial"
 ---
 
 # This tutorial includes:
