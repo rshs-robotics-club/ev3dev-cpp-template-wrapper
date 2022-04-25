@@ -28,7 +28,7 @@ jobs:
         path: ymlupdatepath
     - name: update the yml file
       run: |
-        sed -i -e s/<BRANCH_NAME>/${{ github.head_ref || github.ref_name }}/g ymlupdatepath/docStructure.yml
+        sed -i -e s/AAA_BRANCH_NAME_AAA/${{ github.head_ref || github.ref_name }}/g ymlupdatepath/docStructure.yml
     - name: push the updated yml file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
