@@ -1,0 +1,50 @@
+extra_unneeded_data_for_testing: "Hello!"
+FileSystem:
+  - Ev3Wrap:
+    no_page: true
+    display_text: "AAA_BRANCH_NAME_AAA"
+    child_folder_reqs:
+      - "ev3wrap"
+      - "AAA_BRANCH_NAME_AAA"
+    children:
+    - quickstart:
+      tag: "quickstart"
+      children:
+      - irseekerTutorial:
+        tag: "IrseekerTutorial"
+      - MotorTutorial:
+        tag: "MotorTutorial"
+      - SpeedingUpBindingTutorial:
+        tag: "SpeedingUpBindingTutorial"
+      - MotorPairTutorial:
+        tag: "MotorPairTutorial"
+
+    - documentation:
+      tag: "documentation"
+      child_folder_reqs:
+        - "documentation"
+      children:
+      - Blockable:
+        tag: "Blockable"
+      - Button:
+        tag: "Button"
+      - ColorSensor:
+        tag: "ColorSensor"
+      - CompassSensor:
+        tag: "CompassSensor"
+      - GyroSensor:
+        tag: "GyroSensor"
+      - IrSeekerSensor:
+        tag: "IrSeekerSensor"
+      - Motor:
+        tag: "Motor"
+      - MotorPair:
+        tag: "MotorPair"
+      - Omni:
+        tag: "Omni"
+      - TouchSensor:
+        tag: "TouchSensor"
+      - UltrasonicSensor:
+        tag: "UltrasonicSensor"
+      - Utilities:
+        tag: "Utilities"
