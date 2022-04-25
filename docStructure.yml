@@ -2,10 +2,10 @@ extra_unneeded_data_for_testing: "Hello!"
 FileSystem:
   - Ev3Wrap:
     no_page: true
-    display_text: "unstable"
+    display_text: "<BRANCH_NAME>"
     child_folder_reqs:
       - "ev3wrap"
-      - "unstable"
+      - "<BRANCH_NAME>"
     children:
     - quickstart:
       tag: "quickstart"

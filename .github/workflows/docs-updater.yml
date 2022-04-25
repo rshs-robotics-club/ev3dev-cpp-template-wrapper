@@ -27,9 +27,8 @@ jobs:
       with:
         path: ymlupdatepath
     - name: update the yml file
-      uses: mikefarah/yq@master
-      with:
-        cmd: yq -i '(.FileSystem.[] | select(. == "Ev3Wrap") | .display_text) = "${{ github.head_ref || github.ref_name }}"' ymlupdatepath/docStructure.yml
+      run: |
+        sed -i -e s/<BRANCH_NAME>/${{ github.head_ref || github.ref_name }}/g ymlupdatepath/docStructure.yml
     - name: push the updated yml file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
