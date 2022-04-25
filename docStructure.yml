@@ -1,4 +1,3 @@
-name: "doc structure"
 FileSystem:
   - Ev3Wrap:
     no_page: true
