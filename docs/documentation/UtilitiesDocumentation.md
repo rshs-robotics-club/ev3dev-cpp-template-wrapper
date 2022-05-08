@@ -1,7 +1,7 @@
 ---
 title: "Utilities"
-parent: "documentation"
-grand_parent: "Ev3Wrap-unstable-docs"
+parent: "Documentation-Unstable"
+tag: "Utilities"
 ---
 
 # The Utilities Namespace contains many functions, most of which are contained within namespaces, not classes.

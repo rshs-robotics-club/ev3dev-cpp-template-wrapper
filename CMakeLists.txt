@@ -75,7 +75,7 @@ add_library(
 )
 target_include_directories(
     ${LIBNAME}
-    PRIVATE
+    PUBLIC
     ${PROJECT_SOURCE_DIR}/lib/
     ${PROJECT_SOURCE_DIR}/lib/blockable/
     ${PROJECT_SOURCE_DIR}/lib/button/

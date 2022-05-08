@@ -6,6 +6,7 @@ on:
       - unstable
     paths:
       - docs/**
+      - docStructure.yml
 jobs:
   do-it:
     runs-on: ubuntu-latest
@@ -21,6 +22,28 @@ jobs:
         user-email: noreply@fakeemail.com
         target-branch: main
         target-directory: docs/ev3wrap/${{ github.head_ref || github.ref_name }}
+    - name: Setup for yml file update
+      uses: actions/checkout@v2
+      with:
+        path: ymlupdatepath
+    - name: update the yml file
+      run: |
+        sed -i -e s/AAA_BRANCH_NAME_AAA/${{ github.head_ref || github.ref_name }}/g ymlupdatepath/docStructure.yml
+    - name: push the updated yml file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.EISVERYGOODLETTER_PAT }}
+      with:
+        source_file: ymlupdatepath/docStructure.yml
+        destination_repo: rshs-robotics-club/rshs-robotics-club.github.io
+        destination_folder: docs/_data/structures/
+        rename: ${{ github.head_ref || github.ref_name }}.yml
+        user_email: noreply@fakeemail.com
+        user_name: yml-copier
+        commit_message: yml-update
+
+
+
 
 
 # name: docs-update-action

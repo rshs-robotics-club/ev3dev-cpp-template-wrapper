@@ -1,8 +1,8 @@
 ---
 nav_order: 8
 title: "Gyro"
-parent: "documentation"
-grand_parent: "Ev3Wrap-unstable-docs"
+parent: "Documentation-Unstable"
+tag: "GyroSensor"
 ---
 
 # `Ev3Wrap::Gyro`
