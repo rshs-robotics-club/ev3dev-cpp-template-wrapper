@@ -36,12 +36,11 @@ This will cause `myMotor` to be the first motor that the program can find connec
 To create 2 or more motors, you need to specify which output ports they are connected to. These can be ports A-D
 Simply do
 ```cpp
-Ev3Wrap::Motor myMotorA = Ev3Wrap::Motor::bind(ev3dev::OUTPUT_A)
-Ev3Wrap::Motor myMotorB = Ev3Wrap::Motor::bind(ev3dev::OUTPUT_B)
+Ev3Wrap::Motor myMotorA = Ev3Wrap::Motor::bind(Ev3Wrap::Motor::OUTPUT_A)
+Ev3Wrap::Motor myMotorB = Ev3Wrap::Motor::bind(Ev3Wrap::Motor::OUTPUT_B)
 ```
->   Warning - note that `OUTPUT_A`, `OUTPUT_B`, `OUTPUT_C` and `OUTPUT_D` are in the namespace `ev3dev` instead of `Ev3Wrap`
 
-Specifiying which port the sensors / motors should bind to will always speed up your program. However, specifying the wrong port, using the wrong ports for i2c sensors (future tutorial), will cause a program crash.
+Specifiying which port the sensors / motors should bind to will always speed up your program. However, specifying the wrong port (ie using `Ev3Wrap::IrSeeker::INPUT_1` instead of `Ev3Wrap::Motor::OUTPUT_A` here will cause a crash or undefined behaviour.)
 
 ---
 

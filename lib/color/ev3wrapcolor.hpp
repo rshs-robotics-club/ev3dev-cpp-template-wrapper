@@ -34,6 +34,10 @@ enum class Color {
 
 class ColorSensor : private ev3dev::color_sensor {
     public:
+        using ev3dev::color_sensor::INPUT_1;
+        using ev3dev::color_sensor::INPUT_2;
+        using ev3dev::color_sensor::INPUT_3;
+        using ev3dev::color_sensor::INPUT_4;
         static ColorSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         int getReflectedLightIntensity() {
             return this->reflected_light_intensity();

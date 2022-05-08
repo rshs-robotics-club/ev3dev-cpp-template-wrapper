@@ -28,6 +28,10 @@ class CompassSensor : private ev3dev::compass {
     private:
         int degreeOffsets[5];
     public:
+        using ev3dev::compass::INPUT_1;
+        using ev3dev::compass::INPUT_2;
+        using ev3dev::compass::INPUT_3;
+        using ev3dev::compass::INPUT_4;
         static CompassSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         // gets the absolute direction. getRelativeDirection is recommended
         int getAbsoluteDirection() {
