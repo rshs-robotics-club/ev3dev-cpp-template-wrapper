@@ -7,6 +7,11 @@ tag: "SpeedingUpBindingTutorial"
 ---
 
 ## This tutorial includes: 
+- [What is the bind method?](#what-is-the-bind-method)
+- [What the bind method does:](#what-the-bind-method-does)
+- [How to speed it up](#how-to-speed-it-up)
+
+
 
 ## What is the bind method?
 In order for your code to be able to use any motor or sensor, you must specify what port that motor / sensor is currently at.
