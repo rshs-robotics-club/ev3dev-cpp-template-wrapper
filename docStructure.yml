@@ -10,6 +10,8 @@ FileSystem:
     - quickstart:
       tag: "quickstart"
       children:
+      - index:
+        tag: "introduction"
       - irseekerTutorial:
         tag: "IrseekerTutorial"
       - MotorTutorial:

@@ -4,47 +4,42 @@ title: "Introduction"
 nav_order: 1
 tag: "introduction"
 ---
-
-<details>
-<summary>Legacy build system (V1) setup tutorial</summary>
-
+Note that this is not a completed product
 # Introduction
 If you do not know what ev3dev is, go [here](https://www.ev3dev.org/).
 This library is a wrapper around [ev3dev's official cpp library](https://github.com/ddemidov/ev3dev-lang-cpp). We do not guarantee that this wrapper will work.
-We currently only have support for compiling on windows.
+We currently only have support for compiling on windows. (MacOS support not coming soon)
+## Prerequisites
+- Basic Git Usage
+- Basic C++ Knowledge
+- An Idea of what CMake is
+## Required installations
+- Docker
+- Git
+> Note that CMake is not required to be installed on your machine, since it is actually installed within the Docker image
 ## Quick start - Installation
-1. install [Docker](https://github.com/ddemidov/ev3dev-lang-cpp) and [git bash](https://git-scm.com/downloads). bash will be required to run our `*.sh` scripts for compiling, `git` will be required for downloading (and potentially contributing) to this library, and `Docker` will be required for compiling the code (in order to simulate the ev3dev-stretch OS)
-2. make sure that the Docker daemon is running. (a daemon is a background task). If on windows, open up docker desktop. It should come with the Docker installation. after the "Docker Engine Initialising" screen, the docker daemon will be running
-3. run `docker pull ev3dev/debian-stretch-cross` in command prompt or powershell to download the image that we will give Docker to compile our code
-4. run `docker tag ev3dev/debian-stretch-cross ev3cc` to change the image's name from `ev3dev/debian-stretch-cross` to `ev3cc`. This shortens the name, and the name `ev3cc` is used in our `*.sh` scripts, so this step is NOT optional
-5. using git bash, get to the folder you want the repository to be installed in. e.g. `cd C:\Users\myUsername\some_path_to_a_folder`
-6. do `git clone https://github.com/rm-robotics/ev3dev-cpp-template-wrapper.git` to download/"clone" the repository onto your computer
-7. inside the folder `ev3dev-cpp-template-wrapper`, create a folder named `src`, and a file named `main.cpp` inside the folder.
-8. Copy and paste 
-    ```cpp
-    #include <iostream>
-    #include <ev3wrap.h>
-    int main() {
-        std::cout << "Hello World!\n";
-    }
-    ```
-    into `main.cpp` which you just created.
-9.  do `cd ev3dev-cpp-template-wrapper` to move the cwd into the folder.
-10. run `./scripts/compile.sh` to compile the file. Note that the docker daemon MUST be running for this bash script to work. Every time you want to compile your code in the future, run `./scripts/compile.sh`. Note that you may see a lot of `cmake` cache files appearing. That is normal and will reduce future compile times
-
-</details>
-
-<details>
-<summary>New build system (V2 setup tutorial)</summary>
-
-1. Familiarize yourself with the CMake build system first.(how to construct a basic cmake project)
-2. Create a folder where you will store this library and your code
-3. inside that folder, execute the command `git clone https://github.com/rshs-robotics-club/ev3dev-cpp-template-wrapper`. This will download the library into a folder
-4. Inside that folder, execute the command `git clone https://github.com/todo-create-an-example-repo`
-5. enter the example repo folder
-6. edit the src files as you wish
-
-</details>
+###### OS: Windows
+(this is updated and ready for the V2.5.0 jump)
+1. Clone the repository
+   1. open up command prompt
+   2. open up file explorer
+   3. go to the folder where you would like to install the repository
+   4. Click on the folder path and copy it to the clipboard, as demonstrated like this
+   ![picture of file explorer](tmp.png "TODO")
+   5. Type `cd <paste clipboard file path here>`
+   ![picture of command prompt](tmp.png "TODO")
+   6. Hit Enter and execute the command
+   7. type `git clone --recursive https://github.com/rshs-robotics-club/ev3dev-cpp-wrapper-example.git` into the command prompt
+   8. Hit Enter and execute the command
+   9. The repository should now be cloned into that folder.
+2. Your first compilation
+   1. You are now ready for compiling the library. Open the cloned repository folder with your favorite code editor. (e.g. Visual Studio Code)
+   2. Turn on docker desktop. This will turn on the docker daemon (a background task) that we require for cross compiling.
+   3. run `dockersetup.sh` by double clicking the file, or by running `./scripts/compile.sh` in the repository directory It should be stored inside the `scripts` folder. This will install the Docker image for the ev3 robot. 
+   > Warning: the Docker image is more than 1GB and is quite large, so make sure there is space on your computer
+   4. run `./scripts/compile.sh` within the repository directory. The library should now begin compiling
+3. Using the library regularly
+   1. This part of the documentation is not finished (TODO)
 
 ---
 # [Click here to find the Quick Start tutorials](quickstartTutorials.md)
