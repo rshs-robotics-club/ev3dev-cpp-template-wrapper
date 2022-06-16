@@ -17,6 +17,7 @@ We currently only have support for compiling on windows. (MacOS support not comi
 - Docker
 - Git
 > Note that CMake is not required to be installed on your machine, since it is actually installed within the Docker image
+
 ## Quick start - Installation
 ###### OS: Windows
 (this is updated and ready for the V2.5.0 jump)
@@ -37,6 +38,7 @@ We currently only have support for compiling on windows. (MacOS support not comi
    2. Turn on docker desktop. This will turn on the docker daemon (a background task) that we require for cross compiling.
    3. run `dockersetup.sh` by double clicking the file, or by running `./scripts/compile.sh` in the repository directory It should be stored inside the `scripts` folder. This will install the Docker image for the ev3 robot. 
    > Warning: the Docker image is more than 1GB and is quite large, so make sure there is space on your computer
+   
    4. run `./scripts/compile.sh` within the repository directory. The library should now begin compiling
 3. Using the library regularly
    1. This part of the documentation is not finished (TODO)
