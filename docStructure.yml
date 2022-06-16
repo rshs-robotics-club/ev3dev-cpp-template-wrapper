@@ -12,6 +12,8 @@ FileSystem:
       children:
       - index:
         tag: "introduction"
+      - troubleshooting:
+        tag: "troubleshooting"
       - irseekerTutorial:
         tag: "IrseekerTutorial"
       - MotorTutorial:
