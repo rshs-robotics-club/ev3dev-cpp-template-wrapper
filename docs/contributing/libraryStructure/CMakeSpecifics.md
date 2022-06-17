@@ -8,7 +8,7 @@ tag: "CMakeSpecifics"
 ### In this guide, we will open up the `CMakeLists.txt` file and examine it part by part
 Lets begin with `./CMakeLists.txt`, the main file
 
-```
+```cmake
 cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_SYSTEM_NAME Linux)
@@ -29,13 +29,13 @@ project(${LIBNAME} VERSION 2.0.0)
 message(STATUS ${CMAKE_CXX_FLAGS})
 ```
 Defines name of library, the version of the library (it will be changed to 2.5.0 later) and outputs the cmake flags during the build. Even though
-```CMake
+```cmake
 message(STATUS ${CMAKE_CXX_FLAGS})
 ```
 is no longer needed, it is still useful for debugging purposes
 
 ---
-```CMake
+```cmake
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Os)
 ```
@@ -43,7 +43,7 @@ Make CMake export compile commands into a file that vscode can process and use a
 `add_compile_options(-Os)` tells the compiler to build the library while optimizing for size (minimising binary size) so that the robot can load the executable faster
 
 ---
-```CMake
+```cmake
 add_library(
     ${LIBNAME}
     STATIC
@@ -60,7 +60,7 @@ add_library(
 Actually defines the library `.a` compilation goal. The files listed here contain the source code of the library.
 
 ---
-```CMake
+```cmake
 target_include_directories(
     ${LIBNAME}
     PUBLIC
@@ -74,7 +74,7 @@ target_include_directories(
 Tell CMake where to find the specified files from the previous part (`add_library`)
 
 ---
-```CMake
+```cmake
 set_target_properties(${LIBNAME}
                     PROPERTIES
                     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin/
@@ -84,7 +84,7 @@ set_target_properties(${LIBNAME}
 Set the output directory and the output file name
 
 ---
-```CMake
+```cmake
 set("WRAPPER_EXAMPLES_DIR" ${PROJECT_SOURCE_DIR}/examples)
 set("WRAPPER_SCRIPTS_DIR" ${PROJECT_SOURCE_DIR}/scripts)
 set("WRAPPER_BIN_DIR" ${PROJECT_BINARY_DIR})
@@ -102,7 +102,7 @@ Define a list of variables that will be used later
 `EVERYTHING_BUILT_TARGET`, `LIB_BUILT_TARGET` : The name of a target. This will be used later
 
 ---
-```CMake
+```cmake
 add_custom_target(
     ${EVERYTHING_BUILT_TARGET} 
     ALL
@@ -119,14 +119,14 @@ Add the 2 targets that keep track of:
 These targets are important for when we want to measure the binary size of the library once the build is finished.
 
 ---
-```CMake
+```cmake
 add_dependencies(${EVERYTHING_BUILT_TARGET} ${LIBNAME})
 add_dependencies(${LIB_BUILT_TARGET} ${EVERYTHING_BUILT_TARGET})
 ```
 Make EVERYTHING_BUILT_TARGET depend on LIBNAME and LIB_BUILT_TARGET depend on EVERYTHING_BUILT_TARGET This is just making sure the targets make sense
 
 ---
-```CMake
+```cmake
 add_custom_command(
     TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
     # setting up the directories
@@ -140,7 +140,7 @@ add_custom_command(
 Make it so that once everything is built, the binaries are copied to the finished folder, and `post_build.sh` is run to check its size.
 
 ---
-```CMake
+```cmake
 add_subdirectory(examples)
 ```
 Add another CMake file stored within the `examples` folder. That other CMakeLists.txt file manages the compilation of the examples.
