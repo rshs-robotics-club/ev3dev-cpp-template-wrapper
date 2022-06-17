@@ -9,7 +9,7 @@ tag: "troubleshooting"
 #### This section contains common problems and their solutions. If you can't find the solution to your problem, ask in [issues](https://github.com/rshs-robotics-club/ev3dev-cpp-template-wrapper/issues/)
 
 ---
-#### `No such container EV3PROGRAM found`.
+### `No such container EV3PROGRAM found`.
 
 Solution:
 ensure that you have run `./scripts/dockersetup.sh`. This should set up the EV3PROGRAM container.
@@ -19,7 +19,7 @@ Double check that the `compile.sh` file has CRLF line endings, and the `post_bui
 
 ---
 
-#### `Error response from daemon: You cannot remove a running container. Stop the container before attempting removal or force remove`
+### `Error response from daemon: You cannot remove a running container. Stop the container before attempting removal or force remove`
 
 The likely cause of this error is that you closed the git bash popup window before the docker container was finished, or you just somehow managed to stop the bash script within the container
 
@@ -30,13 +30,13 @@ Open up docker desktop and go to the `Containers / Apps` menu. Find the EV3PROGR
 
 ---
 
-#### `No such image <image name here>`
+### `No such image <image name here>`
 solution:
 Ensure that you have already run `./scripts/dockersetup.sh`
 
 ---
 
-#### I can't run the `.sh` files pls help
+### I can't run the `.sh` files pls help
 solution:
 make sure you have Git Bash installed (windows)
 We currently have no support for MacOS yet, so we don't know if it is installed by default on MacOS.
