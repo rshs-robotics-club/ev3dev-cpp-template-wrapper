@@ -1,6 +1,6 @@
 ---
 title: "Contributing"
-tag: "contributing"
+tag: "contribute"
 has_children: true
 ---
 

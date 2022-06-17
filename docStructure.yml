@@ -54,7 +54,7 @@ FileSystem:
         tag: "Utilities"
     
     - contributing:
-      tag: "contributing"
+      tag: "contribute"
       children:
       - branchNamingRules:
         tag: "branchNamingRules"
