@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Library structure Introduction"
+title: "Library Structure"
 nav_order: 1
 tag: "libraryStructure"
 ---

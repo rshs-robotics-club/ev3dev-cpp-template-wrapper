@@ -57,9 +57,15 @@ FileSystem:
       child_folder_reqs:
         - "contributing"
       children:
-      - branchNamingRules:
-        tag: "branchNamingRules"
       - libraryStructre:
         tag: "libraryStructure"
+        child_folder_reqs:
+          - "libraryStructure"
+        children:
+        - CMakeSpecifics:
+          tag: "CMakeSpecifics"
+      - branchNamingRules:
+        tag: "branchNamingRules"
+      
 
 
