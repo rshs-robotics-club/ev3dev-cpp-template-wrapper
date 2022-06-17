@@ -27,9 +27,9 @@ We currently only have support for compiling on windows. (MacOS support not comi
    2. open up file explorer
    3. go to the folder where you would like to install the repository
    4. Click on the folder path and copy it to the clipboard, as demonstrated like this
-   ![picture of file explorer](toedit.png "picture of path being copied from file explorer")
+   ![picture of file explorer](pictures/toedit.png "picture of path being copied from file explorer (some details censored")
    1. Type `cd <paste clipboard file path here>`
-   ![picture of command prompt](tmp.png "TODO")
+   ![picture of command prompt](pictures/cmd.png "picture of cd command typed in command prompt (some details censored)")
    1. Hit Enter and execute the command
    2. type `git clone --recursive https://github.com/rshs-robotics-club/ev3dev-cpp-wrapper-example.git` into the command prompt
    3. Hit Enter and execute the command
