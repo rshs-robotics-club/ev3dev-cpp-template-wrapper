@@ -55,8 +55,6 @@ FileSystem:
     
     - contributing:
       tag: "contributing"
-      child_folder_reqs:
-        - "contributing"
       children:
       - branchNamingRules:
         tag: "branchNamingRules"
