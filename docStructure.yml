@@ -25,6 +25,8 @@ FileSystem:
 
     - documentation:
       tag: "documentation"
+      child_folder_reqs:
+        - "documentation"
       children:
       - Blockable:
         tag: "Blockable"
@@ -52,6 +54,8 @@ FileSystem:
         tag: "Utilities"
     - contributing:
       tag: "contribute"
+      child_folder_reqs:
+        - "contributing"
       children:
       - branchNamingRules:
         tag: "branchNamingRules"
