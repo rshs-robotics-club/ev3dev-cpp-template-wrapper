@@ -50,9 +50,9 @@ FileSystem:
         tag: "UltrasonicSensor"
       - Utilities:
         tag: "Utilities"
-      - contributing:
-        tag: "contribute"
-        children:
-        - branchNamingRules:
-          tag: "branchNamingRules"
+    - contributing:
+      tag: "contribute"
+      children:
+      - branchNamingRules:
+        tag: "branchNamingRules"
 
