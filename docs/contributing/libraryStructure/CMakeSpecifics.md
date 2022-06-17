@@ -23,7 +23,7 @@ Defines the system we are building on and the cmake version we are using
 Compilers need to be specified so that CMake doesn't get confused in the Docker container and break, or cry out errors
 
 ---
-```CMake
+```cmake
 set(LIBNAME "ev3-cpp-template-wrapper-lib")
 project(${LIBNAME} VERSION 2.0.0)
 message(STATUS ${CMAKE_CXX_FLAGS})
