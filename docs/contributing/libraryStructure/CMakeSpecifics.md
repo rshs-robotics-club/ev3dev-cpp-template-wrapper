@@ -5,9 +5,10 @@ tag: "CMakeSpecifics"
 ---
 
 # Step by step guide of the CMake build system of this library
-### In this guide, we will open up the `CmakeLists.txt` file and examine it part by part
+### In this guide, we will open up the `CMakeLists.txt` file and examine it part by part
 Lets begin with `./CMakeLists.txt`, the main file
-```CMake
+
+```
 cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_SYSTEM_NAME Linux)
