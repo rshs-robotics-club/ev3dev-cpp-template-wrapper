@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Contributing"
 tag: "contributing"
 has_children: true
