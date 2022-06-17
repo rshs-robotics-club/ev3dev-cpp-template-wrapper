@@ -55,4 +55,7 @@ FileSystem:
       children:
       - branchNamingRules:
         tag: "branchNamingRules"
+      - libraryStructre:
+        tag: "libraryStructure"
+
 
