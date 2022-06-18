@@ -68,6 +68,8 @@ FileSystem:
           tag: "CMakeExamples"
       - branchNamingRules:
         tag: "branchNamingRules"
+      - writingDocumentation:
+        tag: "writingDocumentation"
       
 
 
