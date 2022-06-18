@@ -64,6 +64,8 @@ FileSystem:
         children:
         - CMakeSpecifics:
           tag: "CMakeSpecifics"
+        - CMakeExamples:
+          tag: "CMakeExamples"
       - branchNamingRules:
         tag: "branchNamingRules"
       

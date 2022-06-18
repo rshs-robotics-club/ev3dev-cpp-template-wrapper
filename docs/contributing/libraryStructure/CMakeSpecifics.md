@@ -146,3 +146,5 @@ add_subdirectory(examples)
 Add another CMake file stored within the `examples` folder. That other CMakeLists.txt file manages the compilation of the examples.
 
 ---
+
+We will continue looking at `CMakeLists.txt` in the `examples` folder [here](CMakeExamples.md)
