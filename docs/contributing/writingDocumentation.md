@@ -64,7 +64,7 @@ for example,
     tag: "Blockable"
 ``` 
 represents the file with the tag "Blockable". This tag is stored in the [front matter](https://jekyllrb.com/docs/front-matter/) of the md file, something like
-```jekyll
+```
 ---
 layout: default
 title: "Blockable"

@@ -6,33 +6,14 @@ parent: "Ev3Wrap-unstable-docs"
 tag: "documentation"
 ---
 
-# The documentation currently contains:
+# Documentation
+## Contains methods, classes, and their usage.
+refer to [quick start tutorials](quickstartTutorials.md) If you've just seen this library.
 
-# inherited classes
-## - [Ev3Wrap::Blockable](documentation/BlockableDocumentation.md)
+Note that the whole site is split between `master` and `unstable`. New features are added to `unstable` and are not visible on `master`. 
+(currently: master on V2.3.0 unstable on V2.5.0)
 
-# Output classes
-## - [Ev3Wrap::Motor](documentation/motorDocumentation.md)
+---
 
-## - LCD
->   Note - LCD is no longer worked on, as it requires the linux framebuffer library stuff and we do not want to increase the binary size any further.
-
-# controller classes
-## - [Ev3Wrap::MotorPair](documentation/MotorPairDocumentation.md)
-
-## - [Ev3Wrap::Omni](documentation/OmniDocumentation.md)
-
-# sensor classes
-## - [Ev3wrap::CompassSensor](documentation/compassSensorDocumentation.md)
-
-## - [Ev3Wrap::IrSeeker](documentation/IrSeekerDocumentation.md)
-
-## - [Ev3Wrap::UltrasonicSensor](documentation/UltrasonicSensorDocumentation.md)
-
-## - [Ev3Wrap::Gyro](documentation/GyroDocumentation.md)
-
-## - [Ev3Wrap::ColorSensor](documentation/ColorSensorDocumentation.md)
-
-## - [Ev3Wrap::TouchSensor](documentation/TouchSensorDocumentation.md)
-
-## - [Ev3Wrap::Button](documentation/ButtonDocumentation.md)
+### News
+- The lcd class is now deprecated. The (broken) feature will be completely removed when we make to jump to V2.5.0
