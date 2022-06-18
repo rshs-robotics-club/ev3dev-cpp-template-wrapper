@@ -29,3 +29,16 @@ The bind method defaults its port to `INPUT_AUTO` if no port is specified. While
 The sensors can also have different communication standards, for example although both the `IrSeeker` and the `CompassSensor` uses the same `i2c` standard, the `IrSeeker`'s address defaults to the 8th byte and the `CompassSensor`'s address defaults to the 1st byte.
 ##### TL:DR How do you speed it up?
 Manually specify the port instead of making it detect the port automatically
+
+---
+# The Leap to V2.5.0
+In Version 2.5.0, the port naming system has been updated. The bind method itself isn't affected by this change, however, if you wanted to do
+```cpp
+Ev3Wrap::Motor::bind(ev3dev::OUTPUT_A);
+```
+You would have to do
+```cpp
+Ev3Wrap::Motor::bind(Ev3Wrap::Motor::OUTPUT_A);
+```
+instead. The port name definitions have been moved to
+`Ev3Wrap::<sensornamehere>::INPUT_*`, from `ev3dev::INPUT_*`. The main goal of this change is to make the `bind` method easier to use for `i2c` sensors. (they may have different starting bytes and driver port names)
