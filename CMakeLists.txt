@@ -33,7 +33,6 @@ add_library(
     ${LIBNAME} 
     STATIC
 
-    lib/ev3dev.cpp
     
     lib/blockable/ev3wrapblockable.hpp
     lib/button/ev3wrapbutton.cpp
@@ -68,6 +67,10 @@ add_library(
 
     lib/utilities/ev3wraputilities.hpp
 
+    lib/vector/ev3wrapvector.cpp
+    lib/vector/ev3wrapvector.hpp
+
+    lib/ev3dev.cpp
     lib/ev3dev.h
 
     lib/ev3wrap.hpp
@@ -88,6 +91,7 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/lib/touch/
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
     ${PROJECT_SOURCE_DIR}/lib/utilities/
+    ${PROJECT_SOURCE_DIR}/lib/vector/
 )
 
 set_target_properties(${LIBNAME}
