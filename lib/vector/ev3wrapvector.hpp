@@ -13,7 +13,8 @@
     You should have received a copy of the GNU General Public License 
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
-
+#ifndef EV3WRAPVECTOR_HPP_
+#define EV3WRAPVECTOR_HPP_
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cmath>
@@ -81,3 +82,4 @@ public:
 };
 
 } // namespace Ev3Wrap
+#endif
