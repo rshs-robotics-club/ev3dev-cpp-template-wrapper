@@ -66,6 +66,8 @@ add_library(
 
     lib/utilities/ev3wraputilities.hpp
 
+    lib/vector/ev3wrapvector.hpp
+
     lib/ev3dev.cpp
     lib/ev3dev.h
 
@@ -87,6 +89,7 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/lib/touch/
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
     ${PROJECT_SOURCE_DIR}/lib/utilities/
+    ${PROJECT_SOURCE_DIR}/lib/vector/
 )
 
 set_target_properties(${LIBNAME}
