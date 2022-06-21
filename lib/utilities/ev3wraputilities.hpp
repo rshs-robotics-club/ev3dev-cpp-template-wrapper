@@ -57,6 +57,25 @@ namespace Beeper {
 
 } // namespace Utilities in namespace Ev3Wrap
 
+namespace Led {
+    enum class Color {
+        Black,
+        Red,
+        Green,
+        Yellow,
+        Amber,
+        Orange
+    };
+    std::map<Color, std::vector<float>> colRef = {
+        {Color::Black, ev3dev::led::black},
+        {Color::Red, ev3dev::led::red},
+        {Color::Green, ev3dev::led::green},
+        {Color::Yellow, ev3dev::led::yellow},
+        {Color::Amber, ev3dev::led::amber}
+    };
+    
+} // namespace Led
+
 } // namespace Ev3Wrap
 
 
