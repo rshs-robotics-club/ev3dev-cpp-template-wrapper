@@ -29,6 +29,7 @@ message(STATUS ${CMAKE_CXX_FLAGS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Os)
+add_definitions(-DDEBUG_MODE_ENABLED)
 add_library(
     ${LIBNAME} 
     STATIC
