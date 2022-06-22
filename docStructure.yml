@@ -52,6 +52,8 @@ FileSystem:
         tag: "UltrasonicSensor"
       - Utilities:
         tag: "Utilities"
+      - Vector:
+        tag: "Vector"
     - contributing:
       tag: "contribute"
       child_folder_reqs:
