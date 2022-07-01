@@ -37,6 +37,8 @@ class Omni : public Blockable<Omni> {
     public:
         Omni(IrSeeker& irSeeker, CompassSensor& compass);
         Omni& controlRaw(float eSpeed, float fSpeed, float gSpeed, float hSpeed);
+        float getMaxRpm();
+        
         
 };
 

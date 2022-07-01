@@ -129,5 +129,5 @@ add_custom_command(
     COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
 )
 #set(ALL_LIB_FINAL_TARGETS)
-
-add_subdirectory(examples)
+# enable building the examples if you want to.
+#add_subdirectory(examples)

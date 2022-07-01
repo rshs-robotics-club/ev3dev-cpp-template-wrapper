@@ -47,7 +47,9 @@ Omni& Omni::controlRaw(float eSpeed, float fSpeed, float gSpeed, float hSpeed) {
     return *this;
 }
 
-
+float Omni::getMaxRpm() {
+    return this->eMotor.getMaxRpm();
+}
 
 // constructor
 // Omni::Omni(MotorPair& leftRightPair, MotorPair& frontBackPair, CompassSensor& compass, Angle motorToCompassOffset) : 
