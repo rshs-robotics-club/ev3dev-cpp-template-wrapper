@@ -29,6 +29,7 @@ message(STATUS ${CMAKE_CXX_FLAGS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Os)
+add_definitions(-DDEBUG_MODE_ENABLED)
 add_library(
     ${LIBNAME} 
     STATIC
@@ -128,5 +129,5 @@ add_custom_command(
     COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
 )
 #set(ALL_LIB_FINAL_TARGETS)
-
-add_subdirectory(examples)
+# enable building the examples if you want to.
+#add_subdirectory(examples)
