@@ -2,9 +2,9 @@
 using namespace Ev3Wrap;
 int main() {
     // auto bind the compass so that we don't have to customize or change it
-    CompassSensor compass = CompassSensor::bind();
-    Motor leftMotor = Motor::bind(ev3dev::OUTPUT_A);
-    Motor rightMotor = Motor::bind(ev3dev::OUTPUT_B);
+    CompassSensor compass = CompassSensor::bind(CompassSensor::INPUT_1);
+    Motor leftMotor = Motor::bind(Motor::OUTPUT_A);
+    Motor rightMotor = Motor::bind(Motor::OUTPUT_B);
     MotorPair motorPair = MotorPair::CreateMotorPair(leftMotor, rightMotor);
     compass.beginCalibrate();
     motorPair.setBlocking(true);

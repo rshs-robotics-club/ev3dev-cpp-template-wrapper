@@ -28,11 +28,13 @@ project(${LIBNAME} VERSION 2.0.0)
 message(STATUS ${CMAKE_CXX_FLAGS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_compile_options(-Os)
+add_definitions(-DDEBUG_MODE_ENABLED)
 add_library(
     ${LIBNAME} 
     STATIC
+
+    
     lib/blockable/ev3wrapblockable.hpp
     lib/button/ev3wrapbutton.cpp
     lib/button/ev3wrapbutton.hpp
@@ -66,6 +68,9 @@ add_library(
 
     lib/utilities/ev3wraputilities.hpp
 
+    lib/vector/ev3wrapvector.cpp
+    lib/vector/ev3wrapvector.hpp
+
     lib/ev3dev.cpp
     lib/ev3dev.h
 
@@ -87,6 +92,7 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/lib/touch/
     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
     ${PROJECT_SOURCE_DIR}/lib/utilities/
+    ${PROJECT_SOURCE_DIR}/lib/vector/
 )
 
 set_target_properties(${LIBNAME}
@@ -123,5 +129,5 @@ add_custom_command(
     COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
 )
 #set(ALL_LIB_FINAL_TARGETS)
-
-add_subdirectory(examples)
+# enable building the examples if you want to.
+#add_subdirectory(examples)

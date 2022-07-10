@@ -528,6 +528,24 @@ const std::vector<char>& sensor::bin_data() const {
     throw system_error(make_error_code(errc::no_such_device), fname);
 }
 
+// in order to avoid undefined reference
+constexpr char normal_sensor::INPUT_1[];
+constexpr char normal_sensor::INPUT_2[];
+constexpr char normal_sensor::INPUT_3[];
+constexpr char normal_sensor::INPUT_4[];
+constexpr char motor::OUTPUT_A[];
+constexpr char motor::OUTPUT_B[];
+constexpr char motor::OUTPUT_C[];
+constexpr char motor::OUTPUT_D[];
+constexpr char compass::INPUT_1[];
+constexpr char compass::INPUT_2[];
+constexpr char compass::INPUT_3[];
+constexpr char compass::INPUT_4[];
+constexpr char irseeker_sensor::INPUT_1[];
+constexpr char irseeker_sensor::INPUT_2[];
+constexpr char irseeker_sensor::INPUT_3[];
+constexpr char irseeker_sensor::INPUT_4[];
+
 //-----------------------------------------------------------------------------
 i2c_sensor::i2c_sensor(address_type address, const std::set<sensor_type> &types)
     : sensor(address, types)
@@ -537,7 +555,7 @@ i2c_sensor::i2c_sensor(address_type address, const std::set<sensor_type> &types)
 constexpr char touch_sensor::mode_touch[];
 
 touch_sensor::touch_sensor(address_type address)
-    : sensor(address, { ev3_touch, nxt_touch })
+    : normal_sensor(address, { ev3_touch, nxt_touch })
 { }
 
 //-----------------------------------------------------------------------------
@@ -556,7 +574,7 @@ constexpr char color_sensor::color_white[];
 constexpr char color_sensor::color_brown[];
 
 color_sensor::color_sensor(address_type address)
-    : sensor(address, { ev3_color })
+    : normal_sensor(address, { ev3_color })
 { }
 
 //-----------------------------------------------------------------------------
@@ -567,11 +585,11 @@ constexpr char ultrasonic_sensor::mode_us_si_cm[];
 constexpr char ultrasonic_sensor::mode_us_si_in[];
 
 ultrasonic_sensor::ultrasonic_sensor(address_type address)
-    : sensor(address, { ev3_ultrasonic, nxt_ultrasonic })
+    : normal_sensor(address, { ev3_ultrasonic, nxt_ultrasonic })
 { }
 
 ultrasonic_sensor::ultrasonic_sensor(address_type address, const std::set<sensor_type>& sensorTypes)
-    : sensor(address, sensorTypes)
+    : normal_sensor(address, sensorTypes)
 { }
 
 //-----------------------------------------------------------------------------
@@ -584,7 +602,7 @@ constexpr char gyro_sensor::mode_tilt_rate[];
 constexpr char gyro_sensor::mode_tilt_ang[];
 
 gyro_sensor::gyro_sensor(address_type address)
-    : sensor(address, { ev3_gyro })
+    : normal_sensor(address, { ev3_gyro })
 { }
 
 //-----------------------------------------------------------------------------
@@ -595,7 +613,7 @@ char infrared_sensor::mode_ir_rem_a[] = "IR-REM-A";
 char infrared_sensor::mode_ir_cal[] = "IR-CAL";
 
 infrared_sensor::infrared_sensor(address_type address)
-    : sensor(address, { ev3_infrared })
+    : normal_sensor(address, { ev3_infrared })
 { }
 
 //-----------------------------------------------------------------------------
@@ -603,7 +621,7 @@ char sound_sensor::mode_db[] = "DB";
 char sound_sensor::mode_dba[] = "DBA";
 
 sound_sensor::sound_sensor(address_type address)
-    : sensor(address, { nxt_sound, nxt_analog })
+    : normal_sensor(address, { nxt_sound, nxt_analog })
 {
     if (connected() && driver_name() == nxt_analog) {
         lego_port port(address);
@@ -626,7 +644,7 @@ char light_sensor::mode_reflect[] = "REFLECT";
 char light_sensor::mode_ambient[] = "AMBIENT";
 
 light_sensor::light_sensor(address_type address)
-    : sensor(address, { nxt_light })
+    : normal_sensor(address, { nxt_light })
 { }
 
 //-----------------------------------------------------------------------------

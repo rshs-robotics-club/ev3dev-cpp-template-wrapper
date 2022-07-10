@@ -132,3 +132,7 @@ Ev3Wrap::Motor& Ev3Wrap::Motor::releaseMotor() {
 bool Ev3Wrap::Motor::waitUntilStalled(float timeoutMilliseconds) {
     this->blockUntilStateReached([this] {return this->getStalling();}, 5, [] {}, timeoutMilliseconds);
 }
+
+float Ev3Wrap::Motor::getMaxRpm() {
+    return this->max_speed() * 60 * (1 / (this->count_per_rot()));
+}

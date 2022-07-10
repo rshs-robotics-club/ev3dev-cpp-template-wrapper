@@ -23,6 +23,10 @@ namespace Ev3Wrap {
 
 class Gyro : private ev3dev::gyro_sensor {
     public:
+        using ev3dev::gyro_sensor::INPUT_1;
+        using ev3dev::gyro_sensor::INPUT_2;
+        using ev3dev::gyro_sensor::INPUT_3;
+        using ev3dev::gyro_sensor::INPUT_4;
         static Gyro bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         using ev3dev::gyro_sensor::angle;
         using ev3dev::gyro_sensor::rate;

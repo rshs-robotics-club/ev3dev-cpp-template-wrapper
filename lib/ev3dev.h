@@ -78,6 +78,8 @@ constexpr char OUTPUT_B[] = "pistorms:BAM2"; //!< Motor port B
 constexpr char OUTPUT_C[] = "pistorms:BBM1"; //!< Motor port C
 constexpr char OUTPUT_D[] = "pistorms:BBM2"; //!< Motor port D
 #else // assume EV3DEV_PLATFORM_EV3
+/*
+This code has been commented out by Eisverygoodletter
 constexpr char INPUT_1[]  = "ev3-ports:in1";  //!< Sensor port 1
 constexpr char INPUT_2[]  = "ev3-ports:in2";  //!< Sensor port 2
 constexpr char INPUT_3[]  = "ev3-ports:in3";  //!< Sensor port 3
@@ -87,6 +89,7 @@ constexpr char OUTPUT_A[] = "ev3-ports:outA"; //!< Motor port A
 constexpr char OUTPUT_B[] = "ev3-ports:outB"; //!< Motor port B
 constexpr char OUTPUT_C[] = "ev3-ports:outC"; //!< Motor port C
 constexpr char OUTPUT_D[] = "ev3-ports:outD"; //!< Motor port D
+*/
 #endif
 
 //-----------------------------------------------------------------------------
@@ -288,10 +291,21 @@ class i2c_sensor : public sensor {
         }
 };
 
+class normal_sensor : public sensor {
+    public:
+        static constexpr char INPUT_1[] = "ev3-ports:in1";
+        static constexpr char INPUT_2[] = "ev3-ports:in2";
+        static constexpr char INPUT_3[] = "ev3-ports:in3";
+        static constexpr char INPUT_4[] = "ev3-ports:in4";
+        using sensor::sensor;
+        //normal_sensor(address_type a) : sensor(a) {};
+        //normal_sensor(address_type a, const std::set<sensor_type>& b) : sensor(a, b) {};
+};
+
 //-----------------------------------------------------------------------------
 // Touch Sensor
 //-----------------------------------------------------------------------------
-class touch_sensor : public sensor {
+class touch_sensor : public normal_sensor {
     public:
         touch_sensor(address_type address = INPUT_AUTO);
 
@@ -310,7 +324,7 @@ class touch_sensor : public sensor {
 //-----------------------------------------------------------------------------
 // LEGO EV3 color sensor.
 //-----------------------------------------------------------------------------
-class color_sensor : public sensor {
+class color_sensor : public normal_sensor {
     public:
         color_sensor(address_type address = INPUT_AUTO);
 
@@ -408,7 +422,7 @@ class color_sensor : public sensor {
 //-----------------------------------------------------------------------------
 // LEGO EV3 ultrasonic sensor.
 //-----------------------------------------------------------------------------
-class ultrasonic_sensor : public sensor {
+class ultrasonic_sensor : public normal_sensor {
     public:
         ultrasonic_sensor(address_type address = INPUT_AUTO);
 
@@ -455,7 +469,7 @@ class ultrasonic_sensor : public sensor {
 //-----------------------------------------------------------------------------
 // LEGO EV3 gyro sensor.
 //-----------------------------------------------------------------------------
-class gyro_sensor : public sensor {
+class gyro_sensor : public normal_sensor {
     public:
         gyro_sensor(address_type address = INPUT_AUTO);
 
@@ -515,7 +529,7 @@ class gyro_sensor : public sensor {
 //-----------------------------------------------------------------------------
 // LEGO EV3 infrared sensor.
 //-----------------------------------------------------------------------------
-class infrared_sensor : public sensor {
+class infrared_sensor : public normal_sensor {
     public:
         infrared_sensor(address_type address = INPUT_AUTO);
 
@@ -546,7 +560,7 @@ class infrared_sensor : public sensor {
 //-----------------------------------------------------------------------------
 // LEGO NXT Sound Sensor
 //-----------------------------------------------------------------------------
-class sound_sensor : public sensor {
+class sound_sensor : public normal_sensor {
     public:
         sound_sensor(address_type address = INPUT_AUTO);
 
@@ -575,7 +589,7 @@ class sound_sensor : public sensor {
 //-----------------------------------------------------------------------------
 // LEGO NXT Light Sensor
 //-----------------------------------------------------------------------------
-class light_sensor : public sensor {
+class light_sensor : public normal_sensor {
     public:
         light_sensor(address_type address = INPUT_AUTO);
 
@@ -612,6 +626,11 @@ class light_sensor : public sensor {
 //-----------------------------------------------------------------------------
 class motor : protected device {
     public:
+        static constexpr char OUTPUT_A[] = "ev3-ports:outA";
+        static constexpr char OUTPUT_B[] = "ev3-ports:outB";
+        static constexpr char OUTPUT_C[] = "ev3-ports:outC";
+        static constexpr char OUTPUT_D[] = "ev3-ports:outD";
+
         typedef device_type motor_type;
 
         motor(address_type);
@@ -1694,6 +1713,12 @@ class lego_port : protected device {
 */
 class irseeker_sensor : public i2c_sensor{
     public:
+        // default address of the irseeker_sensor is 0x08
+        static constexpr char INPUT_1[] = "ev3-ports:in1:i2c8";
+        static constexpr char INPUT_2[] = "ev3-ports:in2:i2c8";
+        static constexpr char INPUT_3[] = "ev3-ports:in3:i2c8";
+        static constexpr char INPUT_4[] = "ev3-ports:in4:i2c8";
+        // constructor
         irseeker_sensor(address_type address = INPUT_AUTO);
         // idk what this means, i copied from the docs
         static char mode_irseeker_dc[];
@@ -1738,6 +1763,11 @@ class irseeker_sensor : public i2c_sensor{
 
 class compass : public i2c_sensor{
     public:
+        // default address of the compass is 0x01
+        static constexpr char INPUT_1[] = "ev3-ports:in1:i2c1";
+        static constexpr char INPUT_2[] = "ev3-ports:in2:i2c1";
+        static constexpr char INPUT_3[] = "ev3-ports:in3:i2c1";
+        static constexpr char INPUT_4[] = "ev3-ports:in4:i2c1";
         compass(address_type address = INPUT_AUTO);
         static char mode_compass_compass[];
         int degrees(bool do_set_mode = true){

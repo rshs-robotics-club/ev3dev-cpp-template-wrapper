@@ -22,6 +22,10 @@ namespace Ev3Wrap {
 
 class UltrasonicSensor : private ev3dev::ultrasonic_sensor {
     public:
+        using ev3dev::ultrasonic_sensor::INPUT_1;
+        using ev3dev::ultrasonic_sensor::INPUT_2;
+        using ev3dev::ultrasonic_sensor::INPUT_3;
+        using ev3dev::ultrasonic_sensor::INPUT_4;
         static UltrasonicSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
         float getCentimetres() { 
             return this->distance_centimeters(); 

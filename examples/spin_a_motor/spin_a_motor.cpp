@@ -1,7 +1,7 @@
 #include <ev3wrap.hpp>
 
 int main() {
-    Ev3Wrap::Motor motorA = Ev3Wrap::Motor::bind(ev3dev::OUTPUT_A);
+    Ev3Wrap::Motor motorA = Ev3Wrap::Motor::bind(Ev3Wrap::Motor::OUTPUT_A);
     motorA.setBlocking(true);
     // run at 50 rpm for 1 second (1 second == 1000 milliseconds)
     motorA.runTimed(1000, 50);

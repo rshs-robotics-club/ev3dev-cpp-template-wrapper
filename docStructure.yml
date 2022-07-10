@@ -10,6 +10,10 @@ FileSystem:
     - quickstart:
       tag: "quickstart"
       children:
+      - index:
+        tag: "introduction"
+      - troubleshooting:
+        tag: "troubleshooting"
       - irseekerTutorial:
         tag: "IrseekerTutorial"
       - MotorTutorial:
@@ -48,3 +52,26 @@ FileSystem:
         tag: "UltrasonicSensor"
       - Utilities:
         tag: "Utilities"
+      - Vector:
+        tag: "Vector"
+    - contributing:
+      tag: "contribute"
+      child_folder_reqs:
+        - "contributing"
+      children:
+      - libraryStructre:
+        tag: "libraryStructure"
+        child_folder_reqs:
+          - "libraryStructure"
+        children:
+        - CMakeSpecifics:
+          tag: "CMakeSpecifics"
+        - CMakeExamples:
+          tag: "CMakeExamples"
+      - branchNamingRules:
+        tag: "branchNamingRules"
+      - writingDocumentation:
+        tag: "writingDocumentation"
+      
+
+

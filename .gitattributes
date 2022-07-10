@@ -10,7 +10,7 @@
 #
 # The above will handle all files NOT found below
 #
-# These files are text and should be normalized (Convert crlf => lf)
+# These files are text and should be normalized
 *.css           text
 *.html          text
 *.java          text
@@ -27,3 +27,5 @@
 *.gif           binary
 *.jpg           binary
 *.png           binary
+# convert these files to LF line endings from CRLF
+/scripts/runWithinContainer.sh  text    eol=lf

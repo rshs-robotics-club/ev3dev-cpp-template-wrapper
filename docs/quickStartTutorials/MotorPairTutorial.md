@@ -22,9 +22,9 @@ this is a quick start tutorial for using the basic two-wheeled ev3 robots with n
     In order for the code to recognize the motors, add
     ```cpp
         // left motor is connected to ev3dev::OUTPUT_A
-        Ev3Wrap::Motor leftMotor = Ev3Wrap::Motor::bind(ev3dev::OUTPUT_A);
+        Ev3Wrap::Motor leftMotor = Ev3Wrap::Motor::bind(Ev3Wrap::Motor::OUTPUT_A);
         // right motor is connected to ev3dev::OUTPUT_B
-        Ev3Wrap::Motor rightMotor = Ev3Wrap::Motor::bind(ev3dev::OUTPUT_B);
+        Ev3Wrap::Motor rightMotor = Ev3Wrap::Motor::bind(Ev3Wrap::Motor::OUTPUT_B);
     ```
     into the `main()` function. 
     >   Warning - if you create 2 `Ev3Wrap::Motor` objects pointing to the same output port, weird things may happen
