@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 set(LIBNAME "ev3-cpp-template-wrapper-lib")
-project(${LIBNAME} VERSION 2.0.0)
+project(${LIBNAME} VERSION 2.5.1)
 message(STATUS ${CMAKE_CXX_FLAGS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
