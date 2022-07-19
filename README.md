@@ -13,3 +13,5 @@ aimed at providing support for a few other sensors (compass and irseeker etc) an
 
 only works on windows
 Find the documentation [here](rshs-robotics-club.github.io)
+
+# we are currently on version V2.5.1
