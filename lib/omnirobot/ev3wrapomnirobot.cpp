@@ -32,7 +32,7 @@ Omni::Omni(IrSeeker& irSeeker, CompassSensor& compass) : irSeeker(irSeeker), com
 
 Omni& Omni::controlRaw(float eSpeed, float fSpeed, float gSpeed, float hSpeed) {
     #ifdef DEBUG_MODE_ENABLED
-    #define MOMS 100 // MaxOmniMotorSpeed
+    #define MOMS 201 // MaxOmniMotorSpeed
     if (eSpeed > MOMS || fSpeed > MOMS || gSpeed > MOMS || hSpeed > MOMS) {
         throw std::invalid_argument("e: "+std::to_string(eSpeed)+" | "
                                     "f: "+std::to_string(fSpeed)+" | "
