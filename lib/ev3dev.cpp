@@ -533,10 +533,6 @@ constexpr char normal_sensor::INPUT_1[];
 constexpr char normal_sensor::INPUT_2[];
 constexpr char normal_sensor::INPUT_3[];
 constexpr char normal_sensor::INPUT_4[];
-constexpr char motor::OUTPUT_A[];
-constexpr char motor::OUTPUT_B[];
-constexpr char motor::OUTPUT_C[];
-constexpr char motor::OUTPUT_D[];
 
 
 
@@ -587,19 +583,6 @@ ultrasonic_sensor::ultrasonic_sensor(address_type address, const std::set<sensor
 { }
 
 //-----------------------------------------------------------------------------
-constexpr char gyro_sensor::mode_gyro_ang[];
-constexpr char gyro_sensor::mode_gyro_rate[];
-constexpr char gyro_sensor::mode_gyro_fas[];
-constexpr char gyro_sensor::mode_gyro_g_a[];
-constexpr char gyro_sensor::mode_gyro_cal[];
-constexpr char gyro_sensor::mode_tilt_rate[];
-constexpr char gyro_sensor::mode_tilt_ang[];
-
-gyro_sensor::gyro_sensor(address_type address)
-    : normal_sensor(address, { ev3_gyro })
-{ }
-
-//-----------------------------------------------------------------------------
 char infrared_sensor::mode_ir_prox[] = "IR-PROX";
 char infrared_sensor::mode_ir_seek[] = "IR-SEEK";
 char infrared_sensor::mode_ir_remote[] = "IR-REMOTE";
@@ -609,131 +592,6 @@ char infrared_sensor::mode_ir_cal[] = "IR-CAL";
 infrared_sensor::infrared_sensor(address_type address)
     : normal_sensor(address, { ev3_infrared })
 { }
-
-//-----------------------------------------------------------------------------
-char sound_sensor::mode_db[] = "DB";
-char sound_sensor::mode_dba[] = "DBA";
-
-sound_sensor::sound_sensor(address_type address)
-    : normal_sensor(address, { nxt_sound, nxt_analog })
-{
-    if (connected() && driver_name() == nxt_analog) {
-        lego_port port(address);
-
-        if (port.connected()) {
-            port.set_set_device(nxt_sound);
-
-            if (port.status() != nxt_sound) {
-                // Failed to load lego-nxt-sound friver. Wrong port?
-                _path.clear();
-            }
-        } else {
-            _path.clear();
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------
-char light_sensor::mode_reflect[] = "REFLECT";
-char light_sensor::mode_ambient[] = "AMBIENT";
-
-light_sensor::light_sensor(address_type address)
-    : normal_sensor(address, { nxt_light })
-{ }
-
-//-----------------------------------------------------------------------------
-char motor::motor_large[] = "lego-ev3-l-motor";
-char motor::motor_medium[] = "lego-ev3-m-motor";
-char motor::motor_nxt[] = "lego-nxt-motor";
-char motor::command_run_forever[] = "run-forever";
-char motor::command_run_to_abs_pos[] = "run-to-abs-pos";
-char motor::command_run_to_rel_pos[] = "run-to-rel-pos";
-char motor::command_run_timed[] = "run-timed";
-char motor::command_run_direct[] = "run-direct";
-char motor::command_stop[] = "stop";
-char motor::command_reset[] = "reset";
-char motor::encoder_polarity_normal[] = "normal";
-char motor::encoder_polarity_inversed[] = "inversed";
-char motor::polarity_normal[] = "normal";
-char motor::polarity_inversed[] = "inversed";
-char motor::state_running[] = "running";
-char motor::state_ramping[] = "ramping";
-char motor::state_holding[] = "holding";
-char motor::state_overloaded[] = "overloaded";
-char motor::state_stalled[] = "stalled";
-char motor::stop_action_coast[] = "coast";
-char motor::stop_action_brake[] = "brake";
-char motor::stop_action_hold[] = "hold";
-
-//-----------------------------------------------------------------------------
-motor::motor(address_type address) {
-    connect({{ "address", { address } }});
-}
-
-//-----------------------------------------------------------------------------
-motor::motor(address_type address, const motor_type &t) {
-    connect({{ "address", { address } }, { "driver_name", { t }}});
-}
-
-//-----------------------------------------------------------------------------
-bool motor::connect(const std::map<std::string, std::set<std::string>> &match) noexcept
-{
-    static const std::string _strClassDir { SYS_ROOT "/tacho-motor/" };
-    static const std::string _strPattern  { "motor" };
-
-    try {
-        return device::connect(_strClassDir, _strPattern, match);
-    } catch (...) { }
-
-    _path.clear();
-
-    return false;
-}
-
-//-----------------------------------------------------------------------------
-medium_motor::medium_motor(address_type address)
-    : motor(address, motor_medium)
-{ }
-
-//-----------------------------------------------------------------------------
-large_motor::large_motor(address_type address)
-    : motor(address, motor_large)
-{ }
-
-//-----------------------------------------------------------------------------
-nxt_motor::nxt_motor(address_type address)
-    : motor(address, motor_nxt)
-{ }
-
-//-----------------------------------------------------------------------------
-dc_motor::dc_motor(address_type address) {
-    static const std::string _strClassDir { SYS_ROOT "/dc-motor/" };
-    static const std::string _strPattern  { "motor" };
-
-    connect(_strClassDir, _strPattern, {{ "address", { address }}});
-}
-
-char dc_motor::command_run_forever[] = "run-forever";
-char dc_motor::command_run_timed[] = "run-timed";
-char dc_motor::command_run_direct[] = "run-direct";
-char dc_motor::command_stop[] = "stop";
-char dc_motor::polarity_normal[] = "normal";
-char dc_motor::polarity_inversed[] = "inversed";
-char dc_motor::stop_action_coast[] = "coast";
-char dc_motor::stop_action_brake[] = "brake";
-
-//-----------------------------------------------------------------------------
-servo_motor::servo_motor(address_type address) {
-    static const std::string _strClassDir { SYS_ROOT "/servo-motor/" };
-    static const std::string _strPattern  { "motor" };
-
-    connect(_strClassDir, _strPattern, {{ "address", { address }}});
-}
-
-char servo_motor::command_run[] = "run";
-char servo_motor::command_float[] = "float";
-char servo_motor::polarity_normal[] = "normal";
-char servo_motor::polarity_inversed[] = "inversed";
 
 //-----------------------------------------------------------------------------
 led::led(std::string name) {
