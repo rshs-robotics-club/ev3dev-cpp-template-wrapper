@@ -21,7 +21,7 @@
 #define EV3WRAP_H_
 #define DEFAULT_MOTOR_RPM 50
 
-#include <ev3dev.hpp>
+#include <ev3dev.h>
 #include <map>
 #include <string>
 #include <ev3wrapblockable.hpp>
@@ -40,9 +40,7 @@
 
 #include <ev3wrapcolor.hpp>
 
-#include <ev3wrapmotorpair.hpp>
-
-#include <ev3wrapomnirobot.hpp>
+//#include <ev3wrapomnirobot.hpp>
 
 #include <ev3wrapbutton.hpp>
 

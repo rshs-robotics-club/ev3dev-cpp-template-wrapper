@@ -51,9 +51,6 @@ add_library(
     lib/motor/ev3wrapmotor.cpp
     lib/motor/ev3wrapmotor.hpp
 
-    lib/motorpair/ev3wrapmotorpair.cpp
-    lib/motorpair/ev3wrapmotorpair.hpp
-
     #lib/omnirobot/ev3wrapomnirobot.cpp
     #lib/omnirobot/ev3wrapomnirobot.hpp
 
