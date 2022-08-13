@@ -24,64 +24,32 @@
 
 namespace Ev3Wrap {
 
-class CompassSensor : private ev3dev::compass {
+class HiTechnicCompass : private ev3dev::i2c_sensor {
     private:
-        int degreeOffsets[5];
+    int degreeOffsets[5];
+    HiTechnicCompass(ev3dev::address_type addr);
     public:
-        using ev3dev::compass::INPUT_1;
-        using ev3dev::compass::INPUT_2;
-        using ev3dev::compass::INPUT_3;
-        using ev3dev::compass::INPUT_4;
-        static CompassSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
-        // gets the absolute direction. getRelativeDirection is recommended
-        int getAbsoluteDirection() {
-            return this->degrees();
-        }
-        // from stackoverflow.com
-        // returns 1 if otherAngle is to the right of sourceAngle,
-        //         0 if the angles are identical
-        //         -1 if otherAngle is to the left of sourceAngle
-        static int compareAngles(float sourceAngle, float otherAngle, float tolerance = 10)
-        {
-            // sourceAngle and otherAngle should be in the range -180 to 180
-            float difference = otherAngle - sourceAngle;
+    static constexpr char INPUT_1[] = "ev3-ports:in1:i2c1";
+    static constexpr char INPUT_2[] = "ev3-ports:in2:i2c1";
+    static constexpr char INPUT_3[] = "ev3-ports:in3:i2c1";
+    static constexpr char INPUT_4[] = "ev3-ports:in4:i2c1";
+    static HiTechnicCompass bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
+    int getAbsoluteDirection() {
+        set_mode("COMPASS");
+        return this->value(0);
+    }
+    void beginCalibration(){ set_command("BEGIN-CAL"); }
+    void endCalibration(){ set_command("END-CAL"); }
 
-            if(difference < -180.0f)
-                difference += 360.0f;
-            if(difference > 180.0f)
-                difference -= 360.0f;
-
-            if(difference > tolerance)
-                return 1;
-            if(difference < -tolerance)
-                return -1;
-
-            return 0;
-        }
-        // sets the current direction as 0 degrees (in getRelativeDirection)
-        CompassSensor& setZero(int key = 0) {
-            this->degreeOffsets[key] = this->getAbsoluteDirection();
-        }
-        int getDegreeOffset(int key = 0) {
-            return this->degreeOffsets[key];
-        }
-        // range is different from getAbsoluteDirection, this ranges from -180 to 179
-        // inclusive of -180 and non inclusive of 180
-        int getRelativeDirection(int key = 0) {
-            float ret = this->getAbsoluteDirection() - this->degreeOffsets[key];
-            if(ret >= 180) {return ret - 360;}
-            if(ret < -180) {return ret + 360;}
-            return ret;
-        }
-        void beginCalibrate() {
-            return this->begin_calibration();
-        }
-        void endCalibrate() {
-            return this->end_calibration();
-        }
-        
-    private:
-        CompassSensor(ev3dev::address_type addr);
+    void setZero(int key = 0) {
+        this->degreeOffsets[key] = this->getAbsoluteDirection();
+    }
+    int getRelativeDirection(int key = 0) {
+        float ret = this->getAbsoluteDirection() - this->degreeOffsets[key];
+        if(ret >= 180) {return ret - 360;}
+        if(ret < -180) {return ret + 360;}
+        return ret;
+    }
 };
 
 }

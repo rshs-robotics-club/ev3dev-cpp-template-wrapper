@@ -16,10 +16,15 @@
 */
 
 #include <ev3wrapirseeker.hpp>
+#include <ev3dev.h>
+using namespace Ev3Wrap;
 
-Ev3Wrap::IrSeeker::IrSeeker(ev3dev::address_type addr) : ev3dev::irseeker_sensor(addr) {};
-
-Ev3Wrap::IrSeeker Ev3Wrap::IrSeeker::bind(ev3dev::address_type addr) {
-    Ev3Wrap::IrSeeker retSensor = Ev3Wrap::IrSeeker(addr);
-    return retSensor;
+HiTechnicIrSeeker::HiTechnicIrSeeker(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-ir-seek-v2" }) {}
+HiTechnicIrSeeker HiTechnicIrSeeker::bind(ev3dev::address_type addr) {
+    return HiTechnicIrSeeker(addr);
 }
+
+constexpr char HiTechnicIrSeeker::INPUT_1[];
+constexpr char HiTechnicIrSeeker::INPUT_2[];
+constexpr char HiTechnicIrSeeker::INPUT_3[];
+constexpr char HiTechnicIrSeeker::INPUT_4[];

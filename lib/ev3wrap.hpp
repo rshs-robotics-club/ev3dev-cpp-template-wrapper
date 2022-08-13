@@ -21,7 +21,7 @@
 #define EV3WRAP_H_
 #define DEFAULT_MOTOR_RPM 50
 
-#include <ev3dev.h>
+#include <ev3dev.hpp>
 #include <map>
 #include <string>
 #include <ev3wrapblockable.hpp>
@@ -45,11 +45,6 @@
 #include <ev3wrapomnirobot.hpp>
 
 #include <ev3wrapbutton.hpp>
-
-// lcd is deprecated as it requires the linux framebuffer library(s) and it is out of the scope of this library
-//#include <ev3wraplcd.hpp>
-
-#include <ev3wrapgyro.hpp>
 
 #include <ev3wraputilities.hpp>
 

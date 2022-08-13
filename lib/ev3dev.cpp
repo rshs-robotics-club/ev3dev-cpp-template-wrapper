@@ -537,14 +537,8 @@ constexpr char motor::OUTPUT_A[];
 constexpr char motor::OUTPUT_B[];
 constexpr char motor::OUTPUT_C[];
 constexpr char motor::OUTPUT_D[];
-constexpr char compass::INPUT_1[];
-constexpr char compass::INPUT_2[];
-constexpr char compass::INPUT_3[];
-constexpr char compass::INPUT_4[];
-constexpr char irseeker_sensor::INPUT_1[];
-constexpr char irseeker_sensor::INPUT_2[];
-constexpr char irseeker_sensor::INPUT_3[];
-constexpr char irseeker_sensor::INPUT_4[];
+
+
 
 //-----------------------------------------------------------------------------
 i2c_sensor::i2c_sensor(address_type address, const std::set<sensor_type> &types)
@@ -1021,172 +1015,6 @@ void sound::speak(const std::string &text, bool bSynchronous) {
 }
 
 //-----------------------------------------------------------------------------
-lcd::lcd() :
-    _fb(nullptr), _fbsize(0), _llength(0), _xres(0), _yres(0), _bpp(0)
-{
-    init();
-}
-
-//-----------------------------------------------------------------------------
-lcd::~lcd() {
-    deinit();
-}
-
-//-----------------------------------------------------------------------------
-void lcd::fill(unsigned char pixel) {
-    if (_fb && _fbsize) {
-        memset(_fb, pixel, _fbsize);
-    }
-}
-
-//-----------------------------------------------------------------------------
-void lcd::init() {
-    using namespace std;
-
-#ifdef _LINUX_FB_H
-    int fbf = open("/dev/fb0", O_RDWR);
-    if (fbf < 0)
-        return;
-
-    fb_fix_screeninfo i;
-    if (ioctl(fbf, FBIOGET_FSCREENINFO, &i) < 0)
-        return;
-
-    _fbsize  = i.smem_len;
-    _llength = i.line_length;
-
-    _fb = (unsigned char*)mmap(NULL, _fbsize, PROT_READ|PROT_WRITE, MAP_SHARED, fbf, 0);
-    if (_fb == nullptr)
-        return;
-
-    fb_var_screeninfo v;
-
-    if (ioctl(fbf, FBIOGET_VSCREENINFO, &v) < 0)
-        return;
-
-    _xres = v.xres;
-    _yres = v.yres;
-    _bpp  = v.bits_per_pixel;
-#endif
-}
-
-//-----------------------------------------------------------------------------
-void lcd::deinit() {
-    if (_fb) {
-        munmap(_fb, 0);
-    }
-
-    _fbsize = 0;
-}
-
-//-----------------------------------------------------------------------------
-remote_control::remote_control(unsigned channel)
-    : _sensor(new infrared_sensor), _owns_sensor(true)
-{
-    if ((channel >= 1) && (channel <=4))
-        _channel = channel-1;
-
-    if (_sensor->connected())
-        _sensor->set_mode(infrared_sensor::mode_ir_remote);
-}
-
-//-----------------------------------------------------------------------------
-remote_control::remote_control(infrared_sensor &ir, unsigned channel)
-    : _sensor(&ir), _owns_sensor(false)
-{
-    if ((channel >= 1) && (channel <=4))
-        _channel = channel-1;
-
-    if (_sensor->connected())
-        _sensor->set_mode(infrared_sensor::mode_ir_remote);
-}
-
-//-----------------------------------------------------------------------------
-remote_control::~remote_control() {
-    if (_owns_sensor)
-        delete _sensor;
-}
-
-//-----------------------------------------------------------------------------
-bool remote_control::process() {
-    int value = _sensor->value(_channel);
-    if (value != _value) {
-        on_value_changed(value);
-        _value = value;
-        return true;
-    }
-
-    return false;
-}
-
-//-----------------------------------------------------------------------------
-void remote_control::on_value_changed(int value) {
-    int new_state = 0;
-
-    switch (value) {
-        case 1:
-            new_state = red_up;
-            break;
-        case 2:
-            new_state = red_down;
-            break;
-        case 3:
-            new_state = blue_up;
-            break;
-        case  4:
-            new_state = blue_down;
-            break;
-        case 5:
-            new_state = red_up | blue_up;
-            break;
-        case 6:
-            new_state = red_up | blue_down;
-            break;
-        case 7:
-            new_state = red_down |  blue_up;
-            break;
-        case 8:
-            new_state = red_down | blue_down;
-            break;
-        case 9:
-            new_state = beacon;
-            break;
-        case 10:
-            new_state = red_up | red_down;
-            break;
-        case 11:
-            new_state = blue_up | blue_down;
-            break;
-    }
-
-    if (((new_state & red_up) != (_state & red_up)) &&
-            static_cast<bool>(on_red_up))
-        on_red_up(new_state & red_up);
-
-    if (((new_state & red_down) != (_state & red_down)) &&
-            static_cast<bool>(on_red_down))
-        on_red_down(new_state & red_down);
-
-    if (((new_state & blue_up) != (_state & blue_up)) &&
-            static_cast<bool>(on_blue_up))
-        on_blue_up(new_state & blue_up);
-
-    if (((new_state & blue_down) != (_state & blue_down)) &&
-            static_cast<bool>(on_blue_down))
-        on_blue_down(new_state & blue_down);
-
-    if (((new_state & beacon) != (_state & beacon)) &&
-            static_cast<bool>(on_beacon))
-        on_beacon(new_state & beacon);
-
-    if ((new_state != _state) &&
-            static_cast<bool>(on_state_change))
-        on_state_change(new_state);
-
-    _state = new_state;
-}
-
-//-----------------------------------------------------------------------------
 lego_port::lego_port(address_type address) {
     connect({{ "address", { address } }});
 }
@@ -1205,18 +1033,5 @@ bool lego_port::connect(const std::map<std::string, std::set<std::string>> &matc
 
     return false;
 }
-
-//-----------------------------------------------------------------------------
-/*
-    the new modified code from Eisverygoodletter begins here.
-*/
-//-----------------------------------------------------------------------------
-irseeker_sensor::irseeker_sensor(ev3dev::address_type addr) : i2c_sensor(addr, { hitechnic_ir_seeker }) {};
-char irseeker_sensor::mode_irseeker_dc[] = "DC";
-char irseeker_sensor::mode_irseeker_ac[] = "AC";
-char irseeker_sensor::mode_irseeker_dc_all[] = "DC-ALL";
-char irseeker_sensor::mode_irseeker_ac_all[] = "AC-ALL";
-compass::compass(ev3dev::address_type addr) : i2c_sensor(addr, { hitechnic_compass }) {};
-char compass::mode_compass_compass[] = "COMPASS";
 
 } // namespace ev3dev
