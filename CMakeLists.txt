@@ -54,9 +54,6 @@ add_library(
     #lib/omnirobot/ev3wrapomnirobot.cpp
     #lib/omnirobot/ev3wrapomnirobot.hpp
 
-    lib/touch/ev3wraptouch.cpp
-    lib/touch/ev3wraptouch.hpp
-
     lib/ultrasonic/ev3wrapultrasonic.cpp
     lib/ultrasonic/ev3wrapultrasonic.hpp
 

@@ -28,10 +28,6 @@
 
 #include <ev3wrapmotor.hpp>
 
-
-#include <ev3wraptouch.hpp>
-
-
 #include <ev3wrapultrasonic.hpp>
 
 #include <ev3wrapirseeker.hpp>
