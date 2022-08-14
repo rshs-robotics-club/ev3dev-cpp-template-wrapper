@@ -18,7 +18,7 @@
 #ifndef EV3WRAPBUTTON_HPP_
 #define EV3WRAPBUTTON_HPP_
 #include <ev3dev.h>
-#include <blockable/ev3wrapblockable.hpp>
+#include <blockable/blockable.hpp>
 
 namespace Ev3Wrap {
 

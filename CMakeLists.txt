@@ -34,17 +34,17 @@ add_library(
     ${LIBNAME} 
     STATIC
 
-    lib/button/ev3wrapbutton.cpp
+    lib/button/button.cpp
     
-    lib/compass/ev3wrapcompass.cpp
+    lib/hitechnic-compass/hitechnic-compass.cpp
 
-    lib/irseeker/ev3wrapirseeker.cpp
+    lib/hitechnic-irseeker/hitechnic-irseeker.cpp
 
-    lib/motor/ev3wrapmotor.cpp
+    lib/motor/motor.cpp
 
     #lib/omnirobot/ev3wrapomnirobot.cpp
 
-    lib/vector/ev3wrapvector.cpp
+    lib/vector/vector.cpp
 
     lib/ev3dev.cpp
 )
@@ -53,24 +53,6 @@ target_include_directories(
     PUBLIC
     ${PROJECT_SOURCE_DIR}/lib/
 )
-# target_include_directories(
-#     ${LIBNAME}
-#     PUBLIC
-#     ${PROJECT_SOURCE_DIR}/lib/
-#     ${PROJECT_SOURCE_DIR}/lib/blockable/
-#     ${PROJECT_SOURCE_DIR}/lib/button/
-#     ${PROJECT_SOURCE_DIR}/lib/color/
-#     ${PROJECT_SOURCE_DIR}/lib/compass/
-#     ${PROJECT_SOURCE_DIR}/lib/gyro/
-#     ${PROJECT_SOURCE_DIR}/lib/irseeker/
-#     ${PROJECT_SOURCE_DIR}/lib/motor/
-#     ${PROJECT_SOURCE_DIR}/lib/motorpair/
-#     ${PROJECT_SOURCE_DIR}/lib/omnirobot/
-#     ${PROJECT_SOURCE_DIR}/lib/touch/
-#     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
-#     ${PROJECT_SOURCE_DIR}/lib/utilities/
-#     ${PROJECT_SOURCE_DIR}/lib/vector/
-# )
 
 set_target_properties(${LIBNAME}
                     PROPERTIES

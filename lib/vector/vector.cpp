@@ -1,8 +1,7 @@
 /*
-    C++ wrapper for the (modified) C++ API to the Ir Seeker of the ev3dev
-    Linux kernel for the LEGO Mindstorms EV3 hardware
+    A class for a representation of a 2d vector
 
-    Copyright (c) 2021, 2022 - Eisverygoodletter, txxvgnx, Potato-eater
+    Copyright (c) 2022 - txvvgnx, Eisverygoodletter
 
     This file is part of The Ev3dev C++ Wrapper Library.
     The Ev3dev C++ Wrapper Library is free software: you can redistribute it and/or modify
@@ -15,16 +14,6 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <irseeker/ev3wrapirseeker.hpp>
-#include <ev3dev.h>
-using namespace Ev3Wrap;
+#include <vector/vector.hpp>
 
-HiTechnicIrSeeker::HiTechnicIrSeeker(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-ir-seek-v2" }) {}
-HiTechnicIrSeeker HiTechnicIrSeeker::bind(ev3dev::address_type addr) {
-    return HiTechnicIrSeeker(addr);
-}
-
-constexpr char HiTechnicIrSeeker::INPUT_1[];
-constexpr char HiTechnicIrSeeker::INPUT_2[];
-constexpr char HiTechnicIrSeeker::INPUT_3[];
-constexpr char HiTechnicIrSeeker::INPUT_4[];
+Ev3Wrap::Vector Ev3Wrap::Vector::zero = Ev3Wrap::Vector(0, 0);

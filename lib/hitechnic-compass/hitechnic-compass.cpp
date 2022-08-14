@@ -1,5 +1,5 @@
 /*
-    C++ wrapper for the C++ API to the Brick Buttons of the ev3dev
+    C++ wrapper for the (modified) C++ API to the CompassSensor of the ev3dev
     Linux kernel for the LEGO Mindstorms EV3 hardware
 
     Copyright (c) 2021, 2022 - Eisverygoodletter, txxvgnx
@@ -14,14 +14,17 @@
     You should have received a copy of the GNU General Public License 
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
+#include <hitechnic-compass/hitechnic-compass.hpp>
+#include <cstring>
+#include <ev3dev.h>
+using namespace Ev3Wrap;
 
-#include <button/ev3wrapbutton.hpp>
+HiTechnicCompass::HiTechnicCompass(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-compass" }) {}
 
-Ev3Wrap::Button::Button(int keyCode) : ev3dev::button(keyCode) {};
-
-Ev3Wrap::Button Ev3Wrap::Button::CreateButton(ButtonCode btnCode) {
-    int buttonKeyCode = static_cast<int>(btnCode);
-    Ev3Wrap::Button retButton = Button(buttonKeyCode);
-    retButton.setBlocking(true);
-    return retButton;
+HiTechnicCompass Ev3Wrap::HiTechnicCompass::bind(ev3dev::address_type addr) {
+    return HiTechnicCompass(addr);
 }
+constexpr char HiTechnicCompass::INPUT_1[];
+constexpr char HiTechnicCompass::INPUT_2[];
+constexpr char HiTechnicCompass::INPUT_3[];
+constexpr char HiTechnicCompass::INPUT_4[];
