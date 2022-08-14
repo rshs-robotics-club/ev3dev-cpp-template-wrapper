@@ -26,16 +26,18 @@ newFile=false
 # the "-n" flag will be used if the "-w" flag is used
 wipeBin=false
 
-# flag "-O <optimization level>" indicates the optimization level that should be used.
-# the "-n" flag will be used if the "-O" flag is used
-optimizationLevel="-Os"
+# flag "-v" indicates the verbosity (whether if it will check the file size or not)
+# making it verbose may make the build slower
+verbose=false
 
-while getopts 'nwO:' flag; do
+while getopts 'nwO:v' flag; do
   case "${flag}" in
     n) newFile=true ;;
     w) wipeBin=true
         newFile=true ;;
     O) optimizationLevel="-O${OPTARG}"
+        newFile=true ;;
+    v) verbose=true 
         newFile=true ;;
     *) echo "UNKNOWN FLAG ${flag}"
        exit 1 ;;
@@ -45,6 +47,7 @@ done
 rebuildDetails="
 -------- REBUILD DETAILS ----------
 optimization Level: ${optimizationLevel}
+verbosity         : ${verbose}
 "
 if [ $newFile = false ]; then
     rebuildDetails=""
@@ -68,7 +71,8 @@ if [ $newFile = true ]; then
     cmake ./ \
         -G"Unix Makefiles" \
         -B"bin" \
-        -DOPTIMIZATION_LEVEL=${optimizationLevel} 
+        -DOPTIMIZATION_LEVEL=${optimizationLevel} \
+        -DVERBOSE=${verbose}
 fi
 
 echo "building library starting with $(nproc) jobs"

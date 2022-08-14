@@ -34,59 +34,45 @@ add_library(
     ${LIBNAME} 
     STATIC
 
-    
-    lib/blockable/ev3wrapblockable.hpp
     lib/button/ev3wrapbutton.cpp
-    lib/button/ev3wrapbutton.hpp
 
     lib/color/ev3wrapcolor.cpp
-    lib/color/ev3wrapcolor.hpp
     
     lib/compass/ev3wrapcompass.cpp
-    lib/compass/ev3wrapcompass.hpp
 
     lib/irseeker/ev3wrapirseeker.cpp
-    lib/irseeker/ev3wrapirseeker.hpp
 
     lib/motor/ev3wrapmotor.cpp
-    lib/motor/ev3wrapmotor.hpp
 
     #lib/omnirobot/ev3wrapomnirobot.cpp
-    #lib/omnirobot/ev3wrapomnirobot.hpp
-
-    lib/ultrasonic/ev3wrapultrasonic.hpp
-
-    lib/utilities/ev3wraputilities.hpp
 
     lib/vector/ev3wrapvector.cpp
-    lib/vector/ev3wrapvector.hpp
 
     lib/ev3dev.cpp
-    #lib/ev3dev.h
-
-    lib/ev3wrap.hpp
 )
-# target_precompile_headers(${LIBNAME}
-# lib/ev3dev.h
-# )
 target_include_directories(
     ${LIBNAME}
     PUBLIC
     ${PROJECT_SOURCE_DIR}/lib/
-    ${PROJECT_SOURCE_DIR}/lib/blockable/
-    ${PROJECT_SOURCE_DIR}/lib/button/
-    ${PROJECT_SOURCE_DIR}/lib/color/
-    ${PROJECT_SOURCE_DIR}/lib/compass/
-    ${PROJECT_SOURCE_DIR}/lib/gyro/
-    ${PROJECT_SOURCE_DIR}/lib/irseeker/
-    ${PROJECT_SOURCE_DIR}/lib/motor/
-    ${PROJECT_SOURCE_DIR}/lib/motorpair/
-    ${PROJECT_SOURCE_DIR}/lib/omnirobot/
-    ${PROJECT_SOURCE_DIR}/lib/touch/
-    ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
-    ${PROJECT_SOURCE_DIR}/lib/utilities/
-    ${PROJECT_SOURCE_DIR}/lib/vector/
 )
+# target_include_directories(
+#     ${LIBNAME}
+#     PUBLIC
+#     ${PROJECT_SOURCE_DIR}/lib/
+#     ${PROJECT_SOURCE_DIR}/lib/blockable/
+#     ${PROJECT_SOURCE_DIR}/lib/button/
+#     ${PROJECT_SOURCE_DIR}/lib/color/
+#     ${PROJECT_SOURCE_DIR}/lib/compass/
+#     ${PROJECT_SOURCE_DIR}/lib/gyro/
+#     ${PROJECT_SOURCE_DIR}/lib/irseeker/
+#     ${PROJECT_SOURCE_DIR}/lib/motor/
+#     ${PROJECT_SOURCE_DIR}/lib/motorpair/
+#     ${PROJECT_SOURCE_DIR}/lib/omnirobot/
+#     ${PROJECT_SOURCE_DIR}/lib/touch/
+#     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
+#     ${PROJECT_SOURCE_DIR}/lib/utilities/
+#     ${PROJECT_SOURCE_DIR}/lib/vector/
+# )
 
 set_target_properties(${LIBNAME}
                     PROPERTIES
@@ -101,26 +87,28 @@ set(WRAPPER_BIN_FINISHED_DIR ${WRAPPER_BIN_DIR}/finished)
 set(WRAPPER_BIN_EXAMPLES_DIR ${WRAPPER_BIN_FINISHED_DIR}/examples)
 set(EVERYTHING_BUILT_TARGET "EVERYTHING_BUILT_TARGET")
 set(LIB_BUILT_TARGET "LIB_BUILT_TARGET")
-add_custom_target(
-    ${EVERYTHING_BUILT_TARGET} 
-    ALL
-)
-add_custom_target(
-    ${LIB_BUILT_TARGET}
-    ALL
-)
-add_dependencies(${EVERYTHING_BUILT_TARGET} ${LIBNAME})
-add_dependencies(${LIB_BUILT_TARGET} ${EVERYTHING_BUILT_TARGET})
+if (${VERBOSE})
+    add_custom_target(
+        ${EVERYTHING_BUILT_TARGET} 
+        ALL
+    )
+    add_custom_target(
+        ${LIB_BUILT_TARGET}
+        ALL
+    )
+    add_dependencies(${EVERYTHING_BUILT_TARGET} ${LIBNAME})
+    add_dependencies(${LIB_BUILT_TARGET} ${EVERYTHING_BUILT_TARGET})
 
-add_custom_command(
-    TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
-    # setting up the directories
-    COMMAND sudo mkdir -p ${WRAPPER_BIN_FINISHED_DIR}
-    COMMAND sudo mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}
-    # commands for the library itself
-    COMMAND sudo cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
-    COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
-)
+    add_custom_command(
+        TARGET ${EVERYTHING_BUILT_TARGET} POST_BUILD
+        # setting up the directories
+        COMMAND sudo mkdir -p ${WRAPPER_BIN_FINISHED_DIR}
+        COMMAND sudo mkdir -p ${WRAPPER_BIN_EXAMPLES_DIR}
+        # commands for the library itself
+        COMMAND sudo cp ${WRAPPER_BIN_DIR}/libev3dev-cpp-template-wrapper.a ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a
+        COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
+    )
+endif()
 #set(ALL_LIB_FINAL_TARGETS)
 # enable building the examples if you want to.
 #add_subdirectory(examples)

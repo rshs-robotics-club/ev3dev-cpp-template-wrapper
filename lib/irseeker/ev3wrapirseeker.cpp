@@ -15,7 +15,7 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <ev3wrapirseeker.hpp>
+#include <irseeker/ev3wrapirseeker.hpp>
 #include <ev3dev.h>
 using namespace Ev3Wrap;
 

@@ -20,7 +20,6 @@
 #include <ev3dev.h>
 #include <map>
 #include <string>
-#include <ev3wrapblockable.hpp>
 
 namespace Ev3Wrap {
 

@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License 
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
-#include <ev3wrapcompass.hpp>
+#include <compass/ev3wrapcompass.hpp>
 #include <cstring>
 #include <ev3dev.h>
 using namespace Ev3Wrap;

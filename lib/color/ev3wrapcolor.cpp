@@ -15,7 +15,7 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <ev3wrapcolor.hpp>
+#include <color/ev3wrapcolor.hpp>
 
 Ev3Wrap::ColorSensor::ColorSensor(ev3dev::address_type addr) : ev3dev::color_sensor(addr) {}
 
