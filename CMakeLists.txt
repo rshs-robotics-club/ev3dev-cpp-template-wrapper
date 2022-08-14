@@ -54,20 +54,25 @@ target_include_directories(
     ${LIBNAME}
     PUBLIC
     ${PROJECT_SOURCE_DIR}/lib/
-    ${PROJECT_SOURCE_DIR}/lib/blockable/
-    ${PROJECT_SOURCE_DIR}/lib/button/
-    ${PROJECT_SOURCE_DIR}/lib/color/
-    ${PROJECT_SOURCE_DIR}/lib/compass/
-    ${PROJECT_SOURCE_DIR}/lib/gyro/
-    ${PROJECT_SOURCE_DIR}/lib/irseeker/
-    ${PROJECT_SOURCE_DIR}/lib/motor/
-    ${PROJECT_SOURCE_DIR}/lib/motorpair/
-    ${PROJECT_SOURCE_DIR}/lib/omnirobot/
-    ${PROJECT_SOURCE_DIR}/lib/touch/
-    ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
-    ${PROJECT_SOURCE_DIR}/lib/utilities/
-    ${PROJECT_SOURCE_DIR}/lib/vector/
 )
+# target_include_directories(
+#     ${LIBNAME}
+#     PUBLIC
+#     ${PROJECT_SOURCE_DIR}/lib/
+#     ${PROJECT_SOURCE_DIR}/lib/blockable/
+#     ${PROJECT_SOURCE_DIR}/lib/button/
+#     ${PROJECT_SOURCE_DIR}/lib/color/
+#     ${PROJECT_SOURCE_DIR}/lib/compass/
+#     ${PROJECT_SOURCE_DIR}/lib/gyro/
+#     ${PROJECT_SOURCE_DIR}/lib/irseeker/
+#     ${PROJECT_SOURCE_DIR}/lib/motor/
+#     ${PROJECT_SOURCE_DIR}/lib/motorpair/
+#     ${PROJECT_SOURCE_DIR}/lib/omnirobot/
+#     ${PROJECT_SOURCE_DIR}/lib/touch/
+#     ${PROJECT_SOURCE_DIR}/lib/ultrasonic/
+#     ${PROJECT_SOURCE_DIR}/lib/utilities/
+#     ${PROJECT_SOURCE_DIR}/lib/vector/
+# )
 
 set_target_properties(${LIBNAME}
                     PROPERTIES

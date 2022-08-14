@@ -70,7 +70,7 @@ if [ $newFile = true ]; then
     echo "Reconfiguring cmake files"
     cmake ./ \
         -G"Unix Makefiles" \
-        -B"build" \
+        -B"bin" \
         -DOPTIMIZATION_LEVEL=${optimizationLevel} \
         -DVERBOSE=${verbose}
 fi
