@@ -20,43 +20,51 @@
 #define EV3WRAPCOLOR_HPP_
 
 namespace Ev3Wrap {
+using namespace ev3dev;
 
-enum class Color {
-    NONE = 0,
-    BLACK = 1,
-    BLUE = 2,
-    GREEN = 3,
-    YELLOW = 4,
-    RED = 5,
-    WHITE = 6,
-    BROWN = 7
-};
-
-class ColorSensor : private ev3dev::color_sensor {
+class ColorSensor : public normal_sensor {
     public:
-        using ev3dev::color_sensor::INPUT_1;
-        using ev3dev::color_sensor::INPUT_2;
-        using ev3dev::color_sensor::INPUT_3;
-        using ev3dev::color_sensor::INPUT_4;
-        static ColorSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
+        static ColorSensor bind(address_type addr = INPUT_AUTO) {
+            return ColorSensor(addr);
+        }
+        // in the range 0-1020
+        int getRed() {
+            set_mode("RGB-RAW");
+            return value(0);
+        }
+        // in the range 0-1020
+        int getGreen() {
+            set_mode("RGB-RAW");
+            return value(1);
+        }
+        // in the range 0-1020
+        int getBlue() {
+            set_mode("RGB-RAW");
+            return value(2);
+        }
+        // Color detected by the sensor, categorized by overall value.
+        //   - 0: No color
+        //   - 1: Black
+        //   - 2: Blue
+        //   - 3: Green
+        //   - 4: Yellow
+        //   - 5: Red
+        //   - 6: White
+        //   - 7: Brown
+        int getColor() {
+            set_mode("COL-COLOR");
+            return value(0);
+        }
         int getReflectedLightIntensity() {
-            return this->reflected_light_intensity();
+            set_mode("COL-REFLECT");
+            return value(0);
         }
         int getAmbientLightIntensity() {
-            return this->ambient_light_intensity();
+            set_mode("COL-AMBIENT");
+            return value(0);
         }
-        Color getColor() {
-            int colorIndex = this->color();
-            Color color = static_cast<Color>(colorIndex);
-            return color;
-        }
-        std::vector<int> getRgbColor() {
-            set_mode(mode_rgb_raw);
-            return {value(0), value(1), value(2)};
-        }
-
     private:
-        ColorSensor(ev3dev::address_type addr);
+        ColorSensor(address_type addr = INPUT_AUTO) : normal_sensor(addr, { ev3_color }) {}
 };
 
 }

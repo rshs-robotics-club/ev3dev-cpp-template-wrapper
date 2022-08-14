@@ -35,8 +35,6 @@ add_library(
     STATIC
 
     lib/button/ev3wrapbutton.cpp
-
-    lib/color/ev3wrapcolor.cpp
     
     lib/compass/ev3wrapcompass.cpp
 

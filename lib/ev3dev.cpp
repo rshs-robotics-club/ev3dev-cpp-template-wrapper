@@ -544,25 +544,6 @@ i2c_sensor::i2c_sensor(address_type address, const std::set<sensor_type> &types)
 { }
 
 //-----------------------------------------------------------------------------
-constexpr char color_sensor::mode_col_reflect[];
-constexpr char color_sensor::mode_col_ambient[];
-constexpr char color_sensor::mode_col_color[];
-constexpr char color_sensor::mode_ref_raw[];
-constexpr char color_sensor::mode_rgb_raw[];
-constexpr char color_sensor::color_nocolor[];
-constexpr char color_sensor::color_black[];
-constexpr char color_sensor::color_blue[];
-constexpr char color_sensor::color_green[];
-constexpr char color_sensor::color_yellow[];
-constexpr char color_sensor::color_red[];
-constexpr char color_sensor::color_white[];
-constexpr char color_sensor::color_brown[];
-
-color_sensor::color_sensor(address_type address)
-    : normal_sensor(address, { ev3_color })
-{ }
-
-//-----------------------------------------------------------------------------
 char infrared_sensor::mode_ir_prox[] = "IR-PROX";
 char infrared_sensor::mode_ir_seek[] = "IR-SEEK";
 char infrared_sensor::mode_ir_remote[] = "IR-REMOTE";
