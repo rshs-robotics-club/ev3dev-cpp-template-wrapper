@@ -535,7 +535,7 @@ constexpr char normal_sensor::INPUT_3[];
 constexpr char normal_sensor::INPUT_4[];
 
 normal_sensor::normal_sensor(address_type a, const std::set<sensor_type>& b) : sensor(a, b) {
-    
+
 }
 
 //-----------------------------------------------------------------------------
@@ -560,21 +560,6 @@ constexpr char color_sensor::color_brown[];
 
 color_sensor::color_sensor(address_type address)
     : normal_sensor(address, { ev3_color })
-{ }
-
-//-----------------------------------------------------------------------------
-constexpr char ultrasonic_sensor::mode_us_dist_cm[];
-constexpr char ultrasonic_sensor::mode_us_dist_in[];
-constexpr char ultrasonic_sensor::mode_us_listen[];
-constexpr char ultrasonic_sensor::mode_us_si_cm[];
-constexpr char ultrasonic_sensor::mode_us_si_in[];
-
-ultrasonic_sensor::ultrasonic_sensor(address_type address)
-    : normal_sensor(address, { ev3_ultrasonic, nxt_ultrasonic })
-{ }
-
-ultrasonic_sensor::ultrasonic_sensor(address_type address, const std::set<sensor_type>& sensorTypes)
-    : normal_sensor(address, sensorTypes)
 { }
 
 //-----------------------------------------------------------------------------

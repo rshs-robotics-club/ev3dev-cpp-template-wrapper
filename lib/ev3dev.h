@@ -401,53 +401,6 @@ class color_sensor : public normal_sensor {
 };
 
 //-----------------------------------------------------------------------------
-// LEGO EV3 ultrasonic sensor.
-//-----------------------------------------------------------------------------
-class ultrasonic_sensor : public normal_sensor {
-    public:
-        ultrasonic_sensor(address_type address = INPUT_AUTO);
-
-        ultrasonic_sensor(address_type address, const std::set<sensor_type>& sensorTypes);
-
-        // Continuous measurement in centimeters.
-        static constexpr char mode_us_dist_cm[] = "US-DIST-CM";
-
-        // Continuous measurement in inches.
-        static constexpr char mode_us_dist_in[] = "US-DIST-IN";
-
-        // Listen.
-        static constexpr char mode_us_listen[] = "US-LISTEN";
-
-        // Single measurement in centimeters.
-        static constexpr char mode_us_si_cm[] = "US-SI-CM";
-
-        // Single measurement in inches.
-        static constexpr char mode_us_si_in[] = "US-SI-IN";
-
-
-        // Measurement of the distance detected by the sensor,
-        // in centimeters.
-        float distance_centimeters(bool do_set_mode = true) {
-            if (do_set_mode) set_mode(mode_us_dist_cm);
-            return float_value(0);
-        }
-
-        // Measurement of the distance detected by the sensor,
-        // in inches.
-        float distance_inches(bool do_set_mode = true) {
-            if (do_set_mode) set_mode(mode_us_dist_in);
-            return float_value(0);
-        }
-
-        // Value indicating whether another ultrasonic sensor could
-        // be heard nearby.
-        bool other_sensor_present(bool do_set_mode = true) {
-            if (do_set_mode) set_mode(mode_us_listen);
-            return value(0);
-        }
-};
-
-//-----------------------------------------------------------------------------
 // LEGO EV3 infrared sensor.
 //-----------------------------------------------------------------------------
 class infrared_sensor : public normal_sensor {
