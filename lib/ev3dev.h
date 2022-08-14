@@ -299,26 +299,7 @@ class normal_sensor : public sensor {
         static constexpr char INPUT_4[] = "ev3-ports:in4";
         using sensor::sensor;
         //normal_sensor(address_type a) : sensor(a) {};
-        //normal_sensor(address_type a, const std::set<sensor_type>& b) : sensor(a, b) {};
-};
-
-//-----------------------------------------------------------------------------
-// Touch Sensor
-//-----------------------------------------------------------------------------
-class touch_sensor : public normal_sensor {
-    public:
-        touch_sensor(address_type address = INPUT_AUTO);
-
-        // Button state
-        static constexpr char mode_touch[] = "TOUCH";
-
-
-        // A boolean indicating whether the current touch sensor is being
-        // pressed.
-        bool is_pressed(bool do_set_mode = true) {
-            if (do_set_mode) set_mode(mode_touch);
-            return value(0);
-        }
+        normal_sensor(address_type a, const std::set<sensor_type>& b);
 };
 
 //-----------------------------------------------------------------------------

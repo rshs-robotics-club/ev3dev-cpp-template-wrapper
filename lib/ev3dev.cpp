@@ -534,18 +534,13 @@ constexpr char normal_sensor::INPUT_2[];
 constexpr char normal_sensor::INPUT_3[];
 constexpr char normal_sensor::INPUT_4[];
 
-
+normal_sensor::normal_sensor(address_type a, const std::set<sensor_type>& b) : sensor(a, b) {
+    
+}
 
 //-----------------------------------------------------------------------------
 i2c_sensor::i2c_sensor(address_type address, const std::set<sensor_type> &types)
     : sensor(address, types)
-{ }
-
-//-----------------------------------------------------------------------------
-constexpr char touch_sensor::mode_touch[];
-
-touch_sensor::touch_sensor(address_type address)
-    : normal_sensor(address, { ev3_touch, nxt_touch })
 { }
 
 //-----------------------------------------------------------------------------
