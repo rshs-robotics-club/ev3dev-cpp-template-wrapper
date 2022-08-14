@@ -27,79 +27,12 @@
 
 namespace Ev3Wrap {
 
-// Block struct
-struct Block {
-    float milliseconds;
-    std::function<void()> startFunction;
-    std::function<void()> stopFunction;
-    std::function<bool()> repeatedFunction;
-    bool endState;
-    float loopSpeed;
-    Block& setMilliseconds(float milliseconds) {
-        this->milliseconds = milliseconds;
-        return *this;
-    }
-    Block& setStartFunction(std::function<void()> startFunction) {
-        this->startFunction = startFunction;
-        return *this;
-    }
-    Block& setStopFunction(std::function<void()> stopFunction) {
-        this->stopFunction = stopFunction;
-        return *this;
-    }
-    Block& setRepeatedFunction(std::function<bool()> repeatedFunction) {
-        this->repeatedFunction = repeatedFunction;
-        return *this;
-    }
-    Block& setLoopSpeed(float loopSpeed) {
-        this->loopSpeed = loopSpeed;
-        return *this;
-    }
-    Block() {
-        milliseconds = 0;
-        startFunction = nullptr;
-        stopFunction = nullptr;
-        repeatedFunction = nullptr;
-        endState = false;
-        loopSpeed = 1;
-    }
-};
-
-
 // blockable class
-template<typename blockableReturn>
 class Blockable {
     private:
         bool isBlocking;
     protected:
-        void processBlock(Block& block) {
-            if (block.startFunction) {
-                block.startFunction();
-            }
-
-            std::clock_t startTime = std::clock();
-            while (true) {
-                if (block.milliseconds > 0) {
-                    float duration = (std::clock() - startTime) / CLOCKS_PER_SEC;
-                    if (duration > block.milliseconds) {
-                        break;
-                    }
-                }
-                if (block.repeatedFunction) {
-                    bool state = block.repeatedFunction();
-                    if (state == block.endState) {
-                        break;
-                    }
-                }
-                std::this_thread::sleep_for(std::chrono::milliseconds(block.loopSpeed));
-            }
-            if (block.stopFunction) {
-                block.stopFunction();
-            }
-            return;
-        }
         // block the thread for a number of milliseconds.
-        // deprecated. Use processBlock() instead.
         void blockMilliseconds(float milliseconds, std::function<void()> cleanupFunction = []{}) {
             if(!this->isBlocking) {return;}
             // std::chrono::milliseconds can't accept float for some reason, so we have to cast it
@@ -107,7 +40,6 @@ class Blockable {
             cleanupFunction();
         }
         // block the thread until a state is reached, then call the cleanupFunction.
-        // deprecated. Use processBlock() instead.
         void blockUntilStateReached(std::function<bool()> state, float loopSpeed = 5, std::function<void()> cleanupFunction = []{}, float timeoutMilliseconds = 10000) {
             if(!this->isBlocking) {return;}
             std::clock_t startTime = std::clock();
@@ -124,39 +56,21 @@ class Blockable {
             }
             cleanupFunction();
         }
-        // block the thread and force it into a while loop where the `function` is called as fast as possible, and
-        // when `milliseconds` pass, stop and call the `cleanupFunction`
-        // deprecated. Use processBlock() instead.
-        void blockMillisecondsAndFire(std::function<void()> function, float milliseconds, std::function<void()> cleanupFunction = []{}) {
-            if(!this->isBlocking) {return;}
-            std::clock_t startTime = std::clock();
-            while(true) {
-                function();
-                float duration = (std::clock() - startTime) / CLOCKS_PER_SEC;
-                duration *= 1000;
-                if(duration >= milliseconds) {
-                    break;
-                }
-            }
-            cleanupFunction();
-            return;
-        }
 
 
     public:
         Blockable() {
             this->isBlocking = false;
         }
-        blockableReturn& setBlocking(bool willBlock) {
+        void setBlocking(bool willBlock) {
             this->isBlocking = willBlock;
-            return (static_cast<blockableReturn&>(*this));
         }
         bool getBlocking() {
             return this->isBlocking;
         }
-        blockableReturn& wait(float milliseconds) {
-            this->blockMilliseconds(milliseconds);
-            return (static_cast<blockableReturn&>(*this));
+        // wait for a number of milliseconds
+        static void wait(float milliseconds) {
+            std::this_thread::sleep_for(std::chrono::milliseconds((long)milliseconds));
         }
 };
 

@@ -25,7 +25,7 @@
 
 namespace Ev3Wrap {
 
-class Omni : public Blockable<Omni> {
+class Omni : public Blockable {
     private:
         Motor eMotor;
         Motor fMotor;
