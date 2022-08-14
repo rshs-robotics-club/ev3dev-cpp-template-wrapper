@@ -26,7 +26,7 @@ namespace Ev3Wrap {
 
 class HiTechnicCompass : private ev3dev::i2c_sensor {
     private:
-    int degreeOffsets[5];
+    int degreeOffsets[5] = {0, 0, 0, 0, 0};
     HiTechnicCompass(ev3dev::address_type addr);
     public:
     static constexpr char INPUT_1[] = "ev3-ports:in1:i2c1";
