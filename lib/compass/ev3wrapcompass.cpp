@@ -16,14 +16,17 @@
 */
 #include <ev3wrapcompass.hpp>
 #include <cstring>
-Ev3Wrap::CompassSensor::CompassSensor(ev3dev::address_type addr) : ev3dev::compass(addr) {
-    //degreeOffsets = {0};
-    // cringe temporary fix but am too lazy
-    int empty[5] = {0, 0, 0, 0, 0};
-    std::memcpy(this->degreeOffsets, empty, sizeof empty);
-};
+#include <ev3dev.h>
+using namespace Ev3Wrap;
 
-Ev3Wrap::CompassSensor Ev3Wrap::CompassSensor::bind(ev3dev::address_type addr) {
-    Ev3Wrap::CompassSensor retCompassSensor = CompassSensor(addr);
-    return retCompassSensor; 
+HiTechnicCompass::HiTechnicCompass(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-compass" }) {
+    int empty[5] = {0, 0, 0, 0, 0};
+    std::memcpy(this->degreeOffsets, empty, sizeof(empty));
 }
+HiTechnicCompass Ev3Wrap::HiTechnicCompass::bind(ev3dev::address_type addr) {
+    return HiTechnicCompass(addr);
+}
+constexpr char HiTechnicCompass::INPUT_1[];
+constexpr char HiTechnicCompass::INPUT_2[];
+constexpr char HiTechnicCompass::INPUT_3[];
+constexpr char HiTechnicCompass::INPUT_4[];

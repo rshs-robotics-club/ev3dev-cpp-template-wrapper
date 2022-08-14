@@ -28,10 +28,6 @@
 
 #include <ev3wrapmotor.hpp>
 
-
-#include <ev3wraptouch.hpp>
-
-
 #include <ev3wrapultrasonic.hpp>
 
 #include <ev3wrapirseeker.hpp>
@@ -40,16 +36,9 @@
 
 #include <ev3wrapcolor.hpp>
 
-#include <ev3wrapmotorpair.hpp>
-
-#include <ev3wrapomnirobot.hpp>
+//#include <ev3wrapomnirobot.hpp>
 
 #include <ev3wrapbutton.hpp>
-
-// lcd is deprecated as it requires the linux framebuffer library(s) and it is out of the scope of this library
-//#include <ev3wraplcd.hpp>
-
-#include <ev3wrapgyro.hpp>
 
 #include <ev3wraputilities.hpp>
 

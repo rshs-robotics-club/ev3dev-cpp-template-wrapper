@@ -13,7 +13,7 @@
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.24.0)
 
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR arm)
@@ -24,11 +24,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 set(LIBNAME "ev3-cpp-template-wrapper-lib")
-project(${LIBNAME} VERSION 2.5.2)
-message(STATUS ${CMAKE_CXX_FLAGS})
+project(${LIBNAME} VERSION 3.0.0)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_compile_options(-Os)
+message(STATUS ${OPTIMIZATION_LEVEL})
+add_compile_options(${OPTIMIZATION_LEVEL})
 add_definitions(-DDEBUG_MODE_ENABLED)
 add_library(
     ${LIBNAME} 
@@ -45,25 +45,15 @@ add_library(
     lib/compass/ev3wrapcompass.cpp
     lib/compass/ev3wrapcompass.hpp
 
-    lib/gyro/ev3wrapgyro.cpp
-    lib/gyro/ev3wrapgyro.hpp
-
     lib/irseeker/ev3wrapirseeker.cpp
     lib/irseeker/ev3wrapirseeker.hpp
 
     lib/motor/ev3wrapmotor.cpp
     lib/motor/ev3wrapmotor.hpp
 
-    lib/motorpair/ev3wrapmotorpair.cpp
-    lib/motorpair/ev3wrapmotorpair.hpp
+    #lib/omnirobot/ev3wrapomnirobot.cpp
+    #lib/omnirobot/ev3wrapomnirobot.hpp
 
-    lib/omnirobot/ev3wrapomnirobot.cpp
-    lib/omnirobot/ev3wrapomnirobot.hpp
-
-    lib/touch/ev3wraptouch.cpp
-    lib/touch/ev3wraptouch.hpp
-
-    lib/ultrasonic/ev3wrapultrasonic.cpp
     lib/ultrasonic/ev3wrapultrasonic.hpp
 
     lib/utilities/ev3wraputilities.hpp
@@ -72,10 +62,13 @@ add_library(
     lib/vector/ev3wrapvector.hpp
 
     lib/ev3dev.cpp
-    lib/ev3dev.h
+    #lib/ev3dev.h
 
     lib/ev3wrap.hpp
 )
+# target_precompile_headers(${LIBNAME}
+# lib/ev3dev.h
+# )
 target_include_directories(
     ${LIBNAME}
     PUBLIC
