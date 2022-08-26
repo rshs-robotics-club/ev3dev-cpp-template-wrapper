@@ -33,6 +33,7 @@ add_definitions(-DDEBUG_MODE_ENABLED)
 add_library(
     ${LIBNAME} 
     STATIC
+    lib/bbr-irseeker/bbr-irseeker.cpp
 
     lib/button/button.cpp
     
@@ -47,6 +48,7 @@ add_library(
     lib/vector/vector.cpp
 
     lib/ev3dev.cpp
+    #lib/smbus.cpp
 )
 target_include_directories(
     ${LIBNAME}

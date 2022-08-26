@@ -77,4 +77,4 @@ fi
 
 echo "building library starting with $(nproc) jobs"
 
-cmake --build bin -j$(nproc)
+cmake --build bin -j $(nproc)
