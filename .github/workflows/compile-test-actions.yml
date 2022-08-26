@@ -19,7 +19,7 @@ jobs:
   compile-inside-container:
     runs-on: ubuntu-latest
     container: 
-      image: ev3dev/debian-stretch-cross:latest
+      image: eisverygoodletter/debian-stretch-cross:latest
       options: --user root
     steps:
       - uses: actions/checkout@v3
