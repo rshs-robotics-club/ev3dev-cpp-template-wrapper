@@ -1,12 +1,13 @@
 
-
+#include <linux/i2c-dev.h>
+#include <linux/i2c.h>
 #ifndef EV3WRAP_BBR_IRSEEKER_HPP_
 #define EV3WRAP_BBR_IRSEEKER_HPP_
 
 // number of old direction values to be stored
-#define BBR_IRSEEKER_PREV_DIR 10
+#define BBR_IRSEEKER_PREV_DIR 5
 // number of old strength values to be stored
-#define BBR_IRSEEKER_PREV_STR 10
+#define BBR_IRSEEKER_PREV_STR 5
 
 #include <ev3dev.h>
 namespace Ev3Wrap {

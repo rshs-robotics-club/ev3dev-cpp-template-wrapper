@@ -137,3 +137,8 @@ int BBRIrSeeker::getStrength(bool updatePrev) {
     // todo
     return this->previousStrengths[0];
 }
+
+constexpr char BBRIrSeeker::INPUT_1[];
+constexpr char BBRIrSeeker::INPUT_2[];
+constexpr char BBRIrSeeker::INPUT_3[];
+constexpr char BBRIrSeeker::INPUT_4[];
