@@ -33,11 +33,11 @@ class HiTechnicIrSeeker : private ev3dev::i2c_sensor {
     static constexpr char INPUT_3[] = "ev3-ports:in3:i2c8";
     static constexpr char INPUT_4[] = "ev3-ports:in4:i2c8";
     static HiTechnicIrSeeker bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
-    int getDirectionAC() {
+    int getDirection() {
         set_mode("AC");
         return value(0);
     }
-    std::vector<int> getAllAC() {
+    std::vector<int> getAll() {
         set_mode("AC-ALL");
         return {
             value(0),
@@ -54,13 +54,13 @@ class HiTechnicIrSeeker : private ev3dev::i2c_sensor {
             dir = IrDirection;
         }
         else {
-            dir = this->getDirectionAC();
+            dir = this->getDirection();
         }
         // ball is not in a detected direction
         if(dir == 0) {
             return 0;
         }
-        std::vector<int> values = this->getAllAC();
+        std::vector<int> values = this->getAll();
         // direction is even, which means it's interpolated instead of measured from a real sensor
         if(dir % 2 == 0) {
             // take the average of the 2 closer real sensors
