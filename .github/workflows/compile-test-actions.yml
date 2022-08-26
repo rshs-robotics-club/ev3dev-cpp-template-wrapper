@@ -28,5 +28,5 @@ jobs:
       - name: compile it
         run: |
           sudo chmod +x ./scripts/runWithinContainer.sh
-          sudo bash ./scripts/runWithinContainer.sh
+          sudo bash ./scripts/runWithinContainer.sh -w
         shell: bash
