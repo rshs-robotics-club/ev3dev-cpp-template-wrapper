@@ -37,8 +37,12 @@ Motor Motor::bind(ev3dev::address_type addr) {
     return Motor(addr);
 }
 
-Motor::Motor(ev3dev::address_type addr) {
+void Motor::initialize(ev3dev::address_type addr) {
     connect({{ "address", { addr } }});
+}
+
+Motor::Motor(ev3dev::address_type addr) {
+    this->initialize(addr);
 }
 
 bool Motor::connect(const std::map<std::string, std::set<std::string>> &match) noexcept
