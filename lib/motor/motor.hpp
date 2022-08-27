@@ -60,8 +60,10 @@ class Motor : protected device {
         static Motor bind(address_type = OUTPUT_AUTO);
         void runRpm(float rpm);
         void stop(std::string stopAction = "hold");
+        void initialize(ev3dev::address_type addr);
+        Motor() {}; // for lazy initialization purposes, don't use normally
     private:
-        Motor(ev3dev::address_type = ev3dev::OUTPUT_AUTO);
+        Motor(ev3dev::address_type);
         bool connect(const std::map<std::string, std::set<std::string>>&) noexcept;
         int getTachosPerRotation() const { return get_attr_int("count_per_rot"); }
 };

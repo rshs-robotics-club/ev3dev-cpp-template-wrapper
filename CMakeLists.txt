@@ -43,7 +43,7 @@ add_library(
 
     lib/motor/motor.cpp
 
-    #lib/omnirobot/ev3wrapomnirobot.cpp
+    lib/omni/omni.cpp
 
     lib/vector/vector.cpp
 
@@ -54,6 +54,7 @@ target_include_directories(
     ${LIBNAME}
     PUBLIC
     ${PROJECT_SOURCE_DIR}/lib/
+    ${PROJECT_SOURCE_DIR}/lib/*
 )
 
 set_target_properties(${LIBNAME}
