@@ -48,14 +48,30 @@ add_library(
     lib/vector/vector.cpp
 
     lib/ev3dev.cpp
-    #lib/smbus.cpp
+    lib/smbus.cpp
 )
+MACRO(SUBDIRLIST result curdir)
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  SET(dirlist "")
+  FOREACH(child ${children})
+    IF(IS_DIRECTORY ${curdir}/${child})
+      LIST(APPEND dirlist ${child})
+    ENDIF()
+  ENDFOREACH()
+  SET(${result} ${dirlist})
+ENDMACRO()
+
 target_include_directories(
     ${LIBNAME}
     PUBLIC
     ${PROJECT_SOURCE_DIR}/lib/
-    ${PROJECT_SOURCE_DIR}/lib/*
 )
+
+SUBDIRLIST(SUBDIRS ${PROJECT_SOURCE_DIR}/lib/)
+foreach(subdir ${SUBDIRS})
+    message(STATUS ${subdir})
+    target_include_directories(${LIBNAME} PUBLIC ${PROJECT_SOURCE_DIR}/lib/${subdir})
+endforeach()
 
 set_target_properties(${LIBNAME}
                     PROPERTIES
@@ -92,6 +108,3 @@ if (${VERBOSE})
         COMMAND sudo bash ${WRAPPER_SCRIPTS_DIR}/post_build.sh "The-Ev3Wrap-library" 500 ${WRAPPER_BIN_FINISHED_DIR}/libev3dev-cpp-template-wrapper.a 50
     )
 endif()
-#set(ALL_LIB_FINAL_TARGETS)
-# enable building the examples if you want to.
-#add_subdirectory(examples)

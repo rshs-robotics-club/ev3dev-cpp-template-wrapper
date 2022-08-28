@@ -1,4 +1,4 @@
-#include <bbr-irseeker/bbr-irseeker.hpp>
+#include <bbr-irseeker.hpp>
 #include <linux/i2c-dev.h>
 #include <linux/i2c.h>
 #include <sys/ioctl.h>
@@ -13,6 +13,7 @@ BBRIrSeeker BBRIrSeeker::bind(ev3dev::address_type addr) {
 }
 BBRIrSeeker::BBRIrSeeker(ev3dev::address_type addr) {
     this->fdPath = (char*)(addr.c_str());
+    this->flushPrevious();
 }
 int BBRIrSeeker::begin() {
     int fd = 0;

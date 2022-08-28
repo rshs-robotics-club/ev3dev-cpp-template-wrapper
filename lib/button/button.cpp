@@ -15,7 +15,7 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <button/button.hpp>
+#include <button.hpp>
 
 Ev3Wrap::Button::Button(int keyCode) : ev3dev::button(keyCode) {};
 
