@@ -1,5 +1,5 @@
 /*
-    C++ wrapper for the (modified) C++ API to the CompassSensor of the ev3dev
+    C++ wrapper for the C++ API to the Brick Buttons of the ev3dev
     Linux kernel for the LEGO Mindstorms EV3 hardware
 
     Copyright (c) 2021, 2022 - Eisverygoodletter, txxvgnx
@@ -14,16 +14,14 @@
     You should have received a copy of the GNU General Public License 
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
-#include <ev3wrapcompass.hpp>
-#include <cstring>
-Ev3Wrap::CompassSensor::CompassSensor(ev3dev::address_type addr) : ev3dev::compass(addr) {
-    //degreeOffsets = {0};
-    // cringe temporary fix but am too lazy
-    int empty[5] = {0, 0, 0, 0, 0};
-    std::memcpy(this->degreeOffsets, empty, sizeof empty);
-};
 
-Ev3Wrap::CompassSensor Ev3Wrap::CompassSensor::bind(ev3dev::address_type addr) {
-    Ev3Wrap::CompassSensor retCompassSensor = CompassSensor(addr);
-    return retCompassSensor; 
+#include <button/button.hpp>
+
+Ev3Wrap::Button::Button(int keyCode) : ev3dev::button(keyCode) {};
+
+Ev3Wrap::Button Ev3Wrap::Button::CreateButton(ButtonCode btnCode) {
+    int buttonKeyCode = static_cast<int>(btnCode);
+    Ev3Wrap::Button retButton = Button(buttonKeyCode);
+    retButton.setBlocking(true);
+    return retButton;
 }
