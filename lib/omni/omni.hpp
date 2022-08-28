@@ -1,5 +1,5 @@
 /*
-    C++ wrapper for the C++ API to the Ultrasonic Sensor of the ev3dev
+    A Controller class for Omni-directional robots coded with the C++ API to the sensors, motors, buttons, LEDs and battery of the ev3dev
     Linux kernel for the LEGO Mindstorms EV3 hardware
 
     Copyright (c) 2021, 2022 - Eisverygoodletter, txvvgnx
@@ -15,28 +15,26 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
+#ifndef EV3WRAPOMNIROBOT_HPP_
+#define EV3WRAPOMNIROBOT_HPP_
+#include <iostream>
 #include <ev3dev.h>
-#ifndef EV3WRAPULTRASONIC_HPP_
-#define EV3WRAPULTRASONIC_HPP_
+#include <motor/motor.hpp>
 namespace Ev3Wrap {
 
-class UltrasonicSensor : private ev3dev::ultrasonic_sensor {
-    public:
-        using ev3dev::ultrasonic_sensor::INPUT_1;
-        using ev3dev::ultrasonic_sensor::INPUT_2;
-        using ev3dev::ultrasonic_sensor::INPUT_3;
-        using ev3dev::ultrasonic_sensor::INPUT_4;
-        static UltrasonicSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
-        float getCentimetres() { 
-            return this->distance_centimeters(); 
-        }
-        bool getSensorsNearby() { 
-            return this->other_sensor_present(); 
-        }
-        
+class Omni {
     private:
-        UltrasonicSensor(ev3dev::address_type addr);
+        Motor eMotor;
+        Motor fMotor;
+        Motor gMotor;
+        Motor hMotor;
+    public:
+        Omni();
+        Omni& controlRaw(float eSpeed, float fSpeed, float gSpeed, float hSpeed);
+        
+        
 };
 
-} // namespace Ev3Wrap
+}   // namespace Ev3Wrap
+
 #endif

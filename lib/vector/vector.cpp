@@ -14,6 +14,6 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <ev3wrapvector.hpp>
+#include <vector/vector.hpp>
 
 Ev3Wrap::Vector Ev3Wrap::Vector::zero = Ev3Wrap::Vector(0, 0);
