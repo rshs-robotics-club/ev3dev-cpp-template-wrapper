@@ -15,9 +15,9 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <motor/motor.hpp>
+#include <motor.hpp>
 #include <ev3dev.h>
-#include <omni/omni.hpp>
+#include <omni.hpp>
 #include <cmath>
 #include <iostream>
 #include <ctime>

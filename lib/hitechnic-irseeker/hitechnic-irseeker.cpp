@@ -15,7 +15,7 @@
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <hitechnic-irseeker/hitechnic-irseeker.hpp>
+#include <hitechnic-irseeker.hpp>
 #include <ev3dev.h>
 using namespace Ev3Wrap;
 

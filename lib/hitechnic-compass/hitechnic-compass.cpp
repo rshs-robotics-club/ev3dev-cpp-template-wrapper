@@ -14,12 +14,14 @@
     You should have received a copy of the GNU General Public License 
     along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 */
-#include <hitechnic-compass/hitechnic-compass.hpp>
+#include <hitechnic-compass.hpp>
 #include <cstring>
 #include <ev3dev.h>
 using namespace Ev3Wrap;
 
-HiTechnicCompass::HiTechnicCompass(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-compass" }) {}
+HiTechnicCompass::HiTechnicCompass(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-compass" }) {
+    this->setZero();
+}
 
 HiTechnicCompass Ev3Wrap::HiTechnicCompass::bind(ev3dev::address_type addr) {
     return HiTechnicCompass(addr);
