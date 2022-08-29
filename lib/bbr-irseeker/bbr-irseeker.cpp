@@ -12,14 +12,14 @@ BBRIrSeeker BBRIrSeeker::bind(ev3dev::address_type addr) {
     return BBRIrSeeker(addr);
 }
 BBRIrSeeker::BBRIrSeeker(ev3dev::address_type addr) {
-    this->fdPath = (char*)(addr.c_str());
+    this->fdPath = addr;
     this->flushPrevious();
 }
 int BBRIrSeeker::begin() {
     int fd = 0;
 	
 	// Open port for reading and writing
-	if ((fd = open(this->fdPath, O_RDWR)) < 0)
+	if ((fd = open(this->fdPath.c_str(), O_RDWR)) < 0)
 	{
 		exit(2);
 	}
