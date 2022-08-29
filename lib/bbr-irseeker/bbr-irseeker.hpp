@@ -1,6 +1,8 @@
 
 #include <linux/i2c-dev.h>
 #include <linux/i2c.h>
+#include <iostream>
+#include <string>
 #ifndef EV3WRAP_BBR_IRSEEKER_HPP_
 #define EV3WRAP_BBR_IRSEEKER_HPP_
 
@@ -31,8 +33,9 @@ private:
     BBRIrSeeker(ev3dev::address_type addr);
     __s32 i2cReadInt(int fd, __u8 address);
     void i2cReadBlockData(int fd, __u8 address, __u8 length, __u8 *values);
+public:
     void getBoth(int* strength, int* direction);
-    char* fdPath;
+    std::string fdPath;
 };
 
 } // namespace Ev3Wrap
