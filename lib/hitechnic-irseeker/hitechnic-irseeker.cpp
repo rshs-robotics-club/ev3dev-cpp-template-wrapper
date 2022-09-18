@@ -18,6 +18,7 @@
 #include <hitechnic-irseeker.hpp>
 #include <ev3dev.h>
 #include <iostream>
+#include <system_error>
 using namespace Ev3Wrap;
 
 HiTechnicIrSeeker::HiTechnicIrSeeker(ev3dev::address_type addr) try : ev3dev::i2c_sensor(addr, { "ht-nxt-ir-seek-v2" }) {
