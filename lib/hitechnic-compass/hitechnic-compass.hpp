@@ -19,6 +19,7 @@
 #include <iostream>
 #include <exception>
 #include <vector>
+#include <system_error>
 #ifndef EV3WRAPCOMPASS_HPP_
 #define EV3WRAPCOMPASS_HPP_
 

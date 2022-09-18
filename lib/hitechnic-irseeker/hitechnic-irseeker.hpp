@@ -22,6 +22,7 @@
 #define USE_SPECIFIC_IR_DIRECTION FALSE
 #include <exception>
 #include <stdexcept>
+#include <system_error>
 
 namespace Ev3Wrap {
 
