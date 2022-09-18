@@ -31,9 +31,13 @@ class UltrasonicSensor : private normal_sensor {
         static UltrasonicSensor bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO) {
             return UltrasonicSensor(addr);
         }
-        float getCentimetres() {
+        float getCentimetres() try {
             set_mode("US-DIST-CM");
             return float_value(0);
+        }
+        catch(...) {
+            std::string msg = "Ultrasonic sensor failed to get distance";
+            throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
         }
         bool getSensorsNearby() {
             set_mode("US-LISTEN");

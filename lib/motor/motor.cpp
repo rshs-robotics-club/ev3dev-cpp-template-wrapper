@@ -66,11 +66,15 @@ bool Motor::connect(const std::map<std::string, std::set<std::string>> &match) n
     return false;
 }
 
-void Motor::runRpm(float rpm) {
+void Motor::runRpm(float rpm) try {
     // set the speed to tachos per minute (tachos in a rotation * rotations per minute)
     set_attr_int("speed_sp", this->getTachosPerRotation() * rpm / 60);
     // start running motor forever
     set_attr_string("command", "run-forever");
+}
+catch(...) {
+    std::string msg = "Motor failed to run at rpm: " + std::to_string(rpm);
+    throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
 }
 
 void Motor::stop(std::string stopAction) {

@@ -34,9 +34,13 @@ class HiTechnicCompass : private ev3dev::i2c_sensor {
     static constexpr char INPUT_3[] = "ev3-ports:in3:i2c1";
     static constexpr char INPUT_4[] = "ev3-ports:in4:i2c1";
     static HiTechnicCompass bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
-    int getAbsoluteDirection() {
+    int getAbsoluteDirection() try {
         set_mode("COMPASS");
         return this->value(0);
+    }
+    catch(...) {
+        std::string msg = "HiTechnic Compass failed to read absolute direction";
+        throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
     }
     void beginCalibration(){ set_command("BEGIN-CAL"); }
     void endCalibration(){ set_command("END-CAL"); }

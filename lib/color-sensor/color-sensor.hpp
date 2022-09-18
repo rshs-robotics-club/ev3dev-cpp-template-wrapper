@@ -52,9 +52,13 @@ class ColorSensor : public normal_sensor {
         //   - 5: Red
         //   - 6: White
         //   - 7: Brown
-        int getColor() {
+        int getColor() try {
             set_mode("COL-COLOR");
             return value(0);
+        }
+        catch(...) {
+            std::string msg = "Colour sensor failed to read colour";
+            throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
         }
         int getReflectedLightIntensity() {
             set_mode("COL-REFLECT");
