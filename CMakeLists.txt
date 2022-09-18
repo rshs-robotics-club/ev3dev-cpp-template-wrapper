@@ -46,6 +46,8 @@ add_library(
     lib/color-sensor/color-sensor.hpp
     lib/gyro-sensor/gyro.hpp
 
+    lib/lego-port/lego-port.hpp
+
     lib/omni/omni.cpp
 
     lib/vector/vector.cpp
