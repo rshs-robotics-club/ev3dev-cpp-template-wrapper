@@ -16,6 +16,7 @@
 */
 
 #include <ev3dev.h>
+#include <iostream>
 #ifndef EV3WRAPCOLOR_HPP_
 #define EV3WRAPCOLOR_HPP_
 
@@ -51,9 +52,13 @@ class ColorSensor : public normal_sensor {
         //   - 5: Red
         //   - 6: White
         //   - 7: Brown
-        int getColor() {
+        int getColor() try {
             set_mode("COL-COLOR");
             return value(0);
+        }
+        catch(...) {
+            std::string msg = "Colour sensor failed to read colour";
+            throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
         }
         int getReflectedLightIntensity() {
             set_mode("COL-REFLECT");
@@ -64,7 +69,13 @@ class ColorSensor : public normal_sensor {
             return value(0);
         }
     private:
-        ColorSensor(address_type addr = INPUT_AUTO) : normal_sensor(addr, { ev3_color }) {}
+        ColorSensor(address_type addr = INPUT_AUTO) try : normal_sensor(addr, { ev3_color }) {
+
+        }
+        catch(...) {
+            std::string msg = "Color sensor failed to initialise at port " + addr;
+            throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+        }
 };
 
 }

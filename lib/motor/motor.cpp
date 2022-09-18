@@ -21,6 +21,7 @@
 #include <string>
 #include <cstring>
 #include <stdexcept>
+#include <iostream>
 
 
 using namespace Ev3Wrap;
@@ -38,7 +39,13 @@ Motor Motor::bind(ev3dev::address_type addr) {
 }
 
 void Motor::initialize(ev3dev::address_type addr) {
-    connect({{ "address", { addr } }});
+    try {
+        connect({{ "address", { addr } }});
+    }
+    catch(...) {
+        std::string msg = "Motor failed to initialise at port " + addr;
+        throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+    }
 }
 
 Motor::Motor(ev3dev::address_type addr) {
@@ -59,11 +66,15 @@ bool Motor::connect(const std::map<std::string, std::set<std::string>> &match) n
     return false;
 }
 
-void Motor::runRpm(float rpm) {
+void Motor::runRpm(float rpm) try {
     // set the speed to tachos per minute (tachos in a rotation * rotations per minute)
     set_attr_int("speed_sp", this->getTachosPerRotation() * rpm / 60);
     // start running motor forever
     set_attr_string("command", "run-forever");
+}
+catch(...) {
+    std::string msg = "Motor failed to run at rpm: " + std::to_string(rpm);
+    throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
 }
 
 void Motor::stop(std::string stopAction) {

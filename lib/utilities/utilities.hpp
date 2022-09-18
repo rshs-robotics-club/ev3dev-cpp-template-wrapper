@@ -17,6 +17,7 @@
 
 #include <ev3dev.h>
 #include <sstream>
+#include <iostream>
 #ifndef EV3WRAPUTILITIES_HPP_
 #define EV3WRAPUTILITIES_HPP_
 namespace Ev3Wrap {
@@ -56,6 +57,10 @@ namespace Beeper {
         setBeepHertz(hz);
         setBeepDuration(milliseconds);
         beep(false);
+    }
+    static void speak(std::string text) {
+        std::string commandText = "espeak \"" + text + "\" --stdout | aplay";
+        std::system(commandText);
     }
 }
 
