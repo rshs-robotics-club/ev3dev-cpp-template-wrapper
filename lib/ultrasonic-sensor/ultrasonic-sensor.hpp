@@ -16,6 +16,7 @@
 */
 
 #include <ev3dev.h>
+#include <iostream>
 #ifndef EV3WRAPULTRASONIC_HPP_
 #define EV3WRAPULTRASONIC_HPP_
 using namespace ev3dev;
@@ -40,7 +41,13 @@ class UltrasonicSensor : private normal_sensor {
         }
 
     private:
-        UltrasonicSensor(address_type addr) : normal_sensor(addr, { ev3dev::sensor::ev3_ultrasonic, ev3dev::sensor::nxt_ultrasonic }) {}
+        UltrasonicSensor(address_type addr) try : normal_sensor(addr, { ev3dev::sensor::ev3_ultrasonic, ev3dev::sensor::nxt_ultrasonic }) {
+
+        }
+        catch(...) {
+            std::string msg = "Ultrasonic sensor failed to initialise at port " + addr;
+            throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+        }
 };
 
 } // namespace Ev3Wrap

@@ -21,6 +21,7 @@
 #include <string>
 #include <cstring>
 #include <stdexcept>
+#include <iostream>
 
 
 using namespace Ev3Wrap;
@@ -38,7 +39,13 @@ Motor Motor::bind(ev3dev::address_type addr) {
 }
 
 void Motor::initialize(ev3dev::address_type addr) {
-    connect({{ "address", { addr } }});
+    try {
+        connect({{ "address", { addr } }});
+    }
+    catch(...) {
+        std::string msg = "Motor failed to initialise at port " + addr;
+        throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+    }
 }
 
 Motor::Motor(ev3dev::address_type addr) {

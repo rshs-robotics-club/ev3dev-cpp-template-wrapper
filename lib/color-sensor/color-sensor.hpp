@@ -16,6 +16,7 @@
 */
 
 #include <ev3dev.h>
+#include <iostream>
 #ifndef EV3WRAPCOLOR_HPP_
 #define EV3WRAPCOLOR_HPP_
 
@@ -64,7 +65,13 @@ class ColorSensor : public normal_sensor {
             return value(0);
         }
     private:
-        ColorSensor(address_type addr = INPUT_AUTO) : normal_sensor(addr, { ev3_color }) {}
+        ColorSensor(address_type addr = INPUT_AUTO) try : normal_sensor(addr, { ev3_color }) {
+
+        }
+        catch(...) {
+            std::string msg = "Color sensor failed to initialise at port " + addr;
+            throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+        }
 };
 
 }

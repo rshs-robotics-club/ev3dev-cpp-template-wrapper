@@ -50,10 +50,12 @@ __s32 BBRIrSeeker::i2cReadInt(int fd, __u8 address)
 
 void BBRIrSeeker::i2cReadBlockData(int fd, __u8 address, __u8 length, __u8 *values)
 {
-	if (0 > i2c_smbus_read_i2c_block_data(fd, address,length,values)) 
+    int potentialError = i2c_smbus_read_i2c_block_data(fd, address, length, values);
+	if (0 > potentialError) 
 	{
+        std::string msg = "BBR IrSeeker encountered an error while reading. Error code: " + std::to_string(potentialError);
 		close(fd);
-		exit(4);
+		throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
 	}
 }
 
@@ -61,7 +63,7 @@ void BBRIrSeeker::getBoth(int* direction = nullptr, int* strength = nullptr) {
     int fd = this->begin();
     __u8 values[2];
     this->i2cReadBlockData(fd, 0x08, 2, values);
-    close (fd);
+    close(fd);
     if (strength != nullptr) {
         *strength = (int)values[1];
     }

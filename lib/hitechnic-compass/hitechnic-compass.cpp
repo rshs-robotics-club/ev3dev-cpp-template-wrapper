@@ -19,8 +19,12 @@
 #include <ev3dev.h>
 using namespace Ev3Wrap;
 
-HiTechnicCompass::HiTechnicCompass(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-compass" }) {
+HiTechnicCompass::HiTechnicCompass(ev3dev::address_type addr) try : ev3dev::i2c_sensor(addr, { "ht-nxt-compass" }) {
     this->setZero();
+}
+catch(...) {
+    std::string msg = "HiTechnic Compass failed to initialise at port " + addr;
+    throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
 }
 
 HiTechnicCompass Ev3Wrap::HiTechnicCompass::bind(ev3dev::address_type addr) {
