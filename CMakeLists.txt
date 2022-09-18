@@ -43,6 +43,9 @@ add_library(
 
     lib/motor/motor.cpp
 
+    lib/color-sensor/color-sensor.hpp
+    lib/gyro-sensor/gyro.hpp
+
     lib/omni/omni.cpp
 
     lib/vector/vector.cpp
