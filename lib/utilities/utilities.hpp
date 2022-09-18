@@ -60,7 +60,8 @@ namespace Beeper {
     }
     static void speak(std::string text) {
         std::string commandText = "espeak \"" + text + "\" --stdout | aplay";
-        std::system(commandText);
+        std::system(commandText.c_str()); // this is ok because std::system is blocking, so commandText doesn't get
+        // destroyed before the pointer is used
     }
 }
 
