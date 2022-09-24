@@ -27,6 +27,7 @@ jobs:
           path: ./
       - name: compile it
         run: |
+          tree ~
           sudo chmod +x ./scripts/runWithinContainer.sh
           sudo bash ./scripts/runWithinContainer.sh -w
         shell: bash
