@@ -15,7 +15,10 @@ BluetoothSocket BluetoothSocket::CreateBluetoothSocket(std::string dest = "", bo
     return BluetoothSocket(dest, awokenFirst);
 }
 
-BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
+// equivalent to *BDADDR_ANY, but won't make compiler warnings
+#define DEREF_BDADDR_ANY (bdaddr_t) {{0, 0, 0, 0, 0, 0}}
+
+BluetoothSocket::BluetoothSocket(std::string dest = "", bool awokenFirst = true) {
     this->awokenFirst = awokenFirst;
     this->hasDisconnected = false;
     if (awokenFirst) {
@@ -25,7 +28,7 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
         socklen_t opt = sizeof(remoteAddr);
         this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
         localAddr.rc_family = AF_BLUETOOTH;
-        localAddr.rc_bdaddr = *BDADDR_ANY;
+        localAddr.rc_bdaddr = DEREF_BDADDR_ANY;
         localAddr.rc_channel = (uint8_t) BLUETOOTH_PORT;
         bind(this->mySocket, (struct sockaddr *)&localAddr, sizeof(localAddr));
         listen(this->mySocket, BLUETOOTH_PORT);
