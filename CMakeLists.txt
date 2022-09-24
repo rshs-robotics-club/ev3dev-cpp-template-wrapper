@@ -80,7 +80,7 @@ foreach(subdir ${SUBDIRS})
     message(STATUS ${subdir})
     target_include_directories(${LIBNAME} PUBLIC ${PROJECT_SOURCE_DIR}/lib/${subdir})
 endforeach()
-target_include_directories(${LIBNAME} PUBLIC ~/crossCompileLibraries/libbluetooth/include/)
+target_include_directories(${LIBNAME} PUBLIC /home/compiler/crossCompileLibraries/libbluetooth/include/)
 target_link_libraries(${LIBNAME} PRIVATE /home/compiler/crossCompileLibraries/libbluetooth/lib/arm-linux-gnueabi/libbluetooth.a)
 
 set_target_properties(${LIBNAME}
