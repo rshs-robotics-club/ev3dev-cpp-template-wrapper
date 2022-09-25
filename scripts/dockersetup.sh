@@ -14,5 +14,5 @@
 #    You should have received a copy of the GNU General Public License 
 #    along with The Ev3dev C++ Wrapper Library. If not, see <https://www.gnu.org/licenses/>.
 
-docker pull eisverygoodletter/debian-stretch-cross:latest
+docker pull eisverygoodletter/debian-stretch-cross:bluetooth
 echo "done pulling"

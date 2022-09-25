@@ -19,7 +19,7 @@ jobs:
   compile-inside-container:
     runs-on: ubuntu-latest
     container: 
-      image: eisverygoodletter/debian-stretch-cross:latest
+      image: eisverygoodletter/debian-stretch-cross:bluetooth
       options: --user root
     steps:
       - uses: actions/checkout@v3
@@ -27,6 +27,7 @@ jobs:
           path: ./
       - name: compile it
         run: |
+          tree .
           sudo chmod +x ./scripts/runWithinContainer.sh
           sudo bash ./scripts/runWithinContainer.sh -w
         shell: bash

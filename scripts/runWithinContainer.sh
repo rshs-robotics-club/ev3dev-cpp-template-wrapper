@@ -30,6 +30,8 @@ wipeBin=false
 # making it verbose may make the build slower
 verbose=false
 
+optimizationLevel="-Os"
+
 while getopts 'nwO:v' flag; do
   case "${flag}" in
     n) newFile=true ;;
