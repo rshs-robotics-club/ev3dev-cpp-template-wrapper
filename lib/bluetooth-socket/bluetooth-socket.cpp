@@ -279,10 +279,31 @@ void BluetoothSocket::attemptReconnect() {
         throw std::system_error(std::make_error_code(std::errc::invalid_argument), msg);
     }
     if (this->readyAttemptReconnect) {
-
+        if (this->awokenFirst) {
+            // reactivate a server socket
+            if (this->pollServerConnectionReady()) {
+                // accept a socket
+                struct sockaddr_rc remoteAddr = { 0 };
+                socklen_t opt = sizeof(remoteAddr);
+                this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
+                ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
+                std::cout << this->otherSocketMAC << " reconnected\n";
+            }
+        }
+        else {
+            // reactivate a client socket
+            this->attemptClientConnection(std::string(this->otherSocketMAC));
+        }
     }
     else {
         this->readyAttemptReconnect = true;
-        
+        if (this->awokenFirst) {
+            // reactivate a server socket
+            this->constructServerSocket();
+        }
+        else {
+            // reactivate a client socket
+            this->constructClientSocket(std::string(this->otherSocketMAC));
+        }
     }
 }
