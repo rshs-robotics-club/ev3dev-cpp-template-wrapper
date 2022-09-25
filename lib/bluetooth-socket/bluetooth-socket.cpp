@@ -32,7 +32,7 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
         localAddr.rc_channel = (uint8_t) BLUETOOTH_PORT;
         bind(this->mySocket, (struct sockaddr *)&localAddr, sizeof(localAddr));
         listen(this->mySocket, BLUETOOTH_PORT);
-
+        std::cout << "waiting for other side to attempt connection\n";
         this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
         ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
         std::cout << this->otherSocketMAC << " successfully connected\n";
@@ -87,12 +87,11 @@ bool BluetoothSocket::send(char* msg, int size) {
 }
 
 bool BluetoothSocket::readValue(char* msg, int size) {
-    //char* buffer = (char*)malloc(sizeof(*msg));
     struct pollfd *pfds;
     int nfds = 1;
     pfds = (pollfd*)calloc(nfds, sizeof(*pfds));
     if (pfds == NULL) {
-        std::string msg = "Calloc failed: pfds is equal to NULL\n";
+        std::string msg = "Calloc failed: unexpected behavior; pfds is equal to NULL\n";
         throw std::system_error(std::make_error_code(std::errc::not_enough_memory), msg);
     }
     pfds[0].fd = this->otherSocket;
@@ -108,6 +107,8 @@ bool BluetoothSocket::readValue(char* msg, int size) {
     else {
         if (pfds[0].revents & POLLERR) {
             std::cout << "POLLERR\n";
+            this->hasDisconnected = true;
+            free(pfds);
             return false;
         }
         if (pfds[0].revents & POLLHUP) {
@@ -120,7 +121,6 @@ bool BluetoothSocket::readValue(char* msg, int size) {
             // read values
             int bytesRead;
             bytesRead = read(this->otherSocket, msg, size);
-            std::cout << bytesRead << " bytes read\n";
             if (bytesRead <= 0) {
                 std::string msg = "POLLIN was detected however 0 bytes were read\n";
                 throw std::system_error(std::make_error_code(std::errc::bad_message), msg);
@@ -164,7 +164,8 @@ BluetoothSocket BluetoothSocket::CreateBluetoothSocketByHostname(std::string hos
                 memset(deviceAddress, 0, sizeof(deviceAddress));
                 ba2str(&(currentDevice->bdaddr), deviceAddress);
                 memset(deviceName, 0, sizeof(deviceName));
-                if (hci_read_remote_name(socket, &(currentDevice->bdaddr), sizeof(deviceName), deviceName, 0) < 0) {
+                if (hci_read_remote_name(socket, &(currentDevice->bdaddr), sizeof(deviceName), deviceName, 0) == -1) {
+                    std::cout << "could not get remote name errno: " << errno << '\n';
                     continue;
                 }
                 else {

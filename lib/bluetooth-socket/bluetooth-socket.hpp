@@ -41,6 +41,8 @@ public:
     // create a awokenFirst = false bluetooth socket. Searches for a list of hostnames and then connects to the one required
     static BluetoothSocket CreateBluetoothSocketByHostname(std::string hostname);
     ~BluetoothSocket();
+    // reconnect with the same address provided. will throw an error if hasDisconnect = false
+    // if the socket is a client socket, attempts to connect to the server
 private:
     BluetoothSocket(std::string dest = "", bool awokenFirst = true);
 };
