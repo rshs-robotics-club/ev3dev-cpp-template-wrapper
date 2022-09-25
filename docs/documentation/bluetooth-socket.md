@@ -113,12 +113,17 @@ free(myBuffer);
 and on the receiving end:
 ```cpp
 char* recvBuffer = (char*)malloc(sizeof(char) * CHAR_ARRAY_SIZE);
-myBluetoothSocket.readValue(buffer);
-int firstInt, secondInt;
-memcpy(&firstInt, recvBuffer, sizeof(int));
-memcpy(&secondInt, recvBuffer + sizeof(firstInt), sizeof(int));
-free(recvBuffer);
-// now use firstInt and secondInt for whatever you want
+if (myBluetoothSocket.readValue(buffer)) {
+    int firstInt, secondInt;
+    memcpy(&firstInt, recvBuffer, sizeof(int));
+    memcpy(&secondInt, recvBuffer + sizeof(firstInt), sizeof(int));
+    free(recvBuffer);
+    // now use firstInt and secondInt for whatever you want
+}
+else {
+    // read value failed. check myBluetoothSocket.hasDisconnected
+    // ...
+}
 ```
 
 refer to https://stackoverflow.com/questions/1522994/store-an-int-in-a-char-array for more alternative ways to solve this problem.
