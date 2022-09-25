@@ -46,7 +46,6 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
         free(pfd);
 
         this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
-        this->otherSocketMAC = (char*)malloc(sizeof(char) * 18);
         ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
         std::cout << this->otherSocketMAC << " successfully connected\n";
     }
@@ -76,7 +75,6 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
             }
         }
         this->otherSocket = this->mySocket;
-        this->otherSocketMAC = (char*)malloc(sizeof(char) * 18)
         strcpy(this->otherSocketMAC, destination);
     }
 }

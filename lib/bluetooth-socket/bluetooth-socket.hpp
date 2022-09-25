@@ -33,6 +33,8 @@ public:
     bool readValue(char* msg, int size = CHAR_ARRAY_SIZE);
     // if the socket has been disconnected
     bool hasDisconnected;
+    // if the socket is ready to attempt a reconnect
+    bool readyAttemptReconnect;
     // if this is true, it is a server socket which is meant to be turned on first, so that a client can connect to it
     bool awokenFirst;
     static void listDetectedDevices();
