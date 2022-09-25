@@ -54,7 +54,7 @@ If the other end of the socket is disconnected for whatever reason, (such as a p
 using namespace Ev3Wrap;
 int main() {
     system("hciconfig hci0 piscan");
-    BluetoothSocket serverSocket = BluetoothSocket::CreateBluetoothSocket("", true);
+    BluetoothSocket serverSocket = BluetoothSocket::CreateServerSocket();
     while (true) {
         if (!serverSocket.hasDisconnected) {
             char* msg = new char[CHAR_ARRAY_SIZE];
