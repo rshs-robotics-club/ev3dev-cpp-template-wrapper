@@ -57,7 +57,7 @@ int main() {
     BluetoothSocket serverSocket = BluetoothSocket::CreateServerSocket();
     while (true) {
         if (!serverSocket.hasDisconnected) {
-            char* msg = new char[CHAR_ARRAY_SIZE];
+            char* msg = (char*)malloc(sizeof(char) * CHAR_ARRAY_SIZE);
             strcpy(msg, "Hello!\n");
             //std::cout << msg << '\n';
             bool res = serverSocket.send(msg);
@@ -82,7 +82,7 @@ int main() {
     BluetoothSocket clientSocket = BluetoothSocket::CreateClientSocketByHostname("robot2");
     while (true) {
         if (!clientSocket.hasDisconnected) {
-            char* buffer = malloc(sizeof(char) * CHAR_ARRAY_SIZE);
+            char* buffer = (char*)malloc(sizeof(char) * CHAR_ARRAY_SIZE);
             bool res = clientSocket.readValue(buffer);
             if (res) {
                 std::cout << buffer << '\n';
