@@ -33,7 +33,20 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
         bind(this->mySocket, (struct sockaddr *)&localAddr, sizeof(localAddr));
         listen(this->mySocket, BLUETOOTH_PORT);
         std::cout << "waiting for other side to attempt connection\n";
+        // loop until a connection is ready
+        struct pollfd *pfd = (pollfd*)calloc(1, sizeof(*pfd));
+        pfd[0].fd = this->mySocket;
+        pfd[0].events = POLLIN;
+        int res = poll(pfd, 1, 5);
+        std::cout << res << '\n';
+        while (res == 0) {
+            res = poll(pfd, 1, 5);
+            std::cout << "No connection attempt has been made yet...\n"; 
+        }
+        free(pfd);
+
         this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
+        this->otherSocketMAC = (char*)malloc(sizeof(char) * 18);
         ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
         std::cout << this->otherSocketMAC << " successfully connected\n";
     }
@@ -57,12 +70,14 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
                 break;
             }
             else {
-                std::cout << "Bluetooth socket connection refused. Retrying...\n";
+                std::cout << "Bluetooth socket server refused connection. Retrying...\n";
                 close(this->mySocket);
                 this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
             }
         }
         this->otherSocket = this->mySocket;
+        this->otherSocketMAC = (char*)malloc(sizeof(char) * 18)
+        strcpy(this->otherSocketMAC, destination);
     }
 }
 
@@ -81,7 +96,7 @@ BluetoothSocket::~BluetoothSocket() {
 bool BluetoothSocket::send(char* msg, int size) {
     int status = write(this->otherSocket, msg, size);
     if (status == -1) {
-        this->hasDisconnected = true;
+        this->fireDisconnect();
     }
     return (status >= 0);
 }
@@ -106,14 +121,16 @@ bool BluetoothSocket::readValue(char* msg, int size) {
     }
     else {
         if (pfds[0].revents & POLLERR) {
+            // error when polling
+            // very likely due to socket closed
             std::cout << "POLLERR\n";
-            this->hasDisconnected = true;
+            this->fireDisconnect();
             free(pfds);
             return false;
         }
         if (pfds[0].revents & POLLHUP) {
             // communication ended
-            this->hasDisconnected = true;
+            this->fireDisconnect();
             free(pfds);
             return false;
         }
@@ -218,4 +235,17 @@ void BluetoothSocket::listDetectedDevices() {
     }
     close(socket);
     free(iInfs);
+}
+
+void BluetoothSocket::fireDisconnect() {
+    if (this->awokenFirst) {
+        close(this->mySocket);
+        close(this->otherSocket);
+    }
+    else {
+        close(this->otherSocket);
+    }
+    this->mySocket = 0;
+    this->otherSocket = 0;
+    this->hasDisconnected = true;
 }

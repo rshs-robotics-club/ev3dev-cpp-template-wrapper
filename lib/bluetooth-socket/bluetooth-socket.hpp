@@ -44,7 +44,10 @@ public:
     // reconnect with the same address provided. will throw an error if hasDisconnect = false
     // if the socket is a client socket, attempts to connect to the server
 private:
+    // actual constructor
     BluetoothSocket(std::string dest = "", bool awokenFirst = true);
+    // deactivate mySocket and otherSocket
+    void fireDisconnect();
 };
 
 } // namespace Ev3Wrap
