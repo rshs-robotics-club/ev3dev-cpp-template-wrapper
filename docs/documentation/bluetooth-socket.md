@@ -6,7 +6,7 @@ tag: "bluetooth-socket"
 # `BluetoothSocket` class
 
 ### Description
-{ .label .label-green }
+{: .label .label-green }
 `BluetoothSocket` is built for 1 to 1 bluetooth communication between 2 ev3 bricks. If your goal is to have multicast/broadcast related functions, either create many `BluetoothSocket`s or you're out of luck.
 
 A `BluetoothSocket` can either be a "server socket" or a "client socket". Server sockets wait for client sockets to connect to them when created. Client sockets are initialised with a goal bluetooth `MAC` address that they attempt to connect to.
