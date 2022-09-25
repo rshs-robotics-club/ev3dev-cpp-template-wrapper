@@ -37,10 +37,12 @@ public:
     bool awokenFirst;
     static void listDetectedDevices();
     // Create a bluetooth socket. dest (destination) is not required if it is a server socket (awokenFirst = true)
-    static BluetoothSocket CreateBluetoothSocket(std::string dest, bool awokenFirst);
+    static BluetoothSocket CreateBluetoothSocket(std::string dest = "", bool awokenFirst = true);
+    // create a awokenFirst = false bluetooth socket. Searches for a list of hostnames and then connects to the one required
+    static BluetoothSocket CreateBluetoothSocketByHostname(std::string hostname);
     ~BluetoothSocket();
 private:
-    BluetoothSocket(std::string dest, bool awokenFirst);
+    BluetoothSocket(std::string dest = "", bool awokenFirst = true);
 };
 
 } // namespace Ev3Wrap

@@ -11,14 +11,14 @@
 
 using namespace Ev3Wrap;
 
-BluetoothSocket BluetoothSocket::CreateBluetoothSocket(std::string dest = "", bool awokenFirst = true) {
+BluetoothSocket BluetoothSocket::CreateBluetoothSocket(std::string dest, bool awokenFirst) {
     return BluetoothSocket(dest, awokenFirst);
 }
 
 // equivalent to *BDADDR_ANY, but won't make compiler warnings
 #define DEREF_BDADDR_ANY (bdaddr_t) {{0, 0, 0, 0, 0, 0}}
 
-BluetoothSocket::BluetoothSocket(std::string dest = "", bool awokenFirst = true) {
+BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
     this->awokenFirst = awokenFirst;
     this->hasDisconnected = false;
     if (awokenFirst) {
@@ -42,17 +42,25 @@ BluetoothSocket::BluetoothSocket(std::string dest = "", bool awokenFirst = true)
             std::string msg = "destionation bluetooth MAC address was not given!\n";
             throw std::system_error(std::make_error_code(std::errc::no_such_device_or_address), msg);
         }
-        struct sockaddr_rc addr = { 0 };
+        
         char destination[18];
         strcpy(destination, dest.c_str());
         this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-        addr.rc_family = AF_BLUETOOTH;
-        addr.rc_channel = (uint8_t) BLUETOOTH_PORT;
-        str2ba(destination, &addr.rc_bdaddr);
-        int success = connect(this->mySocket, (struct sockaddr*)&addr, sizeof(addr));
-        if (success < 0) {
-            std::string msg = "client socket connection failed with code " + std::to_string(success);
-            throw std::system_error(std::make_error_code(std::errc::connection_refused), msg);
+        while (true) {
+            struct sockaddr_rc addr = { 0 };
+            addr.rc_family = AF_BLUETOOTH;
+            addr.rc_channel = (uint8_t) BLUETOOTH_PORT;
+            str2ba(destination, &addr.rc_bdaddr);
+            int success = connect(this->mySocket, (struct sockaddr*)&addr, sizeof(addr));
+            if (success >= 0) {
+                std::cout << "Bluetooth socket connection succeeded\n";
+                break;
+            }
+            else {
+                std::cout << "Bluetooth socket connection refused. Retrying...\n";
+                close(this->mySocket);
+                this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+            }
         }
         this->otherSocket = this->mySocket;
     }
@@ -116,6 +124,57 @@ bool BluetoothSocket::readValue(char* msg, int size) {
             }
             free(pfds);
             return true;
+        }
+    }
+}
+
+BluetoothSocket BluetoothSocket::CreateBluetoothSocketByHostname(std::string hostname) {
+    int deviceId = hci_get_route(NULL);
+    if (deviceId < 0) {
+        std::string msg = "bluetooth adapter not found\n";
+        throw std::system_error(std::make_error_code(std::errc::address_not_available), msg);
+    }
+    // find nearby devices
+    int len = 8;
+    int maxRsp = 255;
+    int flags = IREQ_CACHE_FLUSH;
+    inquiry_info* iInfs = (inquiry_info*)malloc(maxRsp * sizeof(inquiry_info));
+    int socket = hci_open_dev(deviceId);
+    if (socket < 0) {
+        std::string msg = "Failed to open socket\n";
+        throw std::system_error(std::make_error_code(std::errc::network_unreachable), msg);
+    }
+    while (true) {
+        memset(iInfs, 0, maxRsp * sizeof(inquiry_info));
+        int numRsp = hci_inquiry(deviceId, len, maxRsp, NULL, &iInfs, flags);
+        if (numRsp < 0) {
+            std::string msg = "hci_inquiry failed.\n";
+            throw std::system_error(std::make_error_code(std::errc::network_unreachable), msg);
+        }
+        if (numRsp != 0) {
+            // some are detected
+            std::cout << "Found " << numRsp << " devices\n";
+            int i;
+            for (i = 0; i < numRsp; i++) {
+                char deviceAddress[20], deviceName[300];
+                inquiry_info* currentDevice = iInfs + i;
+                memset(deviceAddress, 0, sizeof(deviceAddress));
+                ba2str(&(currentDevice->bdaddr), deviceAddress);
+                memset(deviceName, 0, sizeof(deviceName));
+                if (hci_read_remote_name(socket, &(currentDevice->bdaddr), sizeof(deviceName), deviceName, 0) < 0) {
+                    continue;
+                }
+                else {
+                    std::cout << deviceAddress << " | " << deviceName << " found\n";
+                    std::string strDeviceName(deviceName, hostname.length());
+                    if (strDeviceName == hostname) {
+                        std::cout << "required address found. Connecting\n";
+                        close(socket);
+                        free(iInfs);
+                        return BluetoothSocket(std::string(deviceAddress), false);
+                    }
+                }
+            }
         }
     }
 }
