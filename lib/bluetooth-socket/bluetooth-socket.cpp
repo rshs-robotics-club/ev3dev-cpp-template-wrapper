@@ -80,6 +80,9 @@ BluetoothSocket::~BluetoothSocket() {
 
 bool BluetoothSocket::send(char* msg, int size) {
     int status = write(this->otherSocket, msg, size);
+    if (status == -1) {
+        this->hasDisconnected = true;
+    }
     return (status >= 0);
 }
 
