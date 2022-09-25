@@ -15,36 +15,76 @@ BluetoothSocket BluetoothSocket::CreateBluetoothSocket(std::string dest, bool aw
     return BluetoothSocket(dest, awokenFirst);
 }
 
+BluetoothSocket BluetoothSocket::CreateServerSocket() {
+    return BluetoothSocket();
+}
+
 // equivalent to *BDADDR_ANY, but won't make compiler warnings
 #define DEREF_BDADDR_ANY (bdaddr_t) {{0, 0, 0, 0, 0, 0}}
+
+void BluetoothSocket::constructServerSocket() {
+    this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+    struct sockaddr_rc localAddr = { 0 };
+    localAddr.rc_family = AF_BLUETOOTH;
+    localAddr.rc_bdaddr = DEREF_BDADDR_ANY;
+    localAddr.rc_channel = (uint8_t) BLUETOOTH_PORT;
+    bind(this->mySocket, (struct sockaddr *)&localAddr, sizeof(localAddr));
+    listen(this->mySocket, BLUETOOTH_PORT);
+}
+
+void BluetoothSocket::constructClientSocket(std::string dest) {
+    this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+    strcpy(this->otherSocketMAC, dest.c_str());
+}
+
+bool BluetoothSocket::attemptClientConnection(std::string dest) {
+    std::string destination = dest;
+    if (dest == "") {
+        destination = std::string(this->otherSocketMAC);
+    }
+    else {
+        strcpy(this->otherSocketMAC, destination.c_str());
+    }
+    struct sockaddr_rc addr = { 0 };
+    addr.rc_family = AF_BLUETOOTH;
+    addr.rc_channel = (uint8_t) BLUETOOTH_PORT;
+    str2ba(this->otherSocketMAC, &addr.rc_bdaddr);
+    int status = connect(this->mySocket, (struct sockaddr*)&addr, sizeof(addr));
+    if (status >= 0) {
+        std::cout << "Bluetooth socket connection succeeded\n";
+        this->otherSocket = this->mySocket;
+        this->hasDisconnected = false;
+        return true;
+    }
+    else {
+        close(this->mySocket);
+        this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+        return false;
+    }
+}
+
+bool BluetoothSocket::pollServerConnectionReady() {
+    struct pollfd *pfd = (pollfd*)calloc(1, sizeof(*pfd));
+    pfd[0].fd = this->mySocket;
+    pfd[0].events = POLLIN;
+    bool ret = (poll(pfd, 1, 5) != 0);
+    free(pfd);
+    return ret;
+}
 
 BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
     this->awokenFirst = awokenFirst;
     this->hasDisconnected = false;
     if (awokenFirst) {
         // initialise into a server like thing
-        struct sockaddr_rc localAddr = { 0 };
-        struct sockaddr_rc remoteAddr = { 0 };
-        socklen_t opt = sizeof(remoteAddr);
-        this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-        localAddr.rc_family = AF_BLUETOOTH;
-        localAddr.rc_bdaddr = DEREF_BDADDR_ANY;
-        localAddr.rc_channel = (uint8_t) BLUETOOTH_PORT;
-        bind(this->mySocket, (struct sockaddr *)&localAddr, sizeof(localAddr));
-        listen(this->mySocket, BLUETOOTH_PORT);
+        this->constructServerSocket();
         std::cout << "waiting for other side to attempt connection\n";
         // loop until a connection is ready
-        struct pollfd *pfd = (pollfd*)calloc(1, sizeof(*pfd));
-        pfd[0].fd = this->mySocket;
-        pfd[0].events = POLLIN;
-        int res = poll(pfd, 1, 5);
-        std::cout << res << '\n';
-        while (res == 0) {
-            res = poll(pfd, 1, 5);
+        while (!this->pollServerConnectionReady()) {
             std::cout << "No connection attempt has been made yet...\n"; 
         }
-        free(pfd);
-
+        struct sockaddr_rc remoteAddr = { 0 };
+        socklen_t opt = sizeof(remoteAddr);
         this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
         ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
         std::cout << this->otherSocketMAC << " successfully connected\n";
@@ -54,28 +94,12 @@ BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
             std::string msg = "destionation bluetooth MAC address was not given!\n";
             throw std::system_error(std::make_error_code(std::errc::no_such_device_or_address), msg);
         }
-        
-        char destination[18];
-        strcpy(destination, dest.c_str());
-        this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+        this->constructClientSocket(dest);
         while (true) {
-            struct sockaddr_rc addr = { 0 };
-            addr.rc_family = AF_BLUETOOTH;
-            addr.rc_channel = (uint8_t) BLUETOOTH_PORT;
-            str2ba(destination, &addr.rc_bdaddr);
-            int success = connect(this->mySocket, (struct sockaddr*)&addr, sizeof(addr));
-            if (success >= 0) {
-                std::cout << "Bluetooth socket connection succeeded\n";
+            if (this->attemptClientConnection(dest)) {
                 break;
             }
-            else {
-                std::cout << "Bluetooth socket server refused connection. Retrying...\n";
-                close(this->mySocket);
-                this->mySocket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-            }
         }
-        this->otherSocket = this->mySocket;
-        strcpy(this->otherSocketMAC, destination);
     }
 }
 
@@ -246,4 +270,19 @@ void BluetoothSocket::fireDisconnect() {
     this->mySocket = 0;
     this->otherSocket = 0;
     this->hasDisconnected = true;
+    this->readyAttemptReconnect = false;
+}
+
+void BluetoothSocket::attemptReconnect() {
+    if (this->hasDisconnected == false) {
+        std::string msg = "Bluetooth socket was told to reconnect even though it is already connected\n";
+        throw std::system_error(std::make_error_code(std::errc::invalid_argument), msg);
+    }
+    if (this->readyAttemptReconnect) {
+
+    }
+    else {
+        this->readyAttemptReconnect = true;
+        
+    }
 }
