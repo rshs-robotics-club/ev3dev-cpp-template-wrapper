@@ -44,3 +44,81 @@ If the other end of the socket is disconnected for whatever reason, (such as a p
 >   Warning: if `BluetoothSocket.hasDisconnected` is `false` when you attempt to reconnect, it will throw an error (you're already connected!)
 
 
+## Examples
+
+```cpp
+// bluetooth-server.cpp
+// to be run on "robot2"
+#include <bluetooth-socket.hpp>
+
+using namespace Ev3Wrap;
+int main() {
+    system("hciconfig hci0 piscan");
+    BluetoothSocket serverSocket = BluetoothSocket::CreateBluetoothSocket("", true);
+    while (true) {
+        if (!serverSocket.hasDisconnected) {
+            char* msg = new char[CHAR_ARRAY_SIZE];
+            strcpy(msg, "Hello!\n");
+            //std::cout << msg << '\n';
+            bool res = serverSocket.send(msg);
+            free(msg);
+        }
+        else {
+            serverSocket.attemptReconnect();
+        }
+    }
+    return 0;
+}
+```
+
+```cpp
+// bluetooth-client.cpp
+// to be run on "robot1"
+#include <bluetooth-socket.hpp>
+
+using namespace Ev3Wrap;
+int main() {
+    system("hciconfig hci0 piscan");
+    BluetoothSocket clientSocket = BluetoothSocket::CreateClientSocketByHostname("robot2");
+    while (true) {
+        if (!clientSocket.hasDisconnected) {
+            char* buffer = malloc(sizeof(char) * CHAR_ARRAY_SIZE);
+            bool res = clientSocket.readValue(buffer);
+            if (res) {
+                std::cout << buffer << '\n';
+            }
+            free(buffer);
+        }
+        else {
+            clientSocket.attemptReconnect();
+        }
+    }
+    return 0;
+}
+```
+The above 2 programs uses the `BluetoothSocket` to communicate with each other. They will continuously attempt to reconnect with each other if disconnected. Note that server sockets and client sockets have no difference outside of initialisation. Both can send data and read data to the other. In this example, the server socket is sending messages to the client socket.
+
+---
+# Advanced Usage
+Most of the time, `char` is not the data type we want to send. Something like `int` would be far more helpful. Given that `int`s are 4 bytes on the EV3, we can designate the first 4 bytes of our `char*` buffer as an `int`, the next 4 bytes as the next `int`, etc.
+```cpp
+char* myBuffer = (char*)malloc(sizeof(char) * CHAR_ARRAY_SIZE);
+int firstInt = 123;
+int secondInt = 456;
+memcpy(myBuffer, &firstInt, sizeof(firstInt));
+memcpy(myBuffer + sizeof(firstInt), &secondInt, sizeof(secondInt));
+myBluetoothSocket.send(myBuffer);
+free(myBuffer);
+```
+and on the receiving end:
+```cpp
+char* recvBuffer = (char*)malloc(sizeof(char) * CHAR_ARRAY_SIZE);
+myBluetoothSocket.readValue(buffer);
+int firstInt, secondInt;
+memcpy(&firstInt, recvBuffer, sizeof(int));
+memcpy(&secondInt, recvBuffer + sizeof(firstInt), sizeof(int));
+free(recvBuffer);
+// now use firstInt and secondInt for whatever you want
+```
+
+refer to https://stackoverflow.com/questions/1522994/store-an-int-in-a-char-array for more alternative ways to solve this problem.
