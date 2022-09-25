@@ -39,14 +39,16 @@ public:
     // if hasDisconnected = false, this function will throw an error.
     // if readyAttemptReconnect = true, this function will not attempt to reset this->mysocket,
     // only trying to check if it can connect
-    void attemptReconnect();
+    bool attemptReconnect();
     // if this is true, it is a server socket which is meant to be turned on first, so that a client can connect to it
     bool awokenFirst;
     static void listDetectedDevices();
     // Create a bluetooth socket. dest (destination) is not required if it is a server socket (awokenFirst = true)
     static BluetoothSocket CreateBluetoothSocket(std::string dest = "", bool awokenFirst = true);
     // create a awokenFirst = false bluetooth socket. Searches for a list of hostnames and then connects to the one required
-    static BluetoothSocket CreateBluetoothSocketByHostname(std::string hostname);
+    static BluetoothSocket CreateClientSocketByHostname(std::string hostname);
+    // create a awokenFirst = false bluetooth socket. directly uses the given MAC address
+    static BluetoothSocket CreateClientSocketByMAC(std::string MAC);
     // create a awokenFirst = true bluetooth socket. Blocks until another robot connects to the socket
     static BluetoothSocket CreateServerSocket();
     ~BluetoothSocket();

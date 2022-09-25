@@ -72,6 +72,10 @@ bool BluetoothSocket::pollServerConnectionReady() {
     return ret;
 }
 
+BluetoothSocket BluetoothSocket::CreateClientSocketByMAC(std::string MAC) {
+    return BluetoothSocket(MAC, false);
+}
+
 BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
     this->awokenFirst = awokenFirst;
     this->hasDisconnected = false;
@@ -170,7 +174,7 @@ bool BluetoothSocket::readValue(char* msg, int size) {
     }
 }
 
-BluetoothSocket BluetoothSocket::CreateBluetoothSocketByHostname(std::string hostname) {
+BluetoothSocket BluetoothSocket::CreateClientSocketByHostname(std::string hostname) {
     int deviceId = hci_get_route(NULL);
     if (deviceId < 0) {
         std::string msg = "bluetooth adapter not found\n";
@@ -273,7 +277,7 @@ void BluetoothSocket::fireDisconnect() {
     this->readyAttemptReconnect = false;
 }
 
-void BluetoothSocket::attemptReconnect() {
+bool BluetoothSocket::attemptReconnect() {
     if (this->hasDisconnected == false) {
         std::string msg = "Bluetooth socket was told to reconnect even though it is already connected\n";
         throw std::system_error(std::make_error_code(std::errc::invalid_argument), msg);
@@ -288,11 +292,13 @@ void BluetoothSocket::attemptReconnect() {
                 this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
                 ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
                 std::cout << this->otherSocketMAC << " reconnected\n";
+                return true;
             }
+            return false;
         }
         else {
             // reactivate a client socket
-            this->attemptClientConnection(std::string(this->otherSocketMAC));
+            return this->attemptClientConnection(std::string(this->otherSocketMAC));
         }
     }
     else {
@@ -305,5 +311,6 @@ void BluetoothSocket::attemptReconnect() {
             // reactivate a client socket
             this->constructClientSocket(std::string(this->otherSocketMAC));
         }
+        return false;
     }
 }

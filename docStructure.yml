@@ -54,6 +54,8 @@ FileSystem:
         tag: "Utilities"
       - Vector:
         tag: "Vector"
+      - BluetoothSocket:
+        tag: "bluetooth-socket"
     - contributing:
       tag: "contribute"
       child_folder_reqs:
