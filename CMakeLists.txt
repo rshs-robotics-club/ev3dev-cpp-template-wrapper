@@ -23,7 +23,7 @@ set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
-set(LIBNAME "ev3-cpp-template-wrapper-lib")
+set(LIBNAME "ev3dev-cpp-template-wrapper-lib")
 project(${LIBNAME} VERSION 3.0.0)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -77,7 +77,6 @@ target_include_directories(
 
 SUBDIRLIST(SUBDIRS ${PROJECT_SOURCE_DIR}/lib/)
 foreach(subdir ${SUBDIRS})
-    message(STATUS ${subdir})
     target_include_directories(${LIBNAME} PUBLIC ${PROJECT_SOURCE_DIR}/lib/${subdir})
 endforeach()
 target_include_directories(${LIBNAME} PUBLIC /home/compiler/crossCompileLibraries/libbluetooth/include/)
