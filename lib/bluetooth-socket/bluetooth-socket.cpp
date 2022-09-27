@@ -76,6 +76,14 @@ BluetoothSocket BluetoothSocket::CreateClientSocketByMAC(std::string MAC) {
     return BluetoothSocket(MAC, false);
 }
 
+BluetoothSocket::BluetoothSocket(bool useless) {
+    std::cout << "dummy socket created\n";
+}
+
+BluetoothSocket BluetoothSocket::CreateDummySocket() {
+    return BluetoothSocket(false);
+}
+
 BluetoothSocket::BluetoothSocket(std::string dest, bool awokenFirst) {
     this->awokenFirst = awokenFirst;
     this->hasDisconnected = false;
@@ -292,6 +300,7 @@ bool BluetoothSocket::attemptReconnect() {
                 this->otherSocket = accept(this->mySocket, (struct sockaddr *)&remoteAddr, &opt);
                 ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
                 std::cout << this->otherSocketMAC << " reconnected\n";
+                this->hasDisconnected = false;
                 return true;
             }
             return false;

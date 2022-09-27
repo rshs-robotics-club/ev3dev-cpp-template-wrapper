@@ -51,12 +51,16 @@ public:
     static BluetoothSocket CreateClientSocketByMAC(std::string MAC);
     // create a awokenFirst = true bluetooth socket. Blocks until another robot connects to the socket
     static BluetoothSocket CreateServerSocket();
+    // create a dummy non functional BluetoothSocket
+    static BluetoothSocket CreateDummySocket();
     ~BluetoothSocket();
     // reconnect with the same address provided. will throw an error if hasDisconnect = false
     // if the socket is a client socket, attempts to connect to the server
 private:
     // actual constructor
     BluetoothSocket(std::string dest = "", bool awokenFirst = true);
+    // dummy constructor
+    BluetoothSocket(bool useless);
     // deactivate mySocket and otherSocket
     void fireDisconnect();
 
