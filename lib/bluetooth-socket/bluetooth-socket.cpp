@@ -54,6 +54,7 @@ bool BluetoothSocket::attemptClientConnection(std::string dest) {
         std::cout << "Bluetooth socket connection succeeded\n";
         this->otherSocket = this->mySocket;
         this->hasDisconnected = false;
+        this->readyAttemptReconnect = false;
         return true;
     }
     else {
@@ -283,6 +284,7 @@ void BluetoothSocket::fireDisconnect() {
     this->otherSocket = 0;
     this->hasDisconnected = true;
     this->readyAttemptReconnect = false;
+    std::cout << "Socket disconnected\n";
 }
 
 bool BluetoothSocket::attemptReconnect() {
@@ -301,6 +303,7 @@ bool BluetoothSocket::attemptReconnect() {
                 ba2str(&remoteAddr.rc_bdaddr, this->otherSocketMAC);
                 std::cout << this->otherSocketMAC << " reconnected\n";
                 this->hasDisconnected = false;
+                this->readyAttemptReconnect = false;
                 return true;
             }
             return false;
