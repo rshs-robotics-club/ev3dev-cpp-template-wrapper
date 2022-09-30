@@ -79,6 +79,8 @@ BluetoothSocket BluetoothSocket::CreateClientSocketByMAC(std::string MAC) {
 
 BluetoothSocket::BluetoothSocket(bool useless) {
     std::cout << "dummy socket created\n";
+    this->hasDisconnected = true;
+    this->readyAttemptReconnect = false;
 }
 
 BluetoothSocket BluetoothSocket::CreateDummySocket() {
