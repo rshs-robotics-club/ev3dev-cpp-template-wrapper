@@ -7,6 +7,8 @@ tag: "writingDocumentation"
 ### The library's documentation relies on a [modified version of just-the-docs](https://github.com/rshs-robotics-club/just-the-docs) as its jekyll theme.
 The modification allows the documentation  to have infinite nesting on the navigation bar, and a more centralised navigation structure management.
 
+> A new just-the-docs version has implemented infinite nesting levels. This fork of just-the-docs will no longer be maintained. The documentation won't be switched over to the new version and will be archived instead along with the library repository.
+
 ### The centralised file structure management
 The structure is stored in a file `docsStructure.yml`.
 It should look something like

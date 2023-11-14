@@ -23,12 +23,15 @@ set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
-set(LIBNAME "ev3-cpp-template-wrapper-lib")
+set(LIBNAME "ev3dev-cpp-template-wrapper-lib")
 project(${LIBNAME} VERSION 3.0.0)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 message(STATUS ${OPTIMIZATION_LEVEL})
 add_compile_options(${OPTIMIZATION_LEVEL})
+# unfortunately there are problems in 
+# libbluetooth so we must use -fpermissive
+add_compile_options(-fpermissive)
 add_definitions(-DDEBUG_MODE_ENABLED)
 add_library(
     ${LIBNAME} 
@@ -43,9 +46,14 @@ add_library(
 
     lib/motor/motor.cpp
 
+    lib/color-sensor/color-sensor.hpp
+    lib/gyro-sensor/gyro.hpp
+
     lib/omni/omni.cpp
 
     lib/vector/vector.cpp
+
+    lib/bluetooth-socket/bluetooth-socket.cpp
 
     lib/ev3dev.cpp
     lib/smbus.cpp
@@ -69,9 +77,10 @@ target_include_directories(
 
 SUBDIRLIST(SUBDIRS ${PROJECT_SOURCE_DIR}/lib/)
 foreach(subdir ${SUBDIRS})
-    message(STATUS ${subdir})
     target_include_directories(${LIBNAME} PUBLIC ${PROJECT_SOURCE_DIR}/lib/${subdir})
 endforeach()
+target_include_directories(${LIBNAME} PUBLIC /home/compiler/crossCompileLibraries/libbluetooth/include/)
+target_link_libraries(${LIBNAME} PRIVATE /home/compiler/crossCompileLibraries/libbluetooth/lib/arm-linux-gnueabi/libbluetooth.a)
 
 set_target_properties(${LIBNAME}
                     PROPERTIES

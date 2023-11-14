@@ -22,6 +22,7 @@
 #define USE_SPECIFIC_IR_DIRECTION FALSE
 #include <exception>
 #include <stdexcept>
+#include <system_error>
 
 namespace Ev3Wrap {
 
@@ -33,11 +34,15 @@ class HiTechnicIrSeeker : private ev3dev::i2c_sensor {
     static constexpr char INPUT_3[] = "ev3-ports:in3:i2c8";
     static constexpr char INPUT_4[] = "ev3-ports:in4:i2c8";
     static HiTechnicIrSeeker bind(ev3dev::address_type addr = ev3dev::INPUT_AUTO);
-    int getDirection() {
+    int getDirection() try {
         set_mode("AC");
         return value(0);
     }
-    std::vector<int> getAll() {
+    catch(...) {
+        std::string msg = "HiTechnic IrSeeker failed to get AC direction";
+        throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+    }
+    std::vector<int> getAll() try {
         set_mode("AC-ALL");
         return {
             value(0),
@@ -48,7 +53,11 @@ class HiTechnicIrSeeker : private ev3dev::i2c_sensor {
             value(5)
         };
     }
-    int getACStrength(int IrDirection = USE_SPECIFIC_IR_DIRECTION) {
+    catch(...) {
+        std::string msg = "HiTechnic IrSeeker failed to get all directional strengths";
+        throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+    }
+    int getACStrength(int IrDirection = USE_SPECIFIC_IR_DIRECTION) try {
         int dir;
         if(IrDirection != FALSE) {
             dir = IrDirection;
@@ -74,6 +83,10 @@ class HiTechnicIrSeeker : private ev3dev::i2c_sensor {
             //throw std::invalid_argument(std::to_string(sensorNum));
             return values[sensorNum];
         }
+    }
+    catch(...) {
+        std::string msg = "HiTechnic IrSeeker failed to get AC strength";
+        throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
     }
     private:
     HiTechnicIrSeeker(ev3dev::address_type addr = ev3dev::INPUT_AUTO);

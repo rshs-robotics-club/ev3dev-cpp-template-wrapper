@@ -17,6 +17,7 @@
 
 #include <ev3dev.h>
 #include <sstream>
+#include <iostream>
 #ifndef EV3WRAPUTILITIES_HPP_
 #define EV3WRAPUTILITIES_HPP_
 namespace Ev3Wrap {
@@ -51,6 +52,16 @@ namespace Beeper {
         args << " -r " << std::to_string(beepRepetitions);
         args << " -d " << std::to_string(beepRepeatDelay);
         ev3dev::sound::beep(args.str(), block);
+    }
+    static void quickBeep(int hz = 750, int milliseconds = 100) {
+        setBeepHertz(hz);
+        setBeepDuration(milliseconds);
+        beep(false);
+    }
+    static void speak(std::string text) {
+        std::string commandText = "espeak \"" + text + "\" --stdout | aplay";
+        std::system(commandText.c_str()); // this is ok because std::system is blocking, so commandText doesn't get
+        // destroyed before the pointer is used
     }
 }
 

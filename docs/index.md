@@ -4,7 +4,10 @@ title: "Introduction"
 nav_order: 1
 tag: "introduction"
 ---
-Note that this is not a completed product
+# Better setup process
+There is now a template available for github codespaces. Select `Use this template -> Open in a codespace` from this [template repository](https://github.com/rshs-robotics-club/ev3dev-cpp-wrapper-example)
+> Please note that the rest of the documentation was written before Github Codespaces are released. Because of this, there is no mention of github codespaces anywhere else in the documentation. If you have a problem with the github codespaces setup, contact `yuetlongfeng@gmail.com`
+
 # Introduction
 If you do not know what ev3dev is, go [here](https://www.ev3dev.org/).
 This library is a wrapper around [ev3dev's official cpp library](https://github.com/ddemidov/ev3dev-lang-cpp). We do not guarantee that this wrapper will work.
@@ -50,9 +53,3 @@ We currently only have support for compiling on windows. (MacOS support not comi
    6. If you want to create more executables/projects, you can do so by creating a new `differentprojectName.cpp` file and running `./scripts/compile.sh` again. Now, you will find both `projectName.elf` and `differentprojectName.elf` in the `bin` folder. This is useful when you require quick prototyping in your project.
 ## Oh no! I ran into a problem
 See the troubleshooting section (Not implemented yet) for solutions to common problems. If you can't find any, check [issues](https://github.com/rshs-robotics-club/ev3dev-cpp-template-wrapper/issues). If you still can't find a solution, open a new [issue](https://github.com/rshs-robotics-club/ev3dev-cpp-template-wrapper/issues) and we will try to help you.
-
----
-# [Click here to find the Quick Start tutorials](quickstartTutorials.md)
----
-# [Click here for the documentation](documentation.md)
----

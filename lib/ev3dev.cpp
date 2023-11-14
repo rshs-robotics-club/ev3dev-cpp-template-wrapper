@@ -217,7 +217,7 @@ int device::device_index() const {
     using namespace std;
 
     if (_path.empty())
-        throw system_error(make_error_code(errc::function_not_supported), "no device connected");
+        throw system_error(make_error_code(errc::function_not_supported), "Device undetected: path not found?");
 
     if (_device_index < 0) {
         unsigned f = 1;

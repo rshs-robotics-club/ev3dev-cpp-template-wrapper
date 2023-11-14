@@ -17,9 +17,17 @@
 
 #include <hitechnic-irseeker.hpp>
 #include <ev3dev.h>
+#include <iostream>
+#include <system_error>
 using namespace Ev3Wrap;
 
-HiTechnicIrSeeker::HiTechnicIrSeeker(ev3dev::address_type addr) : ev3dev::i2c_sensor(addr, { "ht-nxt-ir-seek-v2" }) {}
+HiTechnicIrSeeker::HiTechnicIrSeeker(ev3dev::address_type addr) try : ev3dev::i2c_sensor(addr, { "ht-nxt-ir-seek-v2" }) {
+
+}
+catch(...) {
+    std::string msg = "HiTechnic IrSeeker failed to initialise at port " + addr;
+    throw std::system_error(std::make_error_code(std::errc::no_such_device), msg);
+}
 HiTechnicIrSeeker HiTechnicIrSeeker::bind(ev3dev::address_type addr) {
     return HiTechnicIrSeeker(addr);
 }

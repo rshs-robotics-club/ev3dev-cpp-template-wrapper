@@ -20,15 +20,14 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 srcDir=${scriptDir}/../
 
 entrypointCMD="/${scriptDir}/runWithinContainer.sh"
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     docker rm ${containerName}
-    docker run --entrypoint ${entrypointCMD} --name ${containerName} -v /${srcDir}:/${srcDir} -w /${srcDir} eisverygoodletter/debian-stretch-cross $@
+    docker run --entrypoint ${entrypointCMD} --name ${containerName} -v /${srcDir}:/${srcDir} -w /${srcDir} eisverygoodletter/debian-stretch-cross:bluetooth $@
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     docker rm ${containerName}
-    docker run --entrypoint ${entrypointCMD} --name ${containerName} -v /${srcDir}:/${srcDir} -w /${srcDir} eisverygoodletter/debian-stretch-cross $@
+    docker run --entrypoint ${entrypointCMD} --name ${containerName} -v /${srcDir}:/${srcDir} -w /${srcDir} eisverygoodletter/debian-stretch-cross:bluetooth $@
 else
     winpty docker rm ${containerName}
-    winpty docker run --entrypoint ${entrypointCMD} --name ${containerName} -v /${srcDir}:/${srcDir} -w /${srcDir} eisverygoodletter/debian-stretch-cross $@
+    winpty docker run --entrypoint ${entrypointCMD} --name ${containerName} -v /${srcDir}:/${srcDir} -w /${srcDir} eisverygoodletter/debian-stretch-cross:bluetooth $@
 fi
 $SHELL

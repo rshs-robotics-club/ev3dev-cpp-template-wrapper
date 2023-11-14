@@ -1,17 +1,27 @@
-# NEWS
-## Why is the documentation all over the place?
-### Reasons:
-1. Jump to V3.0.0 was huge
-2. A lot of unneeded features had to be removed. 
-3. Documentation system is currently too complicated and will be overhauled later
-- Eisverygoodletter 28/08/2022
+# ARCHIVE NOTICE
+Since the EV3 bricks are now being replaced by new Spike Prime bricks and the original developers (Eisverygoodletter, txxvgnx, NotOnAClient) have graduated and left the robotics club. This repository no longer has an active maintainer and will be archived.
 
-# welcome to [ev3dev cpp template wrapper]
-### this is a wrapper aimed for lego robotics on ev3dev
+This repository will still remain available and all of its functionality will be intact, but no new features would be added unless a new maintainer is willing to implement features. If you are interested in using this repository or contributing to it, contact me (Eisverygoodletter) at yuetlongfeng@gmail.com
 
-aimed at providing support for a few other sensors (compass and irseeker etc) and wrapping around a highly modified version of `ev3dev.h` and `ev3dev.cpp` from ev3dev-lang-cpp repo
+# welcome to `ev3dev-cpp-template-wrapper`'s repository page.
+This library doesn't require excessive tool installation and overly complicated cross-compiler setups. A guide can be found [here](https://rshs-robotics-club.github.io/ev3wrap/master/). Github Codespaces is available for this project at `https://github.com/rshs-robotics-club/ev3dev-cpp-wrapper-example`
+### This is a wrapper around [ddemidov/ev3dev-lang-cpp](https://github.com/ddemidov/ev3dev-lang-cpp). It includes classes for different sensors, with support for:
+-   Building Block Robotics IR Seeker
+-   Ev3 brick buttons
+-   Color Sensors
+-   Gyro Sensors
+-   HiTechnic Compass Sensors
+-   HiTechnic IR Seeker
+-   Ev3 large and medium motors
+-   An `Omni` class used for managing a specific motor setup
+-   Ultrasonic Sensors
+-   Beeping with ev3 speaker (and speaking words)
+-   Class for `Vector` math
+-   Bluetooth communication (both ev3-to-ev3 and ev3-to-computer are possible)
 
-only works on windows
+While cross compiling has only been tested on Windows, a Github Codespace
+
+
 Find the documentation [here](rshs-robotics-club.github.io)
 
 # we are currently on version V3.0.1
