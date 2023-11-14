@@ -4,7 +4,7 @@ Since the EV3 bricks are now being replaced by new Spike Prime bricks and the or
 This repository will still remain available and all of its functionality will be intact, but no new features would be added unless a new maintainer is willing to implement features. If you are interested in using this repository or contributing to it, contact me (Eisverygoodletter) at yuetlongfeng@gmail.com
 
 # welcome to `ev3dev-cpp-template-wrapper`'s repository page.
-This library doesn't require excessive tool installation and overly complicated cross-compiler setups. A guide can be found [here](https://rshs-robotics-club.github.io/ev3wrap/master/)
+This library doesn't require excessive tool installation and overly complicated cross-compiler setups. A guide can be found [here](https://rshs-robotics-club.github.io/ev3wrap/master/). Github Codespaces is available for this project at `https://github.com/rshs-robotics-club/ev3dev-cpp-wrapper-example`
 ### This is a wrapper around [ddemidov/ev3dev-lang-cpp](https://github.com/ddemidov/ev3dev-lang-cpp). It includes classes for different sensors, with support for:
 -   Building Block Robotics IR Seeker
 -   Ev3 brick buttons
